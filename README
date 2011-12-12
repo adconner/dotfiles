@@ -1,0 +1,7 @@
+Installation:
+
+ln -s ~/path/to/dotfiles/vim ~/.vim
+ln -s ~/path/to/dotfiles/vimrc ~/.vimrc
+ln -s ~/path/to/dotfiles/xinitrc ~/.xinitrc
+ln -s ~/path/to/dotfiles/zshrc ~/.zshrc
+ln -s ~/path/to/dotfiles/Xresources ~/.Xresources
