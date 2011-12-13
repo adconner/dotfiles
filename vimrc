@@ -33,7 +33,9 @@ set ignorecase          " Ignore search term case...
 set smartcase           " ... unless term contains an uppercase character
 set incsearch           " Highlight search...
 set hlsearch            " ... as you type
-set gdefault
+set gdefault            " replace every occurrance by default
+noremap / /\v
+" use aggressive regex by default
 
 " Wrapping
 "set textwidth=80        " Hard-wrap text at nth column
@@ -44,30 +46,38 @@ set wrap                " Wrap long lines
 set ruler               " Show [line,col] number (in status bar)
 set history=1000        " Number of ":" commands and searches to remember
 set wildmenu            " dmenu style menu for commands
+set wildmode=list:longest " complete longest word part
 set fillchars=""        " Remove characters in window split
 set encoding=utf-8      " Default encoding
 set scrolloff=3         " 3 lines of context
 set hidden              " allow fast switching of files w/o saving
 set nostartofline       " dont reset to start of line for large movements
-
-set mouse-=a
-
-set backspace=indent,eol,start          " Allow backspacing on the given values
-
+set showcmd             " show partial commands
+set mouse-=a            " disable mouse
+set backspace=indent,eol,start
+" Allow backspacing on the given values
 set tags+=~/.vim/commontags
 set tags+=./tag
 
+" Requries Vim 7.3
+" set relativenumber     " Use line numbers relative to current line
+" set undofile           " Use a persistent undo file
+
+
+
 " Mappings {{{1
+let mapleader=","
+
 inoremap <C-U> <C-G>u<C-U>
 inoremap jj <Esc>
 
-" Move between splits with CTRL+[hjkl]
-nnoremap <C-h> <C-w>h       
-" todo: for some reason this also skips about 8 characters
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
+" Move left and right between splits with CTRL+[hl]
+nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+" todo: for some reason this also skips about 8 characters
 
+noremap <C-j> <C-e>
+noremap <C-k> <C-y>
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 
@@ -79,17 +89,14 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-noremap! <c-a> <Home>
-noremap! <c-e> <End>
-noremap! <c-f> <Right>
-noremap! <c-b> <Left>
-noremap! <A-f> <S-Right>
+" todo set up command line editing with vi like vi readline,
+cnoremap <c-a> <Home>
+cnoremap <c-e> <End>
+cnoremap <c-f> <Right>
+cnoremap <c-b> <Left>
+cnoremap <A-f> <S-Right>
 " has some trouble with this, see i_CTRL-F
-noremap! <A-b> <S-Left>
-noremap! <c-d> <Del>
-noremap! <A-d> <c-w>
+cnoremap <A-b> <S-Left>
+cnoremap <c-d> <Del>
 
 call togglebg#map("<F5>")
-
-" todo set up command line editing with vi like vi readline,
-" harmonize command line editing with that of bash
