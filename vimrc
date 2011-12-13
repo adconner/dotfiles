@@ -9,6 +9,7 @@ call pathogen#infect()
 
 " General Preferences {{{1
 " File based
+set ttyfast
 filetype plugin on      " Load file type plugins
 filetype indent on      " Enable file type based indentation
 syntax on               " Enable syntax highlighting
@@ -32,6 +33,7 @@ set ignorecase          " Ignore search term case...
 set smartcase           " ... unless term contains an uppercase character
 set incsearch           " Highlight search...
 set hlsearch            " ... as you type
+set gdefault
 
 " Wrapping
 "set textwidth=80        " Hard-wrap text at nth column
@@ -46,6 +48,7 @@ set fillchars=""        " Remove characters in window split
 set encoding=utf-8      " Default encoding
 set scrolloff=3         " 3 lines of context
 set hidden              " allow fast switching of files w/o saving
+set nostartofline       " dont reset to start of line for large movements
 
 set mouse-=a
 
