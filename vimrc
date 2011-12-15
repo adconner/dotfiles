@@ -76,20 +76,23 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 " todo: for some reason this also skips about 8 characters
 
+" make scrolling more convenient
 noremap <C-j> <C-e>
 noremap <C-k> <C-y>
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 
+" make returning to exact cursor position more convenient
 noremap ' `
 noremap ` '
 
+" navigate by display lines
 noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
 
-" todo set up command line editing with vi like vi readline,
+" set up command line editing with vi like readline,
 cnoremap <c-a> <Home>
 cnoremap <c-e> <End>
 cnoremap <c-f> <Right>
@@ -99,4 +102,18 @@ cnoremap <A-f> <S-Right>
 cnoremap <A-b> <S-Left>
 cnoremap <c-d> <Del>
 
+" make tabs, windows, and buffers easier
+noremap <leader>v :vsplit 
+noremap <leader>t :tabnew 
+noremap <leader>n :bn<cr>
+noremap <leader>p :bp<cr>
+
+" misc mappings
+noremap <leader>/ :noh<cr>
+
+noremap <F1> <nop>
 call togglebg#map("<F5>")
+
+" make it so cpp and h file open in parallel in vsplitted windows
+" select text just pasted
+" make auto complete case insensitive
