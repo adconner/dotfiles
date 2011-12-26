@@ -15,9 +15,9 @@ filetype indent on      " Enable file type based indentation
 syntax on               " Enable syntax highlighting
 set background=dark
 if ('gui_running')
-  colorscheme solarized      " Set the colorscheme
+  colorscheme wombat      " Set the colorscheme
 else 
-  colorscheme solarized
+  colorscheme wombat
 endif
 
 " Tabbing
