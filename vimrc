@@ -112,7 +112,6 @@ noremap <leader>p :bp<cr>
 noremap <leader>/ :noh<cr>
 
 noremap <F1> <nop>
-call togglebg#map("<F5>")
 
 " make it so cpp and h file open in parallel in vsplitted windows
 " select text just pasted
