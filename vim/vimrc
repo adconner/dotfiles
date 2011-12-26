@@ -3,6 +3,12 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Make vim respect the XDG base directory spec.
+set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+
 " Pathogen plugin loader
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
