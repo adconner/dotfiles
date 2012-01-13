@@ -42,4 +42,6 @@ alias fgrep="fgrep --color=auto"
 alias vi="vim"
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
+alias info="info --vi"
+
 export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
