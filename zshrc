@@ -10,6 +10,7 @@ export HISTFILE=$XDG_CACHE_HOME/zsh/zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
 export EDITOR='vim'
+export WORDCHARS=`echo $WORDCHARS | tr -d '/'`
 
 eval `dircolors -b`
 
