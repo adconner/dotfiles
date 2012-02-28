@@ -12,6 +12,8 @@ export SAVEHIST=1000
 export EDITOR='vim'
 export WORDCHARS=`echo $WORDCHARS | tr -d '/'`
 
+export PATH=$PATH:~/bin
+
 eval `dircolors -b`
 
 autoload -Uz compinit && compinit

@@ -65,6 +65,9 @@ set backspace=indent,eol,start
 set tags+=~/.vim/commontags
 set tags+=./tag
 
+" set keywordprg=man\ --regex
+map K <nop>
+
 " Requries Vim 7.3
 " set relativenumber     " Use line numbers relative to current line
 " set undofile           " Use a persistent undo file
@@ -72,7 +75,7 @@ set tags+=./tag
 
 
 " Mappings {{{1
-let mapleader=","
+let mapleader="-"
 
 inoremap <C-U> <C-G>u<C-U>
 inoremap jj <Esc>
@@ -91,6 +94,13 @@ noremap <Insert> <C-y>
 " make returning to exact cursor position more convenient
 noremap ' `
 noremap ` '
+
+" make forward line searches easier to reach
+noremap ; ,
+noremap , ;
+
+" make Y consistent with C and D
+nnoremap Y y$
 
 " navigate by display lines
 noremap j gj
@@ -115,7 +125,7 @@ noremap <leader>n :bn<cr>
 noremap <leader>p :bp<cr>
 
 " misc mappings
-noremap <leader>/ :noh<cr>
+noremap <leader><space> :noh<cr>
 
 noremap <F1> <nop>
 

@@ -46,7 +46,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["1","2","3","4","5","6","7","8","9","0"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -135,7 +135,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-[1..9], Move client to workspace N
     --
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+        | (i, k) <- zip (XMonad.workspaces conf) 
+          [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
@@ -155,14 +156,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
 
     -- mod-button1, Set the window to floating mode and move by dragging
-      ((modm, button1), (\w -> focus w >> mouseMoveWindow w
+      ((modm .|. shiftMask, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((modm .|. shiftMask, button2), (\w -> focus w >> windows W.shiftMaster))
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
+    , ((modm .|. shiftMask, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
