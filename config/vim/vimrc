@@ -10,7 +10,6 @@ set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
 
 " Pathogen plugin loader
-runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
 " General Preferences {{{1
