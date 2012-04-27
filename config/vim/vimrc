@@ -1,23 +1,30 @@
+" Initialization {{{1
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Make vim respect the XDG base directory spec.
+" Make vim respect the XDG base directory spec {{{2
 set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+  " swap file location
+set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+  " persistent undo location
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+  " viminfo location
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+"}}}2
 
 " Pathogen plugin loader
 call pathogen#infect()
 
 " General Preferences {{{1
-" File based
-set ttyfast
+" Filetype options {{{2
 filetype plugin on      " Load file type plugins
 filetype indent on      " Enable file type based indentation
 syntax on               " Enable syntax highlighting
+
+" Appearance {{{2
 set background=dark
 if ('gui_running')
   colorscheme wombat      " Set the colorscheme
@@ -25,14 +32,14 @@ else
   colorscheme wombat
 endif
 
-" Tabbing
+" Tabbing {{{2
 set tabstop=2           " The number of spaces a tab is
 set shiftwidth=2        " Number of spaces to use in auto(indent)
 set softtabstop=2       " Just to be clear
 set expandtab           " Insert tabs as spaces
 set smarttab
 
-" Searching
+" Searching {{{2
 set wrapscan            " Wrap searches
 set ignorecase          " Ignore search term case...
 set smartcase           " ... unless term contains an uppercase character
@@ -42,12 +49,13 @@ set gdefault            " replace every occurrance by default
 noremap / /\v
 " use aggressive regex by default
 
-" Wrapping
+" Wrapping {{{2
 "set textwidth=80        " Hard-wrap text at nth column
 set linebreak           " Break existing lines at sane places
 set wrap                " Wrap long lines
 
-" General
+" General {{{2
+set ttyfast
 set ruler               " Show [line,col] number (in status bar)
 set history=1000        " Number of ":" commands and searches to remember
 set wildmenu            " dmenu style menu for commands
@@ -59,47 +67,24 @@ set hidden              " allow fast switching of files w/o saving
 set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 set mouse-=a            " disable mouse
-set backspace=indent,eol,start
-" Allow backspacing on the given values
+set backspace=indent,eol,start " Allow backspacing on the given values
 set tags+=~/.vim/commontags
 set tags+=./tag
 
-" set keywordprg=man\ --regex
-map K <nop>
-
 " Requries Vim 7.3
+set undofile           " Use a persistent undo file
 " set relativenumber     " Use line numbers relative to current line
-" set undofile           " Use a persistent undo file
-
 
 
 " Mappings {{{1
 let mapleader="-"
 
-inoremap <C-U> <C-G>u<C-U>
-inoremap jj <Esc>
+" Insert Mode {{{2
+imap <C-U> <C-G>u<C-U>
+imap jj <Esc>
 
-" Move left and right between splits with CTRL+[hl]
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-" todo: for some reason this also skips about 8 characters
-
-" make scrolling more convenient
-noremap <C-j> <C-e>
-noremap <C-k> <C-y>
-noremap <Del> <C-e>
-noremap <Insert> <C-y>
-
-" make returning to exact cursor position more convenient
-noremap ' `
-noremap ` '
-
-" make forward line searches easier to reach
-noremap ; ,
-noremap , ;
-
-" make Y consistent with C and D
-nnoremap Y y$
+" Normal mode {{{2
+" Movement {{{3
 
 " navigate by display lines
 noremap j gj
@@ -107,27 +92,71 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-" set up command line editing with vi like readline,
-cnoremap <c-a> <Home>
-cnoremap <c-e> <End>
-cnoremap <c-f> <Right>
-cnoremap <c-b> <Left>
-cnoremap <A-f> <S-Right>
-" has some trouble with this, see i_CTRL-F
-cnoremap <A-b> <S-Left>
-cnoremap <c-d> <Del>
+" Move left and right between window splits with CTRL+[hl] 
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+" todo: for some reason this also skips about 8 characters
 
+" make scrolling more convenient
+map <C-j> <C-e>
+map <C-k> <C-y>
+map <Del> <C-e>
+map <Insert> <C-y>
+
+" make forward line searches easier to reach
+noremap ; ,
+noremap , ;
+
+" Editing {{{3
+
+" make Y consistent with C and D
+nmap Y y$
+
+map <leader><space> :noh<cr>
+
+" File Navigation {{{3
 " make tabs, windows, and buffers easier
-noremap <leader>v :vsplit 
-noremap <leader>t :tabnew 
-noremap <leader>n :bn<cr>
-noremap <leader>p :bp<cr>
+map <leader>v :vsplit 
+map <leader>t :tabnew 
+map <leader>j :bn<cr>
+map <leader>k :bp<cr>
 
-" misc mappings
-noremap <leader><space> :noh<cr>
+map <leader>nt :NERDTree<cr>
 
-noremap <F1> <nop>
+" Misc Mappings {{{3
+" disable help key (especially important in gui)
+map <F1> <nop>
 
+" disable key which takes us away from buffer
+map K <nop>
+" set keywordprg=man\ --regex
+
+" Command mode {{{2
+" set up command line editing with vi like readline,
+cmap <c-a> <Home>
+cmap <c-e> <End>
+cmap <c-f> <Right>
+cmap <c-b> <Left>
+cmap <A-f> <S-Right>
+" has some trouble with this, see i_CTRL-F
+cmap <A-b> <S-Left>
+cmap <c-d> <Del>
+
+" sudo write
+if has('unix')
+  " in principle could cause issues if I ever needed the string w!! in the
+  " command line for any other reason
+  cabbrev w!! w !sudo tee % >/dev/null
+endif
+
+"Alias ex commands easily capitalized
+command -nargs=* -complete=file -bang W w<bang> <args>
+command -nargs=* -complete=file -bang Make make<bang> <args>
+
+
+" Todo {{{1
 " make it so cpp and h file open in parallel in vsplitted windows
 " select text just pasted
 " make auto complete case insensitive
+
+" vim: fdm=marker
