@@ -1,0 +1,23 @@
+snippet lr\| "left\| right\|" w
+\left\| ${1:${VISUAL}} \right\|
+endsnippet
+
+snippet doc "Initialization" b
+\documentclass{${1:article}}
+\usepackage{${2:amsmath,amssymb,amsthm}}
+${3:%}\usepackage[margin=1in]{geometry}
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\begin{document}
+${0}
+\end{document}
+endsnippet

@@ -11,8 +11,10 @@ set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
   " persistent undo location
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
   " viminfo location
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+let g:vimdir="$XDG_CONFIG_HOME/vim"
+let &runtimepath=g:vimdir.",".g:vimdir."/after,$VIM,$VIMRUNTIME"
+let $MYVIMRC=g:vimdir."/vimrc"
+let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
 "}}}2
 
 " Pathogen plugin loader
@@ -68,13 +70,17 @@ set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
-set tags+=~/.vim/commontags
-set tags+=./tag
+set dictionary+=/usr/share/dict/words
+let &tags.=",".g:vimdir."/commontags"
+
+" Immediately assume an empty *.tex file is latex
+let g:tex_flavor = "latex"
+" Search runtimepath in forward order to be more efficient
+let g:UltiSnipsDontReverseSearchPath="1"
 
 " Requries Vim 7.3
-set undofile           " Use a persistent undo file
+" set undofile           " Use a persistent undo file
 " set relativenumber     " Use line numbers relative to current line
-
 
 " Mappings {{{1
 let mapleader="-"
@@ -82,6 +88,27 @@ let mapleader="-"
 " Insert Mode {{{2
 imap <C-U> <C-G>u<C-U>
 imap jj <Esc>
+
+" insert mode commands I care about:
+" CTRL-r insert register
+" CTRL-h backspace
+" CTRL-w delete back word
+" CTRL-v insert literal
+
+imap <c-u> <c-x>
+imap <c-l> <c-x><c-l>
+imap <c-]> <c-x><c-]>
+imap <c-t> <c-x><c-]>
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:clang_complete_auto="0"
+let g:clang_snippets_engine='ultisnips'
+let g:clang_snippets="1"
+
+" set so that <tab> and <s-tab> go forward and back
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Normal mode {{{2
 " Movement {{{3
@@ -116,12 +143,13 @@ map <leader><space> :noh<cr>
 
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
-map <leader>v :vsplit 
-map <leader>t :tabnew 
-map <leader>j :bn<cr>
-map <leader>k :bp<cr>
+"   only in normal mode because in visual these lose the selection
+nmap <leader>v :vsplit 
+nmap <leader>t :tabnew 
+nmap <leader>j :bn<cr>
+nmap <leader>k :bp<cr>
 
-map <leader>nt :NERDTree<cr>
+nmap <leader>nt :NERDTree<cr>
 
 " Misc Mappings {{{3
 " disable help key (especially important in gui)
@@ -131,16 +159,21 @@ map <F1> <nop>
 map K <nop>
 " set keywordprg=man\ --regex
 
+map <leader>s :SlimuxREPLSendLine<cr>
+vmap <leader>s :SlimuxREPLSendSelection<cr>
+
 " Command mode {{{2
-" set up command line editing with vi like readline,
-cmap <c-a> <Home>
-cmap <c-e> <End>
-cmap <c-f> <Right>
-cmap <c-b> <Left>
-cmap <A-f> <S-Right>
-" has some trouble with this, see i_CTRL-F
-cmap <A-b> <S-Left>
-cmap <c-d> <Del>
+" Set up command line editing with vi like readline,
+"   These commands also apply to insert mode
+map! <c-a> <Home>
+map! <c-e> <End>
+map! <c-f> <Right>
+map! <c-b> <Left>
+map! <c-d> <Del>
+
+" has some trouble with these, see i_CTRL-F
+"cmap <A-f> <S-Right>
+"cmap <A-b> <S-Left>
 
 " sudo write
 if has('unix')
@@ -151,6 +184,7 @@ endif
 
 "Alias ex commands easily capitalized
 command -nargs=* -complete=file -bang W w<bang> <args>
+command -bang Q q<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
 
@@ -158,5 +192,6 @@ command -nargs=* -complete=file -bang Make make<bang> <args>
 " make it so cpp and h file open in parallel in vsplitted windows
 " select text just pasted
 " make auto complete case insensitive
+" tab completion work with ultisnip
 
 " vim: fdm=marker
