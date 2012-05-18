@@ -1,18 +1,12 @@
---
--- xmonad example config file.
---
--- A template showing all available configuration hooks,
--- and how to override the defaults in your own xmonad.hs conf file.
---
--- Normally, you'd only override those defaults you care about.
---
--- todo: shortcut for ranger, uzbl, others?
--- xmobar set up
--- clean up default settings, let inherit
 
-import XMonad
-import Data.Monoid
+import System.IO
 import System.Exit
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Fullscreen
+import XMonad.Util.Run(spawnPipe)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -21,10 +15,6 @@ import qualified Data.Map        as M
 -- certain contrib modules.
 --
 myTerminal      = "urxvt"
-
--- Whether focus follows the mouse pointer.
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
 
 -- Width of the window border in pixels.
 --
@@ -65,7 +55,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), spawn "dmenu_run")
 
     -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
+    , ((modm .|. shiftMask, xK_p     ), spawn "dmenu_term_run")
 
     -- close focused window
     --, ((modm .|. shiftMask, xK_c     ), kill)
@@ -120,7 +110,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -144,14 +134,44 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+    --     | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+    --     , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+    -- ++
+
+    -- Application keybinds 
+    [ ((controlMask        , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common")
+    , ((0                  , xK_Print) , spawn "scrot -e 'mv $f ~/common")
+    , ((modm               , xK_f)     , spawn "firefox")
+    , ((modm               , xK_r)     , spawn "urxvt -e ranger")
+    , ((modm               , xK_a)     , spawn "urxvt -e alsamixer")
+    , ((modm               , xK_w)     , spawn "urxvt -e wicd-curses")
+    , ((modm .|. shiftMask , xK_m)     , spawn "urxvt -e ncmpcpp")
+      -- XF86AudioPrev
+    , ((0 , 0x1008ff16)     , spawn "mpc prev")
+      -- XF86AudioStop
+    , ((0 , 0x1008ff15)     , spawn "mpc stop")
+      -- XF86AudioPlay
+    , ((0 , 0x1008ff14)     , spawn "mpc toggle")
+      -- XF86AudioNext
+    , ((0 , 0x1008ff17)     , spawn "mpc next")
+      -- XF86AudioLowerVolume
+    , ((0 , 0x1008ff11)     , spawn "amixer set Master 5%-")
+      -- XF86AudioRaiseVolume
+    , ((0 , 0x1008ff13)     , spawn "amixer set Master 5%+")
+      -- XF86AudioMute
+    , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
+
+    ]
 
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
---
+
+-- Whether focus follows the mouse pointer.
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = False
+
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
 
@@ -180,7 +200,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -209,22 +229,13 @@ myLayout = tiled ||| Mirror tiled ||| Full
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
+myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore ]
+    , resource  =? "kdesktop"       --> doIgnore 
+    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
-------------------------------------------------------------------------
--- Event handling
-
--- * EwmhDesktops users should change this to ewmhDesktopsEventHook
---
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
-myEventHook = mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -232,7 +243,8 @@ myEventHook = mempty
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook = return ()
+-- myLogHook = return ()
+
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -249,12 +261,25 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = do
+  xmproc <- spawnPipe "/usr/bin/xmobar /home/austin/.xmonad/xmobar.hs"
+  xmonad $ defaults {
+      logHook = dynamicLogWithPP xmobarPP {
+           ppOutput = hPutStrLn xmproc,
+           ppTitle = xmobarColor "#95e454" "" . shorten 50,
+           ppCurrent = xmobarColor "#eadead" "" . wrap "[" "]",
+           -- ppHidden = xmobarColor "#95e454" "",
+           ppOrder = \(ws:_:t:_) -> [ws,t],
+           ppSep = " | "
+         }
+      }
 
+------------------------------------------------------------------------
+-- Combine it all together
 -- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
+-- fields in the default config. Any you don't override, will 
 -- use the defaults defined in xmonad/XMonad/Config.hs
---
+-- 
 -- No need to modify this.
 --
 defaults = defaultConfig {
@@ -272,9 +297,7 @@ defaults = defaultConfig {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-        logHook            = myLogHook,
         startupHook        = myStartupHook
     }
