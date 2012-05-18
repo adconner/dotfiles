@@ -12,7 +12,7 @@ export SAVEHIST=1000
 export EDITOR='vim'
 export WORDCHARS=`echo $WORDCHARS | tr -d '/'`
 
-export PATH=$PATH:~/bin
+export PATH=~/bin:$PATH
 
 eval `dircolors -b`
 

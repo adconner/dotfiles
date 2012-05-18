@@ -1,6 +1,10 @@
+cd ~
 /usr/bin/xrdb -load $HOME/.Xresources
 /usr/bin/setxkbmap dvorak
 /usr/bin/xmodmap $HOME/.Xmodmap
 exec xmonad
-autocutsel -fork &
-autocutsel -selection PRIMARY -fork &
+
+# for some reason not working
+#unclutter &
+#autocutsel -fork &
+#autocutsel -selection PRIMARY -fork &
