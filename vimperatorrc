@@ -1,0 +1,55 @@
+" Options {{{1
+set gui=none
+set noscrollbars
+set focuscontent=true
+set autocomplete=false
+set visualbell
+
+" Normal mode mappings {{{1
+
+" scroll faster
+nnoremap j 3j
+nnoremap k 3k
+nnoremap h 3h
+nnoremap l 3l
+
+" make scrolling like in pager
+"nnoremap d <c-d>
+"nnoremap u <c-u>
+"nnoremap U u
+"nnoremap <c-d> d
+"nnoremap <c-u> u
+
+" disable unwanted dialogs and make tab switching easier
+nnoremap <c-l> gt
+nnoremap <c-h> gT
+
+" open link in foreground tab
+noremap F ;t
+
+" disable weird switch to google
+nnoremap <c-j> <Nop>
+
+" Insert mode mappings {{{1
+imap <c-f> <Right>
+imap <c-b> <Left>
+imap <c-h> <BS>
+imap <c-d> <Del>
+imap <c-a> <Home>
+imap <c-e> <End>
+imap jj <Esc>
+
+" Command line mappings {{{1
+cmap <c-p> <Up>
+cmap <c-n> <Down>
+cmap <c-f> <Right>
+cmap <c-b> <Left>
+cmap <c-h> <BS>
+cmap <c-d> <Del>
+cmap <c-a> <Home>
+cmap <c-e> <End>
+cmap jj <Esc>
+
+" todo <c-w> delete back word
+
+" vim: fdm=marker ai syntax=vim
