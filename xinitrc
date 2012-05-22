@@ -1,10 +1,12 @@
 cd ~
-/usr/bin/xrdb -load $HOME/.Xresources
+/usr/bin/xrdb -load ~/.Xresources
 /usr/bin/setxkbmap dvorak
-/usr/bin/xmodmap $HOME/.Xmodmap
-exec xmonad
+/usr/bin/xmodmap ~/.Xmodmap
 
-# for some reason not working
-#unclutter &
-#autocutsel -fork &
-#autocutsel -selection PRIMARY -fork &
+sh ~/.fehbg &
+unclutter &
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+# This must be last for some reason
+exec xmonad
