@@ -151,6 +151,8 @@ nmap <leader>k :bp<cr>
 
 nmap <leader>nt :NERDTree<cr>
 
+nmap <leader>e :FufFile<cr>
+
 " Misc Mappings {{{3
 " disable help key (especially important in gui)
 map <F1> <nop>
@@ -161,6 +163,8 @@ map K <nop>
 
 map <leader>s :SlimuxREPLSendLine<cr>
 vmap <leader>s :SlimuxREPLSendSelection<cr>
+
+map <leader>g :Gstatus<cr>
 
 " Command mode {{{2
 " Set up command line editing with vi like readline,
