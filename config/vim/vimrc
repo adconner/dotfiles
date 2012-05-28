@@ -77,6 +77,8 @@ let &tags.=",".g:vimdir."/commontags"
 let g:tex_flavor = "latex"
 " Search runtimepath in forward order to be more efficient
 let g:UltiSnipsDontReverseSearchPath="1"
+" Use libclang instead of clang for c++ auto complete
+let g:clang_use_library="1"
 
 " Requries Vim 7.3
 " set undofile           " Use a persistent undo file
@@ -110,7 +112,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" Normal mode {{{2
+" Normal/Visual modes {{{2
 " Movement {{{3
 
 " navigate by display lines
@@ -140,6 +142,8 @@ noremap , ;
 nmap Y y$
 
 map <leader><space> :noh<cr>
+nmap gs ys
+vmap s S
 
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
