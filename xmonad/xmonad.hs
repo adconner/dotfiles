@@ -140,13 +140,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- ++
 
     -- Application keybinds 
-    [ ((controlMask        , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common")
-    , ((0                  , xK_Print) , spawn "scrot -e 'mv $f ~/common")
-    , ((modm               , xK_f)     , spawn "firefox")
+    [ 
+    -- TODO scrot bindings not being called it seems
+      ((controlMask        , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots")
+    , ((0                  , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots")
+    -- , ((modm               , xK_f)     , spawn "firefox")
+    , ((modm               , xK_f)     , spawn "luakit")
     , ((modm               , xK_r)     , spawn "urxvt -e ranger")
     , ((modm               , xK_a)     , spawn "urxvt -e alsamixer")
     , ((modm               , xK_w)     , spawn "urxvt -e wicd-curses")
-    , ((modm .|. shiftMask , xK_m)     , spawn "urxvt -e ncmpcpp")
+    , ((modm               , xK_n)     , spawn "urxvt -e ncmpcpp")
       -- XF86AudioPrev
     , ((0 , 0x1008ff16)     , spawn "mpc prev")
       -- XF86AudioStop
@@ -176,14 +179,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
 
     -- mod-button1, Set the window to floating mode and move by dragging
-      ((modm .|. shiftMask, button1), (\w -> focus w >> mouseMoveWindow w
+      ((mod1Mask, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
 
     -- mod-button2, Raise the window to the top of the stack
-    , ((modm .|. shiftMask, button2), (\w -> focus w >> windows W.shiftMaster))
+    , ((mod1Mask, button2), (\w -> focus w >> windows W.shiftMaster))
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm .|. shiftMask, button3), (\w -> focus w >> mouseResizeWindow w
+    , ((mod1Mask, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
 
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
