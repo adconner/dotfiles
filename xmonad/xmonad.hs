@@ -150,20 +150,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm               , xK_a)     , spawn "urxvt -e alsamixer")
     , ((modm               , xK_w)     , spawn "urxvt -e wicd-curses")
     , ((modm               , xK_n)     , spawn "urxvt -e ncmpcpp")
-      -- XF86AudioPrev
-    , ((0 , 0x1008ff16)     , spawn "mpc prev")
-      -- XF86AudioStop
-    , ((0 , 0x1008ff15)     , spawn "mpc stop")
-      -- XF86AudioPlay
-    , ((0 , 0x1008ff14)     , spawn "mpc toggle")
-      -- XF86AudioNext
-    , ((0 , 0x1008ff17)     , spawn "mpc next")
-      -- XF86AudioLowerVolume
-    , ((0 , 0x1008ff11)     , spawn "amixer set Master 5%-")
-      -- XF86AudioRaiseVolume
-    , ((0 , 0x1008ff13)     , spawn "amixer set Master 5%+")
-      -- XF86AudioMute
-    , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
+    , ((modm               , xK_o)     , spawn "urxvt -e htop")
+
+    -- These are taken care of by acpid handler now
+    --   -- XF86AudioPrev
+    -- , ((0 , 0x1008ff16)     , spawn "mpc prev")
+    --   -- XF86AudioStop
+    -- , ((0 , 0x1008ff15)     , spawn "mpc stop")
+    --   -- XF86AudioPlay
+    -- , ((0 , 0x1008ff14)     , spawn "mpc toggle")
+    --   -- XF86AudioNext
+    -- , ((0 , 0x1008ff17)     , spawn "mpc next")
+    --   -- XF86AudioLowerVolume
+    -- , ((0 , 0x1008ff11)     , spawn "amixer set Master 5%-")
+    --   -- XF86AudioRaiseVolume
+    -- , ((0 , 0x1008ff13)     , spawn "amixer set Master 5%+")
+    --   -- XF86AudioMute
+    -- , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
 
     ]
 
