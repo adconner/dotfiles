@@ -11,8 +11,8 @@ set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
   " persistent undo location
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
   " viminfo location
-let g:vimdir="$XDG_CONFIG_HOME/vim"
-let &runtimepath=g:vimdir.",".g:vimdir."/after,$VIM,$VIMRUNTIME"
+let g:vimdir=$XDG_CONFIG_HOME."/vim"
+let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
 let $MYVIMRC=g:vimdir."/vimrc"
 let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
 "}}}2
@@ -76,7 +76,7 @@ let &tags.=",".g:vimdir."/commontags"
 " Immediately assume an empty *.tex file is latex
 let g:tex_flavor = "latex"
 " Search runtimepath in forward order to be more efficient
-let g:UltiSnipsDontReverseSearchPath="1"
+let g:UltiSnipsDontReverseSearchPath="0"
 " Use libclang instead of clang for c++ auto complete
 let g:clang_use_library="1"
 
