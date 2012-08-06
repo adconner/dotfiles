@@ -17,7 +17,7 @@ Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
                                     "-L", "10", "-H", "80", "--",
                                     "-O", "<fc=#95e454>AC</fc> - ",
                                     "-o", "",
-                                    "-f", "ADP1/online"] 600 
+                                    "-f", "ADP1/online"] 100 
                     , Run Date "%a %b %_d %I:%M:%S" "date" 10
                     --, Run MPD ["-t", "<artist> - <title> <statei>"] 10
                     -- , Volume "default" "Master"  [] 10

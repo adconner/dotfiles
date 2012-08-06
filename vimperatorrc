@@ -3,7 +3,7 @@ set gui=none
 set noscrollbars
 set focuscontent=true
 set autocomplete=false
-set visualbell
+" set visualbell
 
 " Normal mode mappings {{{1
 
@@ -48,8 +48,7 @@ cmap <c-h> <BS>
 cmap <c-d> <Del>
 cmap <c-a> <Home>
 cmap <c-e> <End>
+cmap <c-w> <c-BS>
 cmap jj <Esc>
 
-" todo <c-w> delete back word
-
-" vim: fdm=marker ai syntax=vim
+" vim: fdm=marker ai ft=vim
