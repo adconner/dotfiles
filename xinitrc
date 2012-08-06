@@ -4,7 +4,7 @@ cd ~
 /usr/bin/xmodmap ~/.Xmodmap
 
 sh ~/.fehbg &
-unclutter &
+unclutter -grab &
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
