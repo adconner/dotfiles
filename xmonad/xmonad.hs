@@ -142,15 +142,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Application keybinds 
     [ 
     -- TODO scrot bindings not being called it seems
-      ((controlMask        , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots")
-    , ((0                  , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots")
-    -- , ((modm               , xK_f)     , spawn "firefox")
-    , ((modm               , xK_f)     , spawn "luakit")
-    , ((modm               , xK_r)     , spawn "urxvt -e ranger")
-    , ((modm               , xK_a)     , spawn "urxvt -e alsamixer")
-    , ((modm               , xK_w)     , spawn "urxvt -e wicd-curses")
-    , ((modm               , xK_n)     , spawn "urxvt -e ncmpcpp")
-    , ((modm               , xK_o)     , spawn "urxvt -e htop")
+      ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots")
+    , ((0                    , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots")
+    -- , ((modm                 , xK_f)     , spawn "firefox")
+    , ((modm                 , xK_f)     , spawn "luakit")
+    , ((modm                 , xK_r)     , spawn "urxvt -e ranger")
+    , ((modm                 , xK_a)     , spawn "urxvt -e alsamixer")
+    , ((modm                 , xK_w)     , spawn "urxvt -e wicd-curses")
+    , ((modm                 , xK_n)     , spawn "urxvt -e ncmpcpp")
+    , ((modm                 , xK_o)     , spawn "urxvt -e htop")
+    , ((modm .|. controlMask , xK_m)     , spawn "urxvt -e mutt")
 
     -- These are taken care of by acpid handler now
     --   -- XF86AudioPrev
