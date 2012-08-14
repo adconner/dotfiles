@@ -10,11 +10,11 @@ export HISTFILE=$XDG_CACHE_HOME/zsh/zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
 export EDITOR='vim'
-export WORDCHARS=`echo $WORDCHARS | tr -d '/'`
+export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
 
 export PATH=~/bin:$PATH
 
-eval `dircolors -b`
+eval $(dircolors -b)
 
 autoload -Uz compinit && compinit
 setopt appendhistory extendedglob
@@ -43,9 +43,21 @@ alias egrep="egrep --color=auto"
 alias fgrep="fgrep --color=auto"
 
 alias vi="vim"
+alias v="vim"
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 alias info="info --vi"
-alias mv="mv -i"
+
+alias ..="cd .."
+alias ...="cd ..."
+alias ....="cd ...."
+alias .....="cd ....."
+alias ......="cd ......"
+alias :q="exit"
+
+# make fewer mistakes
+alias mv="mv -iv"
+alias cp="cp -iv"
+alias ln="ln -iv"
 
 export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
