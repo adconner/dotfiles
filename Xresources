@@ -1,9 +1,19 @@
+URxvt.loginShell: true
 URxvt.scrollBar: off
 URxvt.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt.saveLines: 12000
 URxvt.foreground: #d9d9d9
 URxvt.background: #101010
+
+! transparency
+! URxvt.transparent: true
+! URxvt.shading: 5
+
+! Make urls clickable
+URxvt.perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
+URxvt.matcher.button: 1
+URxvt.urlLauncher: luakit
 
 ! Normal
 ! color0    black

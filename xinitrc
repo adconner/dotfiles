@@ -1,12 +1,12 @@
 cd ~
 /usr/bin/xrdb -load ~/.Xresources
-/usr/bin/setxkbmap dvorak
-/usr/bin/xmodmap ~/.Xmodmap
+/usr/bin/setxkbmap dvorak &
+/usr/bin/xmodmap ~/.Xmodmap &
 
 sh ~/.fehbg &
 unclutter -grab &
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
-# This must be last for some reason
+# This must be last
 exec xmonad
