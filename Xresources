@@ -8,7 +8,7 @@ URxvt.background: #101010
 
 ! transparency
 ! URxvt.transparent: true
-! URxvt.shading: 5
+! URxvt.shading: 30
 
 ! Make urls clickable
 URxvt.perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine

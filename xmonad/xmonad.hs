@@ -151,7 +151,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                 , xK_w)     , spawn "urxvt -e wicd-curses")
     , ((modm                 , xK_n)     , spawn "urxvt -e ncmpcpp")
     , ((modm                 , xK_o)     , spawn "urxvt -e htop")
-    , ((modm .|. controlMask , xK_m)     , spawn "urxvt -e mutt")
+    , ((modm .|. shiftMask   , xK_m)     , spawn "urxvt -e zsh -ic mutt")
+        -- for some reason mutt sometimes has trouble rendering if 
+        -- the shell is not forced to be interactive
 
     -- These are taken care of by acpid handler now
     --   -- XF86AudioPrev
