@@ -1,0 +1,15 @@
+export PATH=~/bin:$PATH
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
+export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
+
+alias vi="vim"
+alias v="vim"
+
+alias info="info --vi"
+
+alias :q="exit"
+
+# make fewer mistakes
+alias mv="mv -iv"
+alias cp="cp -iv"
+alias ln="ln -iv"
