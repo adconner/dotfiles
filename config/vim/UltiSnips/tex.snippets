@@ -4,11 +4,12 @@ endsnippet
 
 snippet doc "Initialization" b
 \documentclass{${1:article}}
-\usepackage{${2:amsmath,amssymb,amsthm}}
+\usepackage{amsmath,amssymb,amsthm${2}}
 ${3:%}\usepackage[margin=1in]{geometry}
 
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\QQ}{\mathbb{Q}}
 
@@ -16,6 +17,9 @@ ${3:%}\usepackage[margin=1in]{geometry}
 \let\originalright\right
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
+
+\title{${4:Title Here}}
+\author{Austin Conner}
 
 \begin{document}
 ${0}

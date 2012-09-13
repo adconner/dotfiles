@@ -49,6 +49,7 @@ set incsearch           " Highlight search...
 set hlsearch            " ... as you type
 set gdefault            " replace every occurrance by default
 noremap / /\v
+noremap ? ?\v
 " use aggressive regex by default
 
 " Wrapping {{{2
