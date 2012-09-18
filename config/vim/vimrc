@@ -20,9 +20,7 @@ endif
 "}}}2
 
 " Pathogen plugin loader
-if exists("g:loaded_pathogen")
-  call pathogen#infect()
-endif
+silent! call pathogen#infect()
 
 " General Preferences {{{1
 " Filetype options {{{2
@@ -33,9 +31,9 @@ syntax on               " Enable syntax highlighting
 " Appearance {{{2
 set background=dark
 if has('gui_running')
-  colorscheme wombat      " Set the colorscheme
+  silent! colorscheme wombat      " Set the colorscheme
 else 
-  colorscheme wombat
+  silent! colorscheme wombat
 endif
 
 if has('gui_win32')
@@ -79,10 +77,12 @@ set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
-set formatoptions+=j    " allow sensible joining of comments, 
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
 set formatoptions+=n    " format numbered lists correctly
+
+" this results in an error on machines without a sufficient vim version
+silent! set formatoptions+=j    " allow sensible joining of comments, 
 
 if has('unix')
   let &tags.=",".g:vimdir."/commontags"
