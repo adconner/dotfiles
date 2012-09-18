@@ -5,20 +5,24 @@
 set nocompatible
 
 " Make vim respect the XDG base directory spec {{{2
-set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
-  " swap file location
-set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
-  " persistent undo location
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-  " viminfo location
-let g:vimdir=$XDG_CONFIG_HOME."/vim"
-let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
-let $MYVIMRC=g:vimdir."/vimrc"
-let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
+if has('unix')
+  set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+    " swap file location
+  set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+    " persistent undo location
+  set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+    " viminfo location
+  let g:vimdir=$XDG_CONFIG_HOME."/vim"
+  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
+  let $MYVIMRC=g:vimdir."/vimrc"
+  let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
+endif
 "}}}2
 
 " Pathogen plugin loader
-call pathogen#infect()
+if exists("g:loaded_pathogen")
+  call pathogen#infect()
+endif
 
 " General Preferences {{{1
 " Filetype options {{{2
@@ -28,10 +32,14 @@ syntax on               " Enable syntax highlighting
 
 " Appearance {{{2
 set background=dark
-if ('gui_running')
+if has('gui_running')
   colorscheme wombat      " Set the colorscheme
 else 
   colorscheme wombat
+endif
+
+if has('gui_win32')
+  set guifont=courier_new:h11
 endif
 
 " Tabbing {{{2
@@ -53,7 +61,7 @@ noremap ? ?\v
 " use aggressive regex by default
 
 " Wrapping {{{2
-"set textwidth=80        " Hard-wrap text at nth column
+set textwidth=80        " Hard-wrap text at nth column
 set linebreak           " Break existing lines at sane places
 set wrap                " Wrap long lines
 
@@ -71,8 +79,15 @@ set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
-set dictionary+=/usr/share/dict/words
-let &tags.=",".g:vimdir."/commontags"
+set formatoptions+=j    " allow sensible joining of comments, 
+" set formatoptions+=a    " auto format
+set formatoptions+=1    " dont auto line break after one letter word if possible
+set formatoptions+=n    " format numbered lists correctly
+
+if has('unix')
+  let &tags.=",".g:vimdir."/commontags"
+  set dictionary+=/usr/share/dict/words
+endif
 
 " Immediately assume an empty *.tex file is latex
 let g:tex_flavor = "latex"
@@ -127,6 +142,11 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 " todo: for some reason this also skips about 8 characters
 
+" " "me" - make current workspace large
+" map <leader>m <c-w><s-_><c-w><s-|>
+" map <leader>M <c-w>=
+
+
 " make scrolling more convenient
 map <C-j> <C-e>
 map <C-k> <C-y>
@@ -159,6 +179,7 @@ nmap <leader>nt :NERDTree<cr>
 nmap <leader>e :FufFile<cr>
 
 " Misc Mappings {{{3
+
 " disable help key (especially important in gui)
 map <F1> <nop>
 
@@ -196,6 +217,19 @@ command -nargs=* -complete=file -bang W w<bang> <args>
 command -bang Q q<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
+" Functions {{{1
+
+" Follow symlinks so we're editing the actual file instead of the symlink
+" (change the value returned by %).
+"
+" Requires readlink - part of GNU coreutils
+" Uses vim-bufkill if available.
+function! s:SwitchToActualFile()
+  let fname = resolve(expand('%:p'))
+  bwipeout
+  exec "edit " . fname
+endfunction
+command FollowSymlink call s:SwitchToActualFile()
 
 " Todo {{{1
 " make it so cpp and h file open in parallel in vsplitted windows
