@@ -77,9 +77,14 @@ set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
+" set undofile            " Use a persistent undo file
+" set relativenumber      " Use line numbers relative to current line
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
-set formatoptions+=n    " format numbered lists correctly
+
+" makes mistakes if there are numbers in a block of text and one ends up at the
+" beginning of a line
+" set formatoptions+=n    " format numbered lists correctly
 
 " this results in an error on machines without a sufficient vim version
 silent! set formatoptions+=j    " allow sensible joining of comments, 
@@ -95,10 +100,6 @@ let g:tex_flavor = "latex"
 let g:UltiSnipsDontReverseSearchPath="0"
 " Use libclang instead of clang for c++ auto complete
 let g:clang_use_library="1"
-
-" Requries Vim 7.3
-" set undofile           " Use a persistent undo file
-" set relativenumber     " Use line numbers relative to current line
 
 " Mappings {{{1
 let mapleader="-"
@@ -142,10 +143,9 @@ nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
 " todo: for some reason this also skips about 8 characters
 
-" " "me" - make current workspace large
-" map <leader>m <c-w><s-_><c-w><s-|>
-" map <leader>M <c-w>=
-
+" "me" - make current workspace large
+map <leader>m :resize<cr>:vertical resize<cr>
+map <leader>M <C-w>=
 
 " make scrolling more convenient
 map <C-j> <C-e>
@@ -163,8 +163,12 @@ noremap , ;
 nmap Y y$
 
 map <leader><space> :noh<cr>
+
+" make tcomment consistant with other keys
 nmap gs ys
-vmap s S
+
+" use useful block comment
+map <leader>b <C-_>b
 
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
@@ -187,6 +191,8 @@ map <F1> <nop>
 map K <nop>
 " set keywordprg=man\ --regex
 
+" todo make this an operator instead (eg -ss for send line and 
+" -sip etc for send the current paragraph
 map <leader>s :SlimuxREPLSendLine<cr>
 vmap <leader>s :SlimuxREPLSendSelection<cr>
 
@@ -235,6 +241,6 @@ command FollowSymlink call s:SwitchToActualFile()
 " make it so cpp and h file open in parallel in vsplitted windows
 " select text just pasted
 " make auto complete case insensitive
-" tab completion work with ultisnip
+" visual paren matching plugin (what was that one called again?)
 
 " vim: fdm=marker
