@@ -97,9 +97,14 @@ endif
 " Immediately assume an empty *.tex file is latex
 let g:tex_flavor = "latex"
 " Search runtimepath in forward order to be more efficient
-let g:UltiSnipsDontReverseSearchPath="0"
-" Use libclang instead of clang for c++ auto complete
-let g:clang_use_library="1"
+let g:UltiSnipsDontReverseSearchPath=0
+
+let g:SuperTabDefaultCompletionType = "context"
+
+let g:clang_use_library=1
+let g:clang_complete_auto=0
+let g:clang_snippets_engine='ultisnips'
+let g:clang_snippets=1
 
 " Mappings {{{1
 let mapleader="-"
@@ -118,11 +123,6 @@ imap <c-u> <c-x>
 imap <c-l> <c-x><c-l>
 imap <c-]> <c-x><c-]>
 imap <c-t> <c-x><c-]>
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:clang_complete_auto="0"
-let g:clang_snippets_engine='ultisnips'
-let g:clang_snippets="1"
 
 " set so that <tab> and <s-tab> go forward and back
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -170,6 +170,11 @@ nmap gs ys
 " use useful block comment
 map <leader>b <C-_>b
 
+" quick replace of highlighted strings
+nmap <leader>r :%s/<c-r>//
+vmap <leader>r :s/\%V<c-r>/\%V/
+
+
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
 "   only in normal mode because in visual these lose the selection
@@ -196,7 +201,7 @@ map K <nop>
 map <leader>s :SlimuxREPLSendLine<cr>
 vmap <leader>s :SlimuxREPLSendSelection<cr>
 
-map <leader>g :Gstatus<cr>
+map <leader>d :Gdiff<cr>
 
 " Command mode {{{2
 " Set up command line editing with vi like readline,
