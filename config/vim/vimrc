@@ -81,6 +81,7 @@ set backspace=indent,eol,start " Allow backspacing on the given values
 " set relativenumber      " Use line numbers relative to current line
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
+set lazyredraw          " dont redraw screen during macro execution
 
 " makes mistakes if there are numbers in a block of text and one ends up at the
 " beginning of a line
@@ -173,7 +174,10 @@ noremap , ;
 " make Y consistent with C and D
 nmap Y y$
 
-map <leader><space> :noh<cr>
+" select last edited text
+nmap gV `[v`]
+
+map <silent> <leader><space> :noh<cr>
 
 " make tcomment consistant with other keys
 nmap gs ys
@@ -188,7 +192,7 @@ vmap <leader>r :s/\%V<c-r>/\%V/
 
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
-"   only in normal mode because in visual these lose the selection
+"   only in normal mode because in visual these loose the selection
 nmap <leader>v :vsplit 
 nmap <leader>t :tabnew 
 nmap <leader>j :bn<cr>
@@ -209,10 +213,20 @@ map K <nop>
 
 " todo make this an operator instead (eg -ss for send line and 
 " -sip etc for send the current paragraph
-map <leader>s :SlimuxREPLSendLine<cr>
-vmap <leader>s :SlimuxREPLSendSelection<cr>
+map <leader>S :SlimuxREPLSendLine<cr>
+vmap <leader>S :SlimuxREPLSendSelection<cr>
 
 map <leader>d :Gdiff<cr>
+
+" set spell mappings
+map <leader>ss :setlocal spell!<cr>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zG
+map <leader>s? z= 
+
+" todo make this work
+" map <leader>p :!zathura %<tab><C-w>pdf &
 
 " Command mode {{{2
 " Set up command line editing with vi like readline,
