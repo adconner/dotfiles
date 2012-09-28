@@ -101,10 +101,21 @@ let g:UltiSnipsDontReverseSearchPath=0
 
 let g:SuperTabDefaultCompletionType = "context"
 
-let g:clang_use_library=1
-let g:clang_complete_auto=0
-let g:clang_snippets_engine='ultisnips'
+let g:clang_auto_select=0
+let g:clang_complete_auto=1
+let g:clang_complete_copen=1
+let g:clang_hl_errors=1
+let g:clang_periodic_quickfix=0
 let g:clang_snippets=1
+let g:clang_snippets_engine="clang_complete"
+" let g:clang_snippets_engine="ultisnips"
+let g:clang_conceal_snippets=1
+let g:clang_user_options=""
+let g:clang_auto_user_options="path, .clang_complete"
+let g:clang_use_library=1
+let g:clang_sort_algo="priority"
+let g:clang_complete_macros=1
+let g:clang_complete_patterns=0
 
 " Mappings {{{1
 let mapleader="-"
