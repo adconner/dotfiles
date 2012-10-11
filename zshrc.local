@@ -1,6 +1,7 @@
 export PATH=~/bin:$PATH
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
+export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
 
 alias vi="vim"
 alias v="vim"
