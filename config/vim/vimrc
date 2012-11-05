@@ -12,6 +12,8 @@ if has('unix')
     " persistent undo location
   set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
     " viminfo location
+  let g:yankring_history_dir=$XDG_CACHE_HOME."/vim"
+    " yankring location
   let g:vimdir=$XDG_CONFIG_HOME."/vim"
   let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
   let $MYVIMRC=g:vimdir."/vimrc"
@@ -172,7 +174,14 @@ noremap , ;
 " Editing {{{3
 
 " make Y consistent with C and D
-nmap Y y$
+function! YRRunAfterMaps()
+  nnoremap Y :<C-u>YRYankCount 'y$'<cr>
+endfunction
+
+" in case yankring not installed
+nnoremap Y y$
+
+map <leader>p :YRShow<cr>
 
 " select last edited text
 nmap gV `[v`]
@@ -225,8 +234,7 @@ map <leader>sp [s
 map <leader>sa zG
 map <leader>s? z= 
 
-" todo make this work
-" map <leader>p :!zathura %<tab><C-w>pdf &
+map <leader>v :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
 
 " Command mode {{{2
 " Set up command line editing with vi like readline,
