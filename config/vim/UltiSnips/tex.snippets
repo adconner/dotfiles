@@ -3,9 +3,11 @@ snippet lr\| "left\| right\|" w
 endsnippet
 
 snippet doc "Initialization" b
-\documentclass{${1:article}}
-\usepackage{amsmath,amssymb,amsthm${2}}
-${3:%}\usepackage[margin=1in]{geometry}
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fixltx2e,microtype,nag}
+%\usepackage{booktabs}
+${1:%}\usepackage[margin=1in]{geometry}
 
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\NN}{\mathbb{N}}
@@ -18,11 +20,11 @@ ${3:%}\usepackage[margin=1in]{geometry}
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
 
-\title{${4:Title Here}}
+\title{${2:Title Here}}
 \author{Austin Conner}
 
 \begin{document}
-${5:%}\maketitle
+${3:%}\maketitle
 ${0}
 \end{document}
 endsnippet
