@@ -47,7 +47,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     ++ concat [ 
     [ ((modm              , k        ), windows $ W.greedyView i), 
-      ((modm .|. shiftMask, k        ), windows $ W.greedyView i . W.shift i)
+      ((modm .|. shiftMask, k        ), windows $ W.shift i)
+      -- ((modm .|. shiftMask, k        ), windows $ W.greedyView i . W.shift i)
     ] | (i, k) <- zip (XMonad.workspaces conf) 
         [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0] ]
 
@@ -137,7 +138,7 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar /home/austin/.xmonad/xmobar.hs"
+  xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
   xmonad $ defaults xmproc
 
 ------------------------------------------------------------------------

@@ -19,7 +19,7 @@ Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
                                     "-o", "",
                                     "-f", "ADP1/online"] 100 
                     , Run Date "%a %b %_d %I:%M:%S" "date" 10
-                    --, Run MPD ["-t", "<artist> - <title> <statei>"] 10
+                    , Run MPD ["-t", "<artist> - <title> <statei>"] 10
                     -- , Volume "default" "Master"  [] 10
                     --                ["-t", "<status><volume>%", "--",
                     --                 "-O", "", "-O", "<fc=#ff2026>mute</fc> - "] 10
@@ -28,6 +28,7 @@ Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
+       , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %mpd% | %KBNA% | <fc=#eadead>%date%</fc>"
        -- , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %mpd% | %default:Master% | %KBNA% | <fc=#eadead>%date%</fc>"
-       , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
+       -- , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
        }
