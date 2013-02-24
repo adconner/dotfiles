@@ -10,9 +10,8 @@ Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
                                     "-L","65","-H","80","--normal","#95e454",
                                     "--high","#ff2026","--low","lightblue"] 36000
                     , Run Wireless "wlan0" ["-t", "<essid> <quality>%"] 50
-                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>%" ] 10
+                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>$ <total3>%" ] 10
                     , Run Memory ["-t","mem: <usedratio>%"] 10
-                    , Run Swap ["-t", "swap: <usedratio>%"] 10
                     , Run Battery  ["-t", "<acstatus><timeleft> (<left>%)",
                                     "-L", "10", "-H", "80", "--",
                                     "-O", "<fc=#95e454>AC</fc> - ",
@@ -28,6 +27,6 @@ Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       -- , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %mpd% | %default:Master% | %KBNA% | <fc=#eadead>%date%</fc>"
-       , template = "%battery% | %multicpu% | %memory% %swap% | %wlan0wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
+       -- , template = "%battery% | %multicpu% | %memory% | %wlan0wi% } %StdinReader% { %mpd% | %default:Master% | %KBNA% | <fc=#eadead>%date%</fc>"
+       , template = "%battery% | %multicpu% | %memory% | %wlan0wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
        }
