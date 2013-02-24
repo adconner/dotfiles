@@ -1,7 +1,6 @@
 cd ~
-/usr/bin/xrdb -load ~/.Xresources
-/usr/bin/setxkbmap dvorak &
-/usr/bin/xmodmap ~/.Xmodmap &
+/usr/bin/xrdb -load ~/.Xresources &
+/usr/bin/setxkbmap dvorak && /usr/bin/xmodmap ~/.Xmodmap &
 
 sh ~/.fehbg &
 unclutter -grab &
