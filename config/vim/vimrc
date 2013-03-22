@@ -15,7 +15,7 @@ if has('unix')
   let g:yankring_history_dir=$XDG_CACHE_HOME."/vim"
     " yankring location
   let g:vimdir=$XDG_CONFIG_HOME."/vim"
-  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
+  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME.",".$VIM."/vimfiles"
   let $MYVIMRC=g:vimdir."/vimrc"
   let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
 endif
