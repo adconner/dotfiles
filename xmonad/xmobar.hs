@@ -1,4 +1,5 @@
-Config { font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
+Config { font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
+--"-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
        , borderColor = "#242424"
        , border = TopB
        , bgColor = "#242424"

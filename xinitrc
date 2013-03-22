@@ -1,6 +1,7 @@
 cd ~
 /usr/bin/xrdb -load ~/.Xresources &
 /usr/bin/setxkbmap dvorak && /usr/bin/xmodmap ~/.Xmodmap &
+xset +fp /usr/share/fonts/local && xset fp rehash &
 
 sh ~/.fehbg &
 unclutter -grab &

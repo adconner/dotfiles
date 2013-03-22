@@ -1,7 +1,9 @@
 URxvt.loginShell: true
 URxvt.scrollBar: off
-URxvt.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
-URxvt.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
+URxvt.font: -*-terminus-medium-r-*-*-*-200-*-*-*-*-iso8859-1
+URxvt.boldFont: -*-terminus-bold-r-*-*-*-200-*-*-*-*-iso8859-1
+#URxvt.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+#URxvt.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
 URxvt.saveLines: 12000
 URxvt.foreground: #d9d9d9
 URxvt.background: #101010
