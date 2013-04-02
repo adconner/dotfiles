@@ -4,10 +4,12 @@ cd ~
 xset +fp /usr/share/fonts/local && xset fp rehash &
 
 sh ~/.fehbg &
-unclutter -grab &
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
-syndaemon -k -i 2 -R -d &
+unclutter -jitter 200 -grab -idle 10 &
+syndaemon -k -t -i 10 -R -d &
+#syndaemon -k -i 5 -R -d &
+#syndaemon -k -i 1 -R -d &
 
 # This must be last
 exec xmonad

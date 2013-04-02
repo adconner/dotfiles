@@ -3,3 +3,5 @@
 	email = aconner.vu@gmail.com
 [color]
   ui=true
+[push]
+	default = upstream

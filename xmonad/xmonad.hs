@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
@@ -102,7 +102,7 @@ myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| Full)
 
 myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
+    -- , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore 
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
