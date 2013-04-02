@@ -1,4 +1,4 @@
-export PATH=~/bin:$PATH
+export PATH=~/bin:~/.cabal/bin:$PATH
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
 export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
