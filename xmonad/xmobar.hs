@@ -11,7 +11,7 @@ Config { font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
                                     "-L","65","-H","80","--normal","#95e454",
                                     "--high","#ff2026","--low","lightblue"] 36000
                     , Run Wireless "wlan0" ["-t", "<essid> <quality>%"] 50
-                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>$ <total3>%" ] 10
+                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>% <total3>%" ] 10
                     , Run Memory ["-t","mem: <usedratio>%"] 10
                     , Run Battery  ["-t", "<acstatus><timeleft> (<left>%)",
                                     "-L", "10", "-H", "80", "--",
