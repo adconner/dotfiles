@@ -8,6 +8,9 @@ alias v="vim"
 
 alias info="info --vi"
 
+# pass color through to less
+alias less="less -R"
+
 alias :q="exit"
 
 # make fewer mistakes
