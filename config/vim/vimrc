@@ -151,18 +151,11 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-" Move left and right between window splits with CTRL+[hl] 
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-" todo: for some reason this also skips about 8 characters
-
 " "me" - make current workspace large
-map <leader>m :resize<cr>:vertical resize<cr>
-map <leader>M <C-w>=
+" map <leader>m :resize<cr>:vertical resize<cr>
+" map <leader>M <C-w>=
 
 " make scrolling more convenient
-map <C-j> <C-e>
-map <C-k> <C-y>
 map <Del> <C-e>
 map <Insert> <C-y>
 
@@ -194,15 +187,12 @@ vmap <leader>r :s/\%V<c-r>/\%V/
 
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
-"   only in normal mode because in visual these loose the selection
-nmap <leader>v :vsplit 
-nmap <leader>t :tabnew 
+"   only in normal mode because in visual these lose the selection
+nmap <leader>t :tabnew
 nmap <leader>j :bn<cr>
 nmap <leader>k :bp<cr>
 
-nmap <leader>nt :NERDTree<cr>
-
-nmap <leader>e :CtrlP<cr>
+nmap <leader>n :NERDTree<cr>
 
 " Misc Mappings {{{3
 
@@ -213,32 +203,25 @@ map <F1> <nop>
 map K <nop>
 " set keywordprg=man\ --regex
 
+map <leader>gw :Gwrite<cr>
+map <leader>gr :Gread<cr>
 map <leader>gd :Gdiff<cr>
 map <leader>gs :Gstatus<cr>
 map <leader>gc :Gcommit<cr>
 map <leader>gl :Glog<cr>
 map <leader>gb :Gblame<cr>
 
-map <leader>V :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
+" todo add this to latex files only
+map <leader>lv :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
 
 " Command mode {{{2
-" Set up command line editing with vi like readline,
-"   These commands also apply to insert mode
-" map! <c-a> <Home>
-" map! <c-e> <End>
-" map! <c-f> <Right>
-" map! <c-b> <Left>
-" map! <c-d> <Del>
-
-" has some trouble with these, see i_CTRL-F
-"cmap <A-f> <S-Right>
-"cmap <A-b> <S-Left>
 
 " sudo write
 if has('unix')
   " in principle could cause issues if I ever needed the string w!! in the
   " command line for any other reason
   cabbrev w!! w !sudo tee % >/dev/null
+  cabbrev W!! w !sudo tee % >/dev/null
 endif
 
 "Alias ex commands easily capitalized
