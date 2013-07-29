@@ -58,7 +58,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                 , xK_f)     , spawn "luakit")
     , ((modm                 , xK_r)     , spawn "urxvt -e ranger")
     , ((modm                 , xK_a)     , spawn "urxvt -e alsamixer")
-    , ((modm                 , xK_w)     , spawn "urxvt -e wicd-curses")
+    -- , ((modm                 , xK_w)     , spawn "urxvt -e wicd-curses")
+    , ((modm                 , xK_w)     , spawn "urxvt -e zsh -ic 'iw wlan0 scan dump | less'")
     , ((modm                 , xK_n)     , spawn "urxvt -e ncmpcpp")
     , ((modm                 , xK_o)     , spawn "urxvt -e htop")
     , ((modm .|. shiftMask   , xK_m)     , spawn "urxvt -e zsh -ic mutt")
@@ -69,7 +70,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 
-myFocusFollowsMouse = True
+myFocusFollowsMouse = False
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
@@ -83,7 +84,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Layouts:
 
-myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayoutHook = avoidStruts (tiled ||| Full ||| Mirror tiled)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -102,7 +103,7 @@ myLayoutHook = avoidStruts (tiled ||| Mirror tiled ||| Full)
 
 myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
+    -- , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore 
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
@@ -138,6 +139,7 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
+  -- xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
   xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
   xmonad $ defaults xmproc
 

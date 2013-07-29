@@ -15,7 +15,7 @@ if has('unix')
   let g:yankring_history_dir=$XDG_CACHE_HOME."/vim"
     " yankring location
   let g:vimdir=$XDG_CONFIG_HOME."/vim"
-  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME
+  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME.",".$VIM."/vimfiles"
   let $MYVIMRC=g:vimdir."/vimrc"
   let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
 endif
@@ -43,7 +43,6 @@ if has('gui_win32')
 endif
 
 " Tabbing {{{2
-set tabstop=2           " The number of spaces a tab is
 set shiftwidth=2        " Number of spaces to use in auto(indent)
 set softtabstop=2       " Just to be clear
 set expandtab           " Insert tabs as spaces
@@ -188,12 +187,6 @@ nmap gV `[v`]
 
 map <silent> <leader><space> :noh<cr>
 
-" make tcomment consistant with other keys
-nmap gs ys
-
-" use useful block comment
-map <leader>b <C-_>b
-
 " quick replace of highlighted strings
 nmap <leader>r :%s/<c-r>//
 vmap <leader>r :s/\%V<c-r>/\%V/
@@ -209,7 +202,7 @@ nmap <leader>k :bp<cr>
 
 nmap <leader>nt :NERDTree<cr>
 
-nmap <leader>e :FufFile<cr>
+nmap <leader>e :CtrlP<cr>
 
 " Misc Mappings {{{3
 
@@ -220,30 +213,22 @@ map <F1> <nop>
 map K <nop>
 " set keywordprg=man\ --regex
 
-" todo make this an operator instead (eg -ss for send line and 
-" -sip etc for send the current paragraph
-map <leader>S :SlimuxREPLSendLine<cr>
-vmap <leader>S :SlimuxREPLSendSelection<cr>
+map <leader>gd :Gdiff<cr>
+map <leader>gs :Gstatus<cr>
+map <leader>gc :Gcommit<cr>
+map <leader>gl :Glog<cr>
+map <leader>gb :Gblame<cr>
 
-map <leader>d :Gdiff<cr>
-
-" set spell mappings
-map <leader>ss :setlocal spell!<cr>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zG
-map <leader>s? z= 
-
-map <leader>v :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
+map <leader>V :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
 
 " Command mode {{{2
 " Set up command line editing with vi like readline,
 "   These commands also apply to insert mode
-map! <c-a> <Home>
-map! <c-e> <End>
-map! <c-f> <Right>
-map! <c-b> <Left>
-map! <c-d> <Del>
+" map! <c-a> <Home>
+" map! <c-e> <End>
+" map! <c-f> <Right>
+" map! <c-b> <Left>
+" map! <c-d> <Del>
 
 " has some trouble with these, see i_CTRL-F
 "cmap <A-f> <S-Right>
