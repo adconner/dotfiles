@@ -42,6 +42,11 @@ if has('gui_win32')
   set guifont=courier_new:h11
 endif
 
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='✗'
+let g:syntastic_style_warning_symbol='⚠'
+
 " Tabbing {{{2
 set shiftwidth=2        " Number of spaces to use in auto(indent)
 set softtabstop=2       " Just to be clear
@@ -213,6 +218,8 @@ map <leader>gb :Gblame<cr>
 
 " todo add this to latex files only
 map <leader>lv :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
+
+map coS :SyntasticToggleMode<cr>
 
 " Command mode {{{2
 
