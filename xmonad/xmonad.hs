@@ -1,3 +1,5 @@
+{-# LANGUAGE DeriveDataTypeable #-}
+
 import System.IO
 import System.Exit
 import XMonad
@@ -7,6 +9,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Fullscreen
 import XMonad.Util.Run(spawnPipe)
 
+import qualified XMonad.Util.ExtensibleState as XS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -43,6 +46,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_apostrophe), toggleMouse)
+
+      -- ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
+    , ((0                 , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots'")
+    , ((modm              , xK_f)     , spawn "luakit")
+    , ((modm              , xK_r)     , spawn "urxvt -e ranger")
+    , ((modm              , xK_a)     , spawn "urxvt -e alsamixer")
+    -- , ((modm              , xK_w)     , spawn "urxvt -e wicd-curses")
+    , ((modm              , xK_w)     , spawn "urxvt -e zsh -ic 'iw wlan0 scan dump | less'")
+    , ((modm .|. shiftMask, xK_l)     , spawn "urxvt -e zsh -ic 'journalctl -f'")
+    , ((modm              , xK_n)     , spawn "urxvt -e ncmpcpp")
+    , ((modm              , xK_o)     , spawn "urxvt -e htop")
+    , ((modm .|. shiftMask, xK_m)     , spawn "urxvt -e zsh -ic mutt")
+        -- for some reason mutt sometimes has trouble rendering if 
+        -- the shell is not forced to be interactive
     ]
 
     ++ concat [ 
@@ -52,33 +70,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ] | (i, k) <- zip (XMonad.workspaces conf) 
         [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0] ]
 
-    ++ [ 
-      -- ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
-      ((0                    , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm                 , xK_f)     , spawn "luakit")
-    , ((modm                 , xK_r)     , spawn "urxvt -e ranger")
-    , ((modm                 , xK_a)     , spawn "urxvt -e alsamixer")
-    -- , ((modm                 , xK_w)     , spawn "urxvt -e wicd-curses")
-    , ((modm                 , xK_w)     , spawn "urxvt -e zsh -ic 'iw wlan0 scan dump | less'")
-    , ((modm                 , xK_n)     , spawn "urxvt -e ncmpcpp")
-    , ((modm                 , xK_o)     , spawn "urxvt -e htop")
-    , ((modm .|. shiftMask   , xK_m)     , spawn "urxvt -e zsh -ic mutt")
-        -- for some reason mutt sometimes has trouble rendering if 
-        -- the shell is not forced to be interactive
-    ]
-
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
-      ((mod1Mask, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-    , ((mod1Mask, button2), (\w -> focus w >> windows W.shiftMaster))
-    , ((mod1Mask, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+      ((mod1Mask, button1), (\w -> 
+        focus w >> mouseMoveWindow w >> windows W.shiftMaster))
+    , ((mod1Mask, button2), (\w -> 
+        focus w >> windows W.shiftMaster))
+    , ((mod1Mask, button3), (\w -> 
+        focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
 ------------------------------------------------------------------------
@@ -103,7 +107,7 @@ myLayoutHook = avoidStruts (tiled ||| Full ||| Mirror tiled)
 
 myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
-    -- , className =? "Gimp"           --> doFloat
+    , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore 
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
@@ -171,3 +175,39 @@ defaults xmproc = defaultConfig {
         startupHook        = myStartupHook,
         logHook            = myLogHook xmproc
     }
+
+-- Functions for disabling the mouse
+
+newtype MouseEnabled = ME Bool
+  deriving Typeable
+
+instance ExtensionClass MouseEnabled where
+  initialValue = ME True
+
+toggleMouse = do
+  e <- mouseEnabled
+  if e then unsafeDisableMouse else unsafeEnableMouse
+
+enableMouse = do
+  e <- mouseEnabled
+  if e then return () else unsafeEnableMouse
+  
+disableMouse = do
+  e <- mouseEnabled
+  if e then unsafeDisableMouse else return ()
+
+unsafeEnableMouse :: X ()
+unsafeEnableMouse = do
+  spawn "synclient TouchpadOff=0 && killall unclutter"
+  XS.put (ME True)
+
+unsafeDisableMouse :: X ()
+unsafeDisableMouse = do
+  spawn "synclient TouchpadOff=1 && unclutter -grab -idle 600 -jitter 100000"
+  XS.put (ME False)
+
+mouseEnabled :: X Bool
+mouseEnabled = do
+  ME b <- XS.get
+  return b
+
