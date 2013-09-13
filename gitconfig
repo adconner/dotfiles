@@ -2,6 +2,6 @@
 	name = Austin Conner
 	email = aconner.vu@gmail.com
 [color]
-  ui=true
+	ui=true
 [push]
 	default = upstream

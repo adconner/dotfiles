@@ -59,15 +59,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_n)     , spawn "urxvt -e ncmpcpp")
     , ((modm              , xK_o)     , spawn "urxvt -e htop")
     , ((modm .|. shiftMask, xK_m)     , spawn "urxvt -e zsh -ic mutt")
-        -- for some reason mutt sometimes has trouble rendering if 
+        -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
     ]
 
-    ++ concat [ 
-    [ ((modm              , k        ), windows $ W.greedyView i), 
+    ++ concat [
+    [ ((modm              , k        ), windows $ W.greedyView i),
       ((modm .|. shiftMask, k        ), windows $ W.shift i)
       -- ((modm .|. shiftMask, k        ), windows $ W.greedyView i . W.shift i)
-    ] | (i, k) <- zip (XMonad.workspaces conf) 
+    ] | (i, k) <- zip (XMonad.workspaces conf)
         [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0] ]
 
 ------------------------------------------------------------------------
@@ -77,11 +77,11 @@ myFocusFollowsMouse = True
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
-      ((mod1Mask, button1), (\w -> 
+      ((mod1Mask, button1), (\w ->
         focus w >> mouseMoveWindow w >> windows W.shiftMaster))
-    , ((mod1Mask, button2), (\w -> 
+    , ((mod1Mask, button2), (\w ->
         focus w >> windows W.shiftMaster))
-    , ((mod1Mask, button3), (\w -> 
+    , ((mod1Mask, button3), (\w ->
         focus w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
@@ -109,7 +109,7 @@ myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore 
+    , resource  =? "kdesktop"       --> doIgnore
     , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
@@ -150,9 +150,9 @@ main = do
 ------------------------------------------------------------------------
 -- Combine it all together
 -- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will 
+-- fields in the default config. Any you don't override, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
--- 
+--
 -- No need to modify this.
 --
 defaults xmproc = defaultConfig {
@@ -191,7 +191,7 @@ toggleMouse = do
 enableMouse = do
   e <- mouseEnabled
   if e then return () else unsafeEnableMouse
-  
+
 disableMouse = do
   e <- mouseEnabled
   if e then unsafeDisableMouse else return ()

@@ -45,7 +45,7 @@ key_volume_up = 261
 #
 key_volume_down = 260
 #
-key_prev_column = 'h' 
+key_prev_column = 'h'
 #
 key_next_column = 'l'
 #
