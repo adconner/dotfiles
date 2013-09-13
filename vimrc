@@ -4,19 +4,16 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Make vim respect the XDG base directory spec {{{2
 if has('unix')
-  " set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " swap file location
-  set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
-    " persistent undo location
-  set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+  set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " viminfo location
-  let g:yankring_history_dir=$XDG_CACHE_HOME."/vim"
-    " yankring location
-  let g:vimdir=$XDG_CONFIG_HOME."/vim"
-  let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME.",".$VIM."/vimfiles"
-  let $MYVIMRC=g:vimdir."/vimrc"
+  set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+    " persistent undo location
+  set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+  let g:vimdir="~/vim"
+  " let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME.",".$VIM."/vimfiles"
+  " let $MYVIMRC=g:vimdir."/vimrc"
   let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
 endif
 "}}}2
