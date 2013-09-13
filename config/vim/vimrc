@@ -6,7 +6,7 @@ set nocompatible
 
 " Make vim respect the XDG base directory spec {{{2
 if has('unix')
-  set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
+  " set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " swap file location
   set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " persistent undo location
@@ -34,18 +34,13 @@ syntax on               " Enable syntax highlighting
 set background=dark
 if has('gui_running')
   silent! colorscheme wombat      " Set the colorscheme
-else 
+else
   silent! colorscheme wombat
 endif
 
 if has('gui_win32')
   set guifont=courier_new:h11
 endif
-
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol='✗'
-let g:syntastic_style_warning_symbol='⚠'
 
 " Tabbing {{{2
 set shiftwidth=2        " Number of spaces to use in auto(indent)
@@ -60,8 +55,8 @@ set smartcase           " ... unless term contains an uppercase character
 set incsearch           " Highlight search...
 set hlsearch            " ... as you type
 set gdefault            " replace every occurrance by default
-noremap / /\v
-noremap ? ?\v
+" noremap / /\v
+" noremap ? ?\v
 " use aggressive regex by default
 
 " Wrapping {{{2
@@ -94,7 +89,7 @@ set lazyredraw          " dont redraw screen during macro execution
 " set formatoptions+=n    " format numbered lists correctly
 
 " this results in an error on machines without a sufficient vim version
-silent! set formatoptions+=j    " allow sensible joining of comments, 
+silent! set formatoptions+=j    " allow sensible joining of comments,
 
 if has('unix')
   let &tags.=",".g:vimdir."/commontags"
@@ -106,16 +101,17 @@ let g:tex_flavor = "latex"
 " Search runtimepath in forward order to be more efficient
 let g:UltiSnipsDontReverseSearchPath=0
 
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType="context"
+let g:SuperTabContextDefaultCompletionType="<c-p>"
 
 let g:clang_auto_select=0
-let g:clang_complete_auto=1
-let g:clang_complete_copen=1
+let g:clang_complete_auto=0
+let g:clang_complete_copen=0
 let g:clang_hl_errors=1
 let g:clang_periodic_quickfix=0
 let g:clang_snippets=1
-let g:clang_snippets_engine="clang_complete"
-" let g:clang_snippets_engine="ultisnips"
+" let g:clang_snippets_engine="clang_complete"
+let g:clang_snippets_engine="ultisnips"
 let g:clang_conceal_snippets=1
 let g:clang_user_options=""
 let g:clang_auto_user_options="path, .clang_complete"
@@ -123,6 +119,13 @@ let g:clang_use_library=1
 let g:clang_sort_algo="priority"
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
+
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_error_symbol='✗'
+let g:syntastic_style_warning_symbol='⚠'
+
+let g:syntastic_tex_checkers=['chktex']
 
 " Mappings {{{1
 let mapleader="-"
@@ -157,10 +160,12 @@ noremap gj j
 noremap gk k
 
 " "me" - make current workspace large
-" map <leader>m :resize<cr>:vertical resize<cr>
-" map <leader>M <C-w>=
+map <leader>m :resize<cr>:vertical resize<cr>
+map <leader>M <C-w>=
 
 " make scrolling more convenient
+map <c-j> <c-e>
+map <c-k> <c-y>
 map <Del> <C-e>
 map <Insert> <C-y>
 
@@ -170,15 +175,8 @@ noremap , ;
 
 " Editing {{{3
 
-" make Y consistent with C and D
-function! YRRunAfterMaps()
-  nnoremap Y :<C-u>YRYankCount 'y$'<cr>
-endfunction
-
 " in case yankring not installed
 nnoremap Y y$
-
-map <leader>p :YRShow<cr>
 
 " select last edited text
 nmap gV `[v`]
@@ -189,15 +187,12 @@ map <silent> <leader><space> :noh<cr>
 nmap <leader>r :%s/<c-r>//
 vmap <leader>r :s/\%V<c-r>/\%V/
 
-
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
 "   only in normal mode because in visual these lose the selection
 nmap <leader>t :tabnew
 nmap <leader>j :bn<cr>
 nmap <leader>k :bp<cr>
-
-nmap <leader>n :NERDTree<cr>
 
 " Misc Mappings {{{3
 
@@ -224,15 +219,11 @@ map coS :SyntasticToggleMode<cr>
 " Command mode {{{2
 
 " sudo write
-if has('unix')
-  " in principle could cause issues if I ever needed the string w!! in the
-  " command line for any other reason
-  cabbrev w!! w !sudo tee % >/dev/null
-  cabbrev W!! w !sudo tee % >/dev/null
-endif
+command -nargs=* -complete=file Sw SudoWrite <args>
+command -nargs=* -complete=file SW SudoWrite <args>
 
 "Alias ex commands easily capitalized
-command -nargs=* -complete=file -bang W w<bang> <args>
+" command -nargs=* -complete=file -bang W w<bang> <args>
 command -bang Q q<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
