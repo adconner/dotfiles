@@ -1,9 +1,0 @@
-Installation:
-
-Let path/to/dotfiles be some path that resolves to the dotfiles directory from the home directory ~. This will be the path which the links use to refer to the dotfiles (I use a relative path from the home directory). For convenience,
-DOTFILES=path/to/dotfiles
-
-Then manually link each file to homefolder:
-cd
-ln -svTi $DOTFILES/<file> .<file>
-...
