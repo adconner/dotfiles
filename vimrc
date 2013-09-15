@@ -1,8 +1,43 @@
 " Initialization {{{1
 
-" Use Vim settings, rather than Vi settings (much better!).
-" This must be first, because it changes other options as a side effect.
 set nocompatible
+
+" General Preferences {{{1
+" Plugin options {{{2
+
+" Set up vundle...
+filetype off
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+
+Bundle 'gmarix/vundle'
+
+Bundle 'bitc/vim-hdevtools.git'
+Bundle 'ervandew/supertab'
+Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
+Bundle 'michaeljsmith/vim-indent-object'
+Bundle 'Rip-Rip/clang_complete'
+Bundle 'scrooloose/syntastic.git'
+Bundle 'SirVer/ultisnips'
+Bundle 'tpope/vim-characterize'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-rsi'
+Bundle 'tpope/vim-sensible'
+Bundle 'tpope/vim-sleuth'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-tbone'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'wlangstroth/vim-haskell'
+
+filetype plugin indent on
+syntax on
+
+" Support file locations {{{2
 
 if has('unix')
     " swap file location
@@ -11,24 +46,15 @@ if has('unix')
   set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
     " persistent undo location
   set undodir=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
-  let g:vimdir="~/vim"
-  " let &runtimepath=g:vimdir.",".g:vimdir."/after,".$VIM.",".$VIMRUNTIME.",".$VIM."/vimfiles"
-  " let $MYVIMRC=g:vimdir."/vimrc"
-  let g:UltiSnipsSnippetsDir=g:vimdir."/UltiSnips"
+    " dictionary for spell check
+  set dictionary+=/usr/share/dict/words
 endif
-"}}}2
 
-" Pathogen plugin loader
-silent! call pathogen#infect()
-
-" General Preferences {{{1
-" Filetype options {{{2
-filetype plugin on      " Load file type plugins
-filetype indent on      " Enable file type based indentation
-syntax on               " Enable syntax highlighting
+" set tags+="~/.vim/commontags"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " Appearance {{{2
-set background=dark
+
 if has('gui_running')
   silent! colorscheme wombat      " Set the colorscheme
 else
@@ -87,11 +113,6 @@ set lazyredraw          " dont redraw screen during macro execution
 
 " this results in an error on machines without a sufficient vim version
 silent! set formatoptions+=j    " allow sensible joining of comments,
-
-if has('unix')
-  let &tags.=",".g:vimdir."/commontags"
-  set dictionary+=/usr/share/dict/words
-endif
 
 " Immediately assume an empty *.tex file is latex
 let g:tex_flavor = "latex"
