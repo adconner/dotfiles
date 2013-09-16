@@ -8,31 +8,33 @@ set nocompatible
 " Set up vundle...
 filetype off
 set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+silent! call vundle#rc()
 
-Bundle 'gmarix/vundle'
+if exists(':Bundle')
+  Bundle 'gmarix/vundle'
 
-Bundle 'bitc/vim-hdevtools.git'
-Bundle 'ervandew/supertab'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'SirVer/ultisnips'
-Bundle 'tpope/vim-characterize'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-eunuch'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-rsi'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-sleuth'
-Bundle 'tpope/vim-speeddating'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-tbone'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'wlangstroth/vim-haskell'
+  Bundle 'bitc/vim-hdevtools.git'
+  Bundle 'ervandew/supertab'
+  Bundle 'godlygeek/tabular'
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'michaeljsmith/vim-indent-object'
+  Bundle 'Rip-Rip/clang_complete'
+  Bundle 'scrooloose/syntastic.git'
+  Bundle 'SirVer/ultisnips'
+  Bundle 'tpope/vim-characterize'
+  Bundle 'tpope/vim-commentary'
+  Bundle 'tpope/vim-eunuch'
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-repeat'
+  Bundle 'tpope/vim-rsi'
+  Bundle 'tpope/vim-sensible'
+  Bundle 'tpope/vim-sleuth'
+  Bundle 'tpope/vim-speeddating'
+  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-tbone'
+  Bundle 'tpope/vim-unimpaired'
+  Bundle 'wlangstroth/vim-haskell'
+endif
 
 filetype plugin indent on
 syntax on
