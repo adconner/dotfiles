@@ -17,6 +17,7 @@ if exists(':Bundle')
   Bundle 'ervandew/supertab'
   Bundle 'godlygeek/tabular'
   Bundle 'kien/ctrlp.vim'
+  Bundle 'LaTeX-Box-Team/LaTeX-Box'
   Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'Rip-Rip/clang_complete'
   Bundle 'scrooloose/syntastic.git'
@@ -116,36 +117,18 @@ set lazyredraw          " dont redraw screen during macro execution
 " this results in an error on machines without a sufficient vim version
 silent! set formatoptions+=j    " allow sensible joining of comments,
 
-" Immediately assume an empty *.tex file is latex
-let g:tex_flavor = "latex"
-" Search runtimepath in forward order to be more efficient
-let g:UltiSnipsDontReverseSearchPath=0
-
-let g:SuperTabDefaultCompletionType="context"
-let g:SuperTabContextDefaultCompletionType="<c-p>"
-
-let g:clang_auto_select=0
-let g:clang_complete_auto=0
-let g:clang_complete_copen=0
-let g:clang_hl_errors=1
-let g:clang_periodic_quickfix=0
-let g:clang_snippets=1
-" let g:clang_snippets_engine="clang_complete"
-let g:clang_snippets_engine="ultisnips"
-let g:clang_conceal_snippets=1
-let g:clang_user_options=""
-let g:clang_auto_user_options="path, .clang_complete"
-let g:clang_use_library=1
-let g:clang_sort_algo="priority"
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol='✗'
 let g:syntastic_style_warning_symbol='⚠'
 
-let g:syntastic_tex_checkers=['chktex']
+let g:SuperTabDefaultCompletionType="context"
+let g:SuperTabContextDefaultCompletionType="<c-p>"
+
+" Search runtimepath in forward order to be more efficient
+let g:UltiSnipsDontReverseSearchPath=0
+
+let g:tex_flavor = "latex"
 
 " Mappings {{{1
 let mapleader="-"
@@ -221,6 +204,7 @@ map <F1> <nop>
 
 " disable key which takes us away from buffer
 map K <nop>
+map Q <nop>
 " set keywordprg=man\ --regex
 
 map <leader>gw :Gwrite<cr>
@@ -231,10 +215,7 @@ map <leader>gc :Gcommit<cr>
 map <leader>gl :Glog<cr>
 map <leader>gb :Gblame<cr>
 
-" todo add this to latex files only
-map <leader>lv :!zathura <c-r>=substitute(expand("%"),".tex$",".pdf","")<cr> &<cr><cr>
-
-map coS :SyntasticToggleMode<cr>
+" map coS :SyntasticToggleMode<cr>
 
 " Command mode {{{2
 
