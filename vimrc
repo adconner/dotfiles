@@ -14,7 +14,6 @@ if exists(':Bundle')
   Bundle 'gmarix/vundle'
 
   Bundle 'bitc/vim-hdevtools.git'
-  Bundle 'ervandew/supertab'
   Bundle 'godlygeek/tabular'
   Bundle 'kien/ctrlp.vim'
   Bundle 'LaTeX-Box-Team/LaTeX-Box'
@@ -105,7 +104,6 @@ set showcmd             " show partial commands
 set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
 " set undofile            " Use a persistent undo file
-" set relativenumber      " Use line numbers relative to current line
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
 set lazyredraw          " dont redraw screen during macro execution
@@ -116,6 +114,9 @@ set lazyredraw          " dont redraw screen during macro execution
 
 " this results in an error on machines without a sufficient vim version
 silent! set formatoptions+=j    " allow sensible joining of comments,
+
+" ignore files for tab completion and ctrlp
+set wildignore+=*.o,*.pdf,*.log,*.aux
 
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
@@ -184,6 +185,11 @@ nnoremap Y y$
 " select last edited text
 nmap gV `[v`]
 
+" split line
+nmap K i<cr><esc>
+" TODO K in visual or operator mode splits at sensible places in the line
+" (possibly filetype dependant). Ex. latex splits lines at binary relations
+
 map <silent> <leader><space> :noh<cr>
 
 " quick replace of highlighted strings
@@ -193,7 +199,6 @@ vmap <leader>r :s/\%V<c-r>/\%V/
 " File Navigation {{{3
 " make tabs, windows, and buffers easier
 "   only in normal mode because in visual these lose the selection
-nmap <leader>t :tabnew
 nmap <leader>j :bn<cr>
 nmap <leader>k :bp<cr>
 
@@ -203,7 +208,6 @@ nmap <leader>k :bp<cr>
 map <F1> <nop>
 
 " disable key which takes us away from buffer
-map K <nop>
 map Q <nop>
 " set keywordprg=man\ --regex
 
@@ -227,20 +231,6 @@ command -nargs=* -complete=file SW SudoWrite <args>
 " command -nargs=* -complete=file -bang W w<bang> <args>
 command -bang Q q<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
-
-" Functions {{{1
-
-" Follow symlinks so we're editing the actual file instead of the symlink
-" (change the value returned by %).
-"
-" Requires readlink - part of GNU coreutils
-" Uses vim-bufkill if available.
-function! s:SwitchToActualFile()
-  let fname = resolve(expand('%:p'))
-  bwipeout
-  exec "edit " . fname
-endfunction
-command FollowSymlink call s:SwitchToActualFile()
 
 " Todo {{{1
 " make it so cpp and h file open in parallel in vsplitted windows
