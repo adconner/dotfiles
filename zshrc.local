@@ -7,6 +7,8 @@ export PAGER='less -R'
 alias vi="vim"
 alias v="vim"
 
+alias r="ranger"
+
 alias info="info --vi"
 
 # pass color through to less
