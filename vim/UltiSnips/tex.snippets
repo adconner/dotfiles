@@ -1,3 +1,13 @@
+snippet [ "display math environment" b
+\[
+  ${0:${VISUAL}}
+\]
+endsnippet
+
+snippet wlog "Without loss of generality" w
+without loss of generality
+endsnippet
+
 snippet lr\| "left\| right\|" w
 \left\| ${1:${VISUAL}} \right\|
 endsnippet
@@ -6,19 +16,25 @@ snippet doc "Initialization" b
 \documentclass{article}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{fixltx2e,microtype,nag}
-%\usepackage{booktabs}
+\usepackage{booktabs}
 ${1:%}\usepackage[margin=1in]{geometry}
 
 \newcommand{\RR}{\mathbb{R}}
-\newcommand{\NN}{\mathbb{N}}
-\newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\FF}{\mathbb{F}}
+
+\newtheorem{thm}{Theorem
+\newtheorem{lem}[thm]{Theorem}
 
 \let\originalleft\left
 \let\originalright\right
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
+
+%\DeclareMathOperator{\gcd}{gcd}
 
 \title{${2:Title Here}}
 \author{Austin Conner}
