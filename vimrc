@@ -118,6 +118,9 @@ silent! set formatoptions+=j    " allow sensible joining of comments,
 " ignore files for tab completion and ctrlp
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
+" set default commentstring
+set commentstring=#%s
+
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol='✗'
