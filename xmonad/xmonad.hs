@@ -46,7 +46,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
-    , ((modm              , xK_apostrophe), toggleMouse)
+    -- , ((modm              , xK_apostrophe), toggleMouse)
+    , ((modm              , xK_semicolon), toggleMouse)
 
       -- ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots'")
