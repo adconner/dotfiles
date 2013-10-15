@@ -1,9 +1,10 @@
 #!/bin/sh
-for i in $(ls | grep -v 'install.sh\|config'); do
-  ln -svTir $i ~/.$i
+dotf=`pwd`
+cd ~
+for i in $(ls $dotf | grep -v 'install.sh\|config'); do
+  ln -svTi $dotf/$i ~/.$i
 done
-cd config
-for i in $(ls); do
-  ln -svTir $i ~/.config/$i
+for i in $(ls $dotf/config); do
+  ln -svTi $dotf/config/$i ~/.config/$i
 done
 cd -
