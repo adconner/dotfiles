@@ -1,4 +1,4 @@
-URxvt.loginShell: true
+URxvt.loginShell: false
 URxvt.scrollBar: off
 URxvt.font: -*-terminus-medium-r-*-*-*-200-*-*-*-*-iso8859-1
 URxvt.boldFont: -*-terminus-bold-r-*-*-*-200-*-*-*-*-iso8859-1
