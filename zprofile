@@ -11,9 +11,8 @@ export XDG_CACHE_HOME=$HOME/.cache
 #export XDG_RUNTIME_DIR
 
 #set up cache dir
-# cachetmp=/tmp/austin-`date +%s`
-# mkdir $cachetmp 
-# rm -r $XDG_CACHE_HOME
-# ln -sf $cachetmp $XDG_CACHE_HOME
-# mkdir $XDG_CACHE_HOME/zsh
-
+cachetmp=/tmp/austin-`date +%s`
+mkdir $cachetmp 
+rm -r $XDG_CACHE_HOME
+ln -sf $cachetmp $XDG_CACHE_HOME
+mkdir $XDG_CACHE_HOME/zsh
