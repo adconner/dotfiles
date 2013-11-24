@@ -1,21 +1,16 @@
-URxvt.loginShell: false
-URxvt.scrollBar: off
-URxvt.font: -*-terminus-medium-r-*-*-*-200-*-*-*-*-iso8859-1
-URxvt.boldFont: -*-terminus-bold-r-*-*-*-200-*-*-*-*-iso8859-1
-!URxvt.font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
-!URxvt.boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
-URxvt.saveLines: 12000
-URxvt.foreground: #d9d9d9
-URxvt.background: #101010
+xterm*termName: xterm-256color
+xterm*metaSendsEscape: true
+xterm*locale: true
 
-! transparency
-! URxvt.transparent: true
-! URxvt.shading: 30
-
-! Make urls clickable
-URxvt.perl-ext-common: default,matcher,-option-popup,-selection-popup,-realine
-URxvt.matcher.button: 1
-URxvt.urlLauncher: luakit
+xterm*loginShell: false
+xterm*scrollBar: off
+xterm*font: -*-terminus-medium-r-*-*-*-200-*-*-*-*-iso8859-1
+xterm*boldFont: -*-terminus-bold-r-*-*-*-200-*-*-*-*-iso8859-1
+!xterm*font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
+!xterm*boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
+xterm*saveLines: 4096
+xterm*foreground: rgb:d9/d9/d9
+xterm*background: rgb:10/10/10
 
 ! Normal
 ! color0    black
@@ -27,14 +22,14 @@ URxvt.urlLauncher: luakit
 ! color6    cyan
 ! color7    white
 
-URxvt.color0:    #6c6c6c
-URxvt.color1:    #e9897c
-URxvt.color2:    #b6e77d
-URxvt.color3:    #eceb8e
-URxvt.color4:    #797dfb
-URxvt.color5:    #ea96eb
-URxvt.color6:    #99cadc
-URxvt.color7:    #d0d0d0
+xterm*color0:    rgb:6c/6c/6c
+xterm*color1:    rgb:e9/89/7c
+xterm*color2:    rgb:b6/e7/7d
+xterm*color3:    rgb:ec/eb/8e
+xterm*color4:    rgb:79/7d/fb
+xterm*color5:    rgb:ea/96/eb
+xterm*color6:    rgb:99/ca/dc
+xterm*color7:    rgb:d0/d0/d0
 
 ! Light
 ! color8    black
@@ -46,11 +41,11 @@ URxvt.color7:    #d0d0d0
 ! color14    cyan
 ! color15    white
 
-URxvt.color8:    #747474
-URxvt.color9:    #f99286
-URxvt.color10:    #c3f786
-URxvt.color11:    #fcfb8c
-URxvt.color12:    #96aeff
-URxvt.color13:    #fba1fb
-URxvt.color14:    #c3ecf0
-URxvt.color15:    #f2f2f2
+xterm*color8:    rgb:74/74/74
+xterm*color9:    rgb:f9/92/86
+xterm*color10:    rgb:c3/f7/86
+xterm*color11:    rgb:fc/fb/8c
+xterm*color12:    rgb:96/ae/ff
+xterm*color13:    rgb:fb/a1/fb
+xterm*color14:    rgb:c3/ec/f0
+xterm*color15:    rgb:f2/f2/f2

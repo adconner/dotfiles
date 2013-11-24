@@ -13,7 +13,7 @@ import qualified XMonad.Util.ExtensibleState as XS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-myTerminal      = "urxvt"
+myTerminal      = "xterm"
 myBorderWidth   = 1
 myModMask       = mod4Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9","0"]
@@ -52,14 +52,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots'")
     , ((modm              , xK_f)     , spawn "luakit")
-    , ((modm              , xK_r)     , spawn "urxvt -e ranger")
-    , ((modm              , xK_a)     , spawn "urxvt -e alsamixer")
-    -- , ((modm              , xK_w)     , spawn "urxvt -e wicd-curses")
-    , ((modm              , xK_w)     , spawn "urxvt -e zsh -ic 'iw wlan0 scan dump | less'")
-    , ((modm .|. shiftMask, xK_l)     , spawn "urxvt -e zsh -ic 'journalctl -f'")
-    , ((modm              , xK_n)     , spawn "urxvt -e ncmpcpp")
-    , ((modm              , xK_o)     , spawn "urxvt -e htop")
-    , ((modm .|. shiftMask, xK_m)     , spawn "urxvt -e zsh -ic mutt")
+    , ((modm              , xK_r)     , spawn $ myTerminal ++ " -e ranger")
+    , ((modm              , xK_a)     , spawn $ myTerminal ++ " -e alsamixer")
+    -- , ((modm              , xK_w)     , spawn $ myTerminal ++ " -e wicd-curses")
+    , ((modm              , xK_w)     , spawn $ myTerminal ++ " -e zsh -ic 'iw wlan0 scan dump | less'")
+    , ((modm .|. shiftMask, xK_l)     , spawn $ myTerminal ++ " -e zsh -ic 'journalctl -f'")
+    , ((modm              , xK_n)     , spawn $ myTerminal ++ " -e ncmpcpp")
+    , ((modm              , xK_o)     , spawn $ myTerminal ++ " -e htop")
+    , ((modm .|. shiftMask, xK_m)     , spawn $ myTerminal ++ " -e zsh -ic mutt")
         -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
     ]
