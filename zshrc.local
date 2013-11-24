@@ -1,17 +1,9 @@
-export HISTFILE=$XDG_CACHE_HOME/zsh/zsh_history
-export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
-export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
-export EDITOR='vim'
-export BROWSER='luakit'
-export MAIL='~/.mail'
-export PAGER='less -R'
-export RANGER_LOAD_DEFAULT_RC='FALSE'
-
 alias vi="vim"
 alias v="vim"
 alias r="ranger"
 alias info="info --vi"
 alias :q="exit"
+alias e='emacs'
 
 # pass color through to less
 alias less="less -R"
