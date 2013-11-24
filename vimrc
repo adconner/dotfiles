@@ -11,16 +11,22 @@ set rtp+=~/.vim/bundle/vundle
 silent! call vundle#rc()
 
 if exists(':Bundle')
-  Bundle 'gmarix/vundle'
-
   Bundle 'bitc/vim-hdevtools.git'
+  Bundle 'gmarix/vundle'
   Bundle 'godlygeek/tabular'
   Bundle 'kien/ctrlp.vim'
   Bundle 'LaTeX-Box-Team/LaTeX-Box'
   Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'Rip-Rip/clang_complete'
+  " Bundle 'Rip-Rip/clang_complete'
   Bundle 'scrooloose/syntastic.git'
+  " Bundle 'Shougo/neocomplete.vim'
+  Bundle 'Valloric/YouCompleteMe'
+  Bundle 'Shougo/vimproc.vim'
+  Bundle 'Shougo/vimshell.vim'
+  " Bundle 'Shougo/neosnippet.vim'
+  Bundle 'Shougo/context_filetype.vim'
   Bundle 'SirVer/ultisnips'
+  Bundle 'terryma/vim-multiple-cursors'
   Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-eunuch'
@@ -42,6 +48,8 @@ syntax on
 " Support file locations {{{2
 
 if has('unix')
+  " increases startup times
+  " silent !mkdir -p $XDG_CACHE_HOME/vim
     " swap file location
   set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " viminfo location
@@ -126,36 +134,19 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_style_error_symbol='✗'
 let g:syntastic_style_warning_symbol='⚠'
 
-let g:SuperTabDefaultCompletionType="context"
-let g:SuperTabContextDefaultCompletionType="<c-p>"
-
 " Search runtimepath in forward order to be more efficient
 let g:UltiSnipsDontReverseSearchPath=0
 
 let g:tex_flavor = "latex"
 
+" this option causes vim to flicker, perhaps can disable when syntastic is
+" upadeted
+let g:ycm_allow_changing_updatetime=0
+let g:ycm_register_as_syntastic_checker=0
+" let g:ycm_seed_identifiers_with_syntax
+
 " Mappings {{{1
 let mapleader="-"
-
-" Insert Mode {{{2
-imap <C-U> <C-G>u<C-U>
-imap jj <Esc>
-
-" insert mode commands I care about:
-" CTRL-r insert register
-" CTRL-h backspace
-" CTRL-w delete back word
-" CTRL-v insert literal
-
-imap <c-u> <c-x>
-imap <c-l> <c-x><c-l>
-imap <c-]> <c-x><c-]>
-imap <c-t> <c-x><c-]>
-
-" set so that <tab> and <s-tab> go forward and back
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Normal/Visual modes {{{2
 " Movement {{{3
@@ -179,6 +170,8 @@ map <Insert> <C-y>
 " make forward line searches easier to reach
 noremap ; ,
 noremap , ;
+
+noremap <Tab> %
 
 " Editing {{{3
 
@@ -222,7 +215,52 @@ map <leader>gc :Gcommit<cr>
 map <leader>gl :Glog<cr>
 map <leader>gb :Gblame<cr>
 
-" map coS :SyntasticToggleMode<cr>
+" noremap coS :SyntasticToggleMode<cr>
+
+" Insert Mode {{{2
+imap jj <Esc>
+
+" insert mode commands I care about:
+" CTRL-r insert register
+" CTRL-h backspace
+" CTRL-w delete back word
+" CTRL-v insert literal
+
+imap <c-u> <c-x>
+imap <c-l> <c-x><c-l>
+imap <c-]> <c-x><c-]>
+imap <c-t> <c-x><c-]>
+
+" use c-n and c-p for completion selection
+let g:ycm_key_list_select_completion=['<Down>']
+let g:ycm_key_list_previous_completion=['<Up>']
+" let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
+" let g:ycm_key_list_previous_completion=['<S-Tab>', '<Up>']
+
+" " set so that <c-n> and <c-p> go forward and back
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" function! g:UltiSnips_Complete()
+"     call UltiSnips_ExpandSnippet()
+"     if g:ulti_expand_res == 0
+"         if pumvisible()
+"             return "\<C-n>"
+"         else
+"             call UltiSnips_JumpForwards()
+"             if g:ulti_jump_forwards_res == 0
+"                return "\<TAB>"
+"             endif
+"         endif
+"     endif
+"     return ""
+" endfunction
+
+" " exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsListSnippets="<c-e>"
 
 " Command mode {{{2
 
