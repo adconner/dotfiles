@@ -14,16 +14,14 @@ if exists(':Bundle')
   Bundle 'bitc/vim-hdevtools.git'
   Bundle 'gmarix/vundle'
   Bundle 'godlygeek/tabular'
+  Bundle 'kana/vim-textobj-user'
   Bundle 'kien/ctrlp.vim'
   Bundle 'LaTeX-Box-Team/LaTeX-Box'
   Bundle 'michaeljsmith/vim-indent-object'
-  " Bundle 'Rip-Rip/clang_complete'
   Bundle 'scrooloose/syntastic.git'
-  " Bundle 'Shougo/neocomplete.vim'
   Bundle 'Valloric/YouCompleteMe'
   Bundle 'Shougo/vimproc.vim'
   Bundle 'Shougo/vimshell.vim'
-  " Bundle 'Shougo/neosnippet.vim'
   Bundle 'Shougo/context_filetype.vim'
   Bundle 'SirVer/ultisnips'
   Bundle 'terryma/vim-multiple-cursors'
@@ -157,15 +155,11 @@ noremap k gk
 noremap gj j
 noremap gk k
 
-" "me" - make current workspace large
-map <leader>m :resize<cr>:vertical resize<cr>
-map <leader>M <C-w>=
-
 " make scrolling more convenient
-map <c-j> <c-e>
-map <c-k> <c-y>
-map <Del> <C-e>
-map <Insert> <C-y>
+noremap <c-j> <c-e>
+noremap <c-k> <c-y>
+noremap <Del> <C-e>
+noremap <Insert> <C-y>
 
 " make forward line searches easier to reach
 noremap ; ,
@@ -175,28 +169,48 @@ noremap <Tab> %
 
 " Editing {{{3
 
-" in case yankring not installed
+" make Y consistent with other capital maps
 nnoremap Y y$
 
 " select last edited text
-nmap gV `[v`]
+nnoremap gV `[v`]
 
 " split line
-nmap K i<cr><esc>
+nnoremap K i<cr><esc>
 " TODO K in visual or operator mode splits at sensible places in the line
 " (possibly filetype dependant). Ex. latex splits lines at binary relations
 
-map <silent> <leader><space> :noh<cr>
+noremap <silent> <leader><space> :noh<cr>
 
-" quick replace of highlighted strings
-nmap <leader>r :%s/<c-r>//
-vmap <leader>r :s/\%V<c-r>/\%V/
 
 " File Navigation {{{3
+
 " make tabs, windows, and buffers easier
 "   only in normal mode because in visual these lose the selection
-nmap <leader>j :bn<cr>
-nmap <leader>k :bp<cr>
+nnoremap <leader>j :bn<cr>
+nnoremap <leader>k :bp<cr>
+
+" "me" - make current workspace large
+nnoremap <leader>m :resize<cr>:vertical resize<cr>
+nnoremap <leader>M <C-w>=
+
+" Leader Mappings {{{3
+
+" use x-mode maps when mapping printible characters in visual mode
+nmap     <leader>es V<leader>es
+xnoremap <leader>es !sage -q \| sed '$d' \| sed '$d' \| cut -c7-<cr>
+nnoremap <silent> <leader>ee cc<c-r>=pyeval(getreg("\""))<cr><esc>
+xmap     <leader>ee J<leader>ee
+nnoremap <leader>ev :exec getline('.')<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>gr :Gread<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>r  :%s/<c-r>//
+xnoremap <leader>r  :s/\%V<c-r>/\%V/
 
 " Misc Mappings {{{3
 
@@ -207,18 +221,12 @@ map <F1> <nop>
 map Q <nop>
 " set keywordprg=man\ --regex
 
-map <leader>gw :Gwrite<cr>
-map <leader>gr :Gread<cr>
-map <leader>gd :Gdiff<cr>
-map <leader>gs :Gstatus<cr>
-map <leader>gc :Gcommit<cr>
-map <leader>gl :Glog<cr>
-map <leader>gb :Gblame<cr>
-
-" noremap coS :SyntasticToggleMode<cr>
+nnoremap coS :SyntasticToggleMode<cr>
+" todo toggle completion
+" nnoremap coc :Ycm ...
 
 " Insert Mode {{{2
-imap jj <Esc>
+inoremap jj <Esc>
 
 " insert mode commands I care about:
 " CTRL-r insert register
@@ -226,10 +234,10 @@ imap jj <Esc>
 " CTRL-w delete back word
 " CTRL-v insert literal
 
-imap <c-u> <c-x>
-imap <c-l> <c-x><c-l>
-imap <c-]> <c-x><c-]>
-imap <c-t> <c-x><c-]>
+" imap <c-u> <c-x>
+" imap <c-l> <c-x><c-l>
+" imap <c-]> <c-x><c-]>
+" imap <c-t> <c-x><c-]>
 
 " use c-n and c-p for completion selection
 let g:ycm_key_list_select_completion=['<Down>']
