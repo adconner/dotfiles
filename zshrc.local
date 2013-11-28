@@ -1,6 +1,6 @@
 alias vi="vim"
 alias v="vim"
-alias r="ranger"
+alias r="ranger-cd"
 alias info="info --vi"
 alias :q="exit"
 alias e='emacs'
@@ -12,3 +12,13 @@ alias less="less -R"
 alias mv="mv -iv"
 alias cp="cp -iv"
 alias ln="ln -iv"
+
+function ranger-cd {
+    tempfile='/tmp/chosendir'
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
