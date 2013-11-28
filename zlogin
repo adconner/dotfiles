@@ -35,7 +35,8 @@ export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
 } &!
 
 if (( $+commands[fortune] )); then
-  fortune -a
-  print
+  # fortune -a
+  # print
+  startx
 fi
 
