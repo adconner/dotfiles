@@ -11,6 +11,8 @@ unclutter -jitter 200 -grab -idle 10 &
 # syndaemon -k -i 5 -R -d &
 # syndaemon -k -i 1 -R -d &
 
+renice -n -10 $$
+
 # This must be last
 exec xmonad
 

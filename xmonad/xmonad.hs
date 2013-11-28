@@ -13,20 +13,26 @@ import qualified XMonad.Util.ExtensibleState as XS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-myTerminal      = "xterm"
-myBorderWidth   = 1
-myModMask       = mod4Mask
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9","0"]
+-- for mouse cursor
+-- import Graphics.X11.Xlib
+-- import Graphics.X11.Xlib.Extras
+
+myTerminal           = "xterm"
+myShell              = "zsh"
+myBorderWidth        = 1
+myModMask            = mod4Mask
+myWorkspaces         = ["1","2","3","4","5","6","7","8","9","0"]
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
+myAddNice            = 10 -- keep xmonad at high priority
 
 ------------------------------------------------------------------------
 -- Key bindings
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_p     ), spawn "dmenu_run")
-    , ((modm .|. shiftMask, xK_p     ), spawn "dmenu_term_run")
+    [ ((modm .|. shiftMask, xK_Return), mySpawn $ XMonad.terminal conf)
+    , ((modm,               xK_p     ), mySpawn "dmenu_run")
+    , ((modm .|. shiftMask, xK_p     ), mySpawn "dmenu_term_run")
     , ((modm,               xK_d     ), kill)
     , ((modm,               xK_space ), sendMessage NextLayout)
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
@@ -45,21 +51,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_period), sendMessage (IncMasterN 1))
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_q     ), mySpawn "xmonad --recompile; xmonad --restart")
     -- , ((modm              , xK_apostrophe), toggleMouse)
     , ((modm              , xK_semicolon), toggleMouse)
 
-      -- ((controlMask          , xK_Print) , spawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
-    , ((0                 , xK_Print) , spawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm              , xK_f)     , spawn "luakit")
-    , ((modm              , xK_r)     , spawn $ myTerminal ++ " -e ranger")
-    , ((modm              , xK_a)     , spawn $ myTerminal ++ " -e alsamixer")
-    -- , ((modm              , xK_w)     , spawn $ myTerminal ++ " -e wicd-curses")
-    , ((modm              , xK_w)     , spawn $ myTerminal ++ " -e zsh -ic 'iw wlan0 scan dump | less'")
-    , ((modm .|. shiftMask, xK_l)     , spawn $ myTerminal ++ " -e zsh -ic 'journalctl -f'")
-    , ((modm              , xK_n)     , spawn $ myTerminal ++ " -e ncmpcpp")
-    , ((modm              , xK_o)     , spawn $ myTerminal ++ " -e htop")
-    , ((modm .|. shiftMask, xK_m)     , spawn $ myTerminal ++ " -e zsh -ic mutt")
+      -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
+    , ((0                 , xK_Print) , mySpawn "scrot -e 'mv $f ~/common/shots'")
+    , ((modm              , xK_f)     , mySpawn "luakit")
+    , ((modm              , xK_r)     , mySpawnTerm "ranger")
+    , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
+    -- , ((modm              , xK_w)     , mySpawnTerm "wicd-curses")
+    , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less'")
+    , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f'")
+    , ((modm              , xK_n)     , mySpawnTerm "ncmpcpp")
+    , ((modm              , xK_o)     , mySpawnTerm" htop")
+    , ((modm .|. shiftMask, xK_m)     , mySpawnTerm "mutt")
         -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
     ]
@@ -176,6 +182,13 @@ defaults xmproc = defaultConfig {
         startupHook        = myStartupHook,
         logHook            = myLogHook xmproc
     }
+
+-- Utility functions
+
+mySpawn s = spawn $ "nice -n " ++ n ++ " " ++ s
+  where n = show myAddNice
+
+mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic " ++ c)
 
 -- Functions for disabling the mouse
 
