@@ -61,10 +61,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_r)     , mySpawnTerm "ranger")
     , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
     -- , ((modm              , xK_w)     , mySpawnTerm "wicd-curses")
-    , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less'")
-    , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f'")
+    , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less")
+    , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f")
     , ((modm              , xK_n)     , mySpawnTerm "ncmpcpp")
-    , ((modm              , xK_o)     , mySpawnTerm" htop")
+    , ((modm              , xK_o)     , mySpawnTerm "htop")
     , ((modm .|. shiftMask, xK_m)     , mySpawnTerm "mutt")
         -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
@@ -188,7 +188,7 @@ defaults xmproc = defaultConfig {
 mySpawn s = spawn $ "nice -n " ++ n ++ " " ++ s
   where n = show myAddNice
 
-mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic " ++ c)
+mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic '" ++ c ++ "'")
 
 -- Functions for disabling the mouse
 
