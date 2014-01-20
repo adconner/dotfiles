@@ -34,7 +34,12 @@ ${1:%}\usepackage[margin=1in]{geometry}
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
 
-%\DeclareMathOperator{\gcd}{gcd}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+
+\renewcommand{\bar}[1]{\overline{#1}}
+
+%\DeclareMathOperator{\foo}{foo}
 
 \title{${2:Title Here}}
 \author{Austin Conner}
