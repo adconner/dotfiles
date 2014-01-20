@@ -2,10 +2,21 @@ xterm*termName: xterm-256color
 xterm*metaSendsEscape: true
 xterm*locale: true
 
-xterm*loginShell: false
-xterm*scrollBar: off
-xterm*faceName: Consolas:antialias=false
+! default font
+xterm*faceName: "DejaVu Sans Mono:antialias=false"
 xterm*faceSize: 12
+
+! alternate fonts, chosen by menu
+! xterm*font: -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*
+! xterm*font1: -*-*-*-*-*-*-2-*-*-*-*-*-*-*
+! xterm*font2: -misc-fixed-*-r-normal-*-8-*-*-*-*-*-iso8859-*
+! xterm*font3: -b&h-lucidatypewriter-bold-*-*-*-12-*-*-*-*-*-*-*
+! xterm*font4: -*-screen-bold-r-normal-*-16-*-*-*-*-*-iso8859-*
+! xterm*font5: -*-lucidatypewriter-medium-*-*-*-18-*-*-*-*-*-*-*
+! xterm*font6: -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
+! xterm*font7: -dec-terminal-bold-r-normal-*-14-*-*-*-*-*-iso8859-*
+! xterm*font 
+
 !xterm*faceName: Terminus:style=Regular:size=16
 !xterm*fort: -*-dina-medium-r-*-*-16-*-*-*-*-*-*-*
 ! xterm*font: -*-terminus-medium-r-*-*-*-200-*-*-*-*-iso8859-1
@@ -13,6 +24,9 @@ xterm*faceSize: 12
 ! xterm*boldFont: -*-terminus-bold-r-*-*-*-200-*-*-*-*-iso8859-1
 ! xterm*font: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 ! xterm*boldFont: -misc-fixed-bold-r-normal--18-120-100-100-c-90-iso10646-1
+
+xterm*loginShell: false
+xterm*scrollBar: off
 xterm*saveLines: 4096
 xterm*foreground: rgb:d9/d9/d9
 xterm*background: rgb:15/15/15
