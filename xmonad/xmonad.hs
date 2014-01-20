@@ -46,7 +46,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
     , ((modm,               xK_h     ), sendMessage Shrink)
     , ((modm,               xK_l     ), sendMessage Expand)
-    , ((modm,               xK_t     ), withFocused $ windows . W.sink)
+    , ((modm .|. shiftMask, xK_t     ), withFocused $ windows . W.sink)
     , ((modm              , xK_comma ), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_period), sendMessage (IncMasterN 1))
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
@@ -58,7 +58,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print) , mySpawn "scrot -e 'mv $f ~/common/shots'")
     , ((modm              , xK_f)     , mySpawn "luakit")
-    , ((modm              , xK_r)     , mySpawnTerm "ranger")
+    , ((modm              , xK_t)     , mySpawnTerm "ranger")
     , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
     -- , ((modm              , xK_w)     , mySpawnTerm "wicd-curses")
     , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less")
@@ -81,7 +81,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-{g,c} %! Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{g,c} %! Move client to screen 1, 2, or 3
     [((modm .|. m,  key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_g, xK_c] [0..]
+        | (key, sc) <- zip [xK_g, xK_c, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 ------------------------------------------------------------------------
