@@ -108,7 +108,7 @@ set scrolloff=3         " 3 lines of context
 set hidden              " allow fast switching of files w/o saving
 set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
-set mouse-=a            " disable mouse
+" set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
 " set undofile            " Use a persistent undo file
 " set formatoptions+=a    " auto format

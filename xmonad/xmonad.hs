@@ -219,12 +219,12 @@ disableMouse = do
 
 unsafeEnableMouse :: X ()
 unsafeEnableMouse = do
-  spawn "synclient TouchpadOff=0 && killall unclutter"
+  spawn "synclient TouchpadOff=0"
   XS.put (ME True)
 
 unsafeDisableMouse :: X ()
 unsafeDisableMouse = do
-  spawn "synclient TouchpadOff=1 && unclutter -grab -idle 600 -jitter 100000"
+  spawn "synclient TouchpadOff=1"
   XS.put (ME False)
 
 mouseEnabled :: X Bool
