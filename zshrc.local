@@ -10,7 +10,7 @@ alias less="less -R"
 
 # make fewer mistakes
 alias mv="mv -iv"
-alias cp="cp -iv"
+alias cp="cp -iv --reflink=auto"
 alias ln="ln -iv"
 
 # xinerama settings
