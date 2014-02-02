@@ -2,7 +2,7 @@
 
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH"
 
-export BROWSER='luakit'
+export BROWSER='dwb'
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'

@@ -52,15 +52,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), mySpawn "xmonad --recompile; xmonad --restart")
-    -- , ((modm              , xK_apostrophe), toggleMouse)
     , ((modm              , xK_semicolon), toggleMouse)
+    -- , ((modm              , xK_apostrophe), mySpawn "xdotool getwindowfocus click --window %1 1")
+    --   --  needed for firefox, seems finnicky
 
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print) , mySpawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm              , xK_f)     , mySpawn "luakit")
+    , ((modm              , xK_f)     , mySpawn "dwb")
     , ((modm              , xK_t)     , mySpawnTerm "ranger")
     , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
-    -- , ((modm              , xK_w)     , mySpawnTerm "wicd-curses")
     , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less")
     , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f")
     , ((modm              , xK_n)     , mySpawnTerm "ncmpcpp")
