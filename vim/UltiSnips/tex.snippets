@@ -1,3 +1,10 @@
+snippet proveiff "both forward and backward cases" b
+$\Longrightarrow$) ${0}
+
+$\Longleftarrow$)
+
+endsnippet
+
 snippet [ "display math environment" b
 \[
   ${0:${VISUAL}}
@@ -38,8 +45,10 @@ ${1:%}\usepackage[margin=1in]{geometry}
 \newcommand{\norm}[1]{\lVert #1 \rVert}
 
 \renewcommand{\bar}[1]{\overline{#1}}
+\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\implies}{\Rightarrow}
 
-%\DeclareMathOperator{\foo}{foo}
+\DeclareMathOperator{\im}{im}
 
 \title{${2:Title Here}}
 \author{Austin Conner}

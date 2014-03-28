@@ -32,7 +32,7 @@ if exists(':Bundle')
   Bundle 'tpope/vim-repeat'
   Bundle 'tpope/vim-rsi'
   Bundle 'tpope/vim-sensible'
-  Bundle 'tpope/vim-sleuth'
+  " Bundle 'tpope/vim-sleuth' " seems to be too agressive
   Bundle 'tpope/vim-speeddating'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-tbone'
