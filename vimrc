@@ -211,6 +211,7 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>o  :RangerOpen<cr>
 nnoremap <leader>r  :%s/<c-r>//
 xnoremap <leader>r  :s/\%V<c-r>/\%V/
 nnoremap <leader>t= :Tabularize /=
