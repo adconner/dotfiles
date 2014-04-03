@@ -281,7 +281,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 command -nargs=* -complete=file Sw SudoWrite <args>
 command -nargs=* -complete=file SW SudoWrite <args>
 
-command WQ Gwrite|execute 'Gcommit -m "updates"'|q
+command -bar Gc Gwrite|Gcommit -m "updates"
+command Gcq Gc|q
 
 "Alias ex commands easily capitalized
 " command -nargs=* -complete=file -bang W w<bang> <args>
