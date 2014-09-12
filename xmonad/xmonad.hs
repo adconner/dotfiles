@@ -1,6 +1,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 
 import System.IO
+import System.IO.Unsafe(unsafePerformIO)
+import System.Environment(getEnvironment)
 import System.Exit
 import XMonad
 import XMonad.Hooks.DynamicLog
@@ -17,8 +19,8 @@ import qualified Data.Map        as M
 -- import Graphics.X11.Xlib
 -- import Graphics.X11.Xlib.Extras
 
-myTerminal           = "xterm"
-myShell              = "zsh"
+myTerminal           = envVarDefault "XTERM" "xterm"
+myShell              = envVarDefault "SHELL" "bash"
 myBorderWidth        = 1
 myModMask            = mod4Mask
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9","0"]
@@ -46,7 +48,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
     , ((modm,               xK_h     ), sendMessage Shrink)
     , ((modm,               xK_l     ), sendMessage Expand)
-    , ((modm .|. shiftMask, xK_t     ), withFocused $ windows . W.sink)
+    , ((modm .|. shiftMask, xK_s     ), withFocused $ windows . W.sink)
     , ((modm              , xK_comma ), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_period), sendMessage (IncMasterN 1))
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
@@ -58,8 +60,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print) , mySpawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm              , xK_f)     , mySpawn "dwb")
+    , ((modm              , xK_f)     , mySpawn $ envVarDefault "BROWSER" "chromium")
+    , ((modm              , xK_e)     , mySpawnTerm $ envVarDefault "EDITOR" "vim")
     , ((modm              , xK_t)     , mySpawnTerm "ranger")
+    , ((modm .|. shiftMask, xK_t)     , mySpawnTerm "vim ~/documents/todo/todo")
     , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
     , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less")
     , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f")
@@ -92,11 +96,11 @@ myFocusFollowsMouse = True
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [
       ((mod1Mask, button1), (\w ->
-        focus w >> mouseMoveWindow w >> windows W.shiftMaster))
+        focus w >> float w >> mouseMoveWindow w >> windows W.shiftMaster))
     , ((mod1Mask, button2), (\w ->
         focus w >> windows W.shiftMaster))
     , ((mod1Mask, button3), (\w ->
-        focus w >> mouseResizeWindow w >> windows W.shiftMaster))
+        focus w >> float w >> mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
 ------------------------------------------------------------------------
@@ -152,24 +156,17 @@ myLogHook xmproc = dynamicLogWithPP xmobarPP {
 myStartupHook = return ()
 
 ------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
+-- Now run xmonad with the config we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
   -- xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
   xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
-  xmonad $ defaults xmproc
+  xmonad $ myConfig xmproc
 
-------------------------------------------------------------------------
--- Combine it all together
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults xmproc = defaultConfig {
+
+myConfig xmproc = defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -191,6 +188,9 @@ defaults xmproc = defaultConfig {
     }
 
 -- Utility functions
+
+env = unsafePerformIO getEnvironment
+envVarDefault e d = maybe d id $ lookup e env
 
 mySpawn s = spawn $ "nice -n " ++ n ++ " " ++ s
   where n = show myAddNice
