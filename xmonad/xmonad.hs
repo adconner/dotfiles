@@ -4,11 +4,24 @@ import System.IO
 import System.IO.Unsafe(unsafePerformIO)
 import System.Environment(getEnvironment)
 import System.Exit
-import XMonad
+
+import XMonad hiding ((|||))
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+
+import XMonad.Layout.LayoutCombinators -- for JumpToLayout
 import XMonad.Layout.Fullscreen
+import XMonad.Layout.TwoPane
+import XMonad.Layout.NoBorders
+
+import XMonad.Actions.CycleRecentWS(cycleRecentWS)
+import XMonad.Actions.CycleSelectedLayouts
+import XMonad.Actions.Promote
+-- import XMonad.Actions.DwmPromote
+import XMonad.Actions.FindEmptyWorkspace
+
 import XMonad.Util.Run(spawnPipe)
 
 import qualified XMonad.Util.ExtensibleState as XS
@@ -23,7 +36,7 @@ myTerminal           = envVarDefault "XTERM" "xterm"
 myShell              = envVarDefault "SHELL" "bash"
 myBorderWidth        = 1
 myModMask            = mod4Mask
-myWorkspaces         = ["1","2","3","4","5","6","7","8","9","0"]
+myWorkspaces         = ["1:gen","2:trash","3","4","5","6","7","8","9","0"]
 myNormalBorderColor  = "gray" -- "#dddddd"
 myFocusedBorderColor = "red" -- "#ff0000"
 myAddNice            = 10 -- keep xmonad at higher priority than other interactive programs
@@ -36,14 +49,22 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), mySpawn "dmenu_run")
     , ((modm .|. shiftMask, xK_p     ), mySpawn "dmenu_term_run")
     , ((modm,               xK_d     ), kill)
-    , ((modm,               xK_space ), sendMessage NextLayout)
+    -- , ((modm,               xK_space ), sendMessage NextLayout)
+    -- , ((modm,               xK_space ), cycleThroughLayouts ["Tall", "Full", "Mirror Tall"])
+    , ((modm,               xK_space ), cycleThroughLayouts ["Tall", "TwoPane"])
+    , ((modm .|. shiftMask, xK_f     ), sendMessage $ JumpToLayout "Full")
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-    , ((modm,               xK_Return), windows W.swapMaster)
+    -- , ((modm,               xK_m     ), windows W.focusMaster  )
+    , ((modm,               xK_m     ), windows . W.shift $ myWorkspaces !! 1 )
+    , ((modm,               xK_v     ), viewEmptyWorkspace )
+    , ((modm .|. shiftMask, xK_v     ), tagToEmptyWorkspace )
+    -- , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm,               xK_Return), promote)
+    -- , ((modm,               xK_Return), dwmpromote)
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
     , ((modm,               xK_h     ), sendMessage Shrink)
@@ -57,19 +78,21 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_semicolon), toggleMouse)
     -- , ((modm              , xK_apostrophe), mySpawn "xdotool getwindowfocus click --window %1 1")
     --   --  needed for firefox, seems finnicky
+     
+    , ((mod1Mask          , xK_Tab   ), cycleRecentWS [xK_Alt_L] xK_Tab xK_apostrophe)
 
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
-    , ((0                 , xK_Print) , mySpawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm              , xK_f)     , mySpawn $ envVarDefault "BROWSER" "chromium")
-    , ((modm              , xK_e)     , mySpawnTerm $ envVarDefault "EDITOR" "vim")
-    , ((modm              , xK_t)     , mySpawnTerm "ranger")
-    , ((modm .|. shiftMask, xK_t)     , mySpawnTerm "vim ~/documents/todo/todo")
-    , ((modm              , xK_a)     , mySpawnTerm "alsamixer")
-    , ((modm              , xK_w)     , mySpawnTerm "iw wlan0 scan dump | less")
-    , ((modm .|. shiftMask, xK_l)     , mySpawnTerm "journalctl -f")
-    , ((modm              , xK_n)     , mySpawnTerm "ncmpcpp")
-    , ((modm              , xK_o)     , mySpawnTerm "htop")
-    , ((modm .|. shiftMask, xK_m)     , mySpawnTerm "mutt")
+    , ((0                 , xK_Print ), mySpawn "scrot -e 'mv $f ~/common/shots'")
+    , ((modm              , xK_f     ), mySpawn $ envVarDefault "BROWSER" "chromium")
+    , ((modm              , xK_e     ), mySpawnTerm $ envVarDefault "EDITOR" "vim")
+    , ((modm              , xK_t     ), mySpawnTerm "ranger")
+    , ((modm .|. shiftMask, xK_t     ), mySpawnTerm "vim ~/documents/todo/todo")
+    , ((modm              , xK_a     ), mySpawnTerm "alsamixer")
+    , ((modm              , xK_w     ), mySpawnTerm "iw wlan0 scan dump | less")
+    , ((modm .|. shiftMask, xK_l     ), mySpawnTerm "journalctl -f")
+    , ((modm              , xK_n     ), mySpawnTerm "ncmpcpp")
+    , ((modm              , xK_o     ), mySpawnTerm "htop")
+    , ((modm .|. shiftMask, xK_m     ), mySpawnTerm "mutt")
         -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
         
@@ -136,19 +159,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Layouts:
 
-myLayoutHook = avoidStruts (tiled ||| Full ||| Mirror tiled)
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+myLayoutHook = tall ||| TwoPane (3/100) (1/2) ||| noBorders Full ||| Mirror tall
+  where tall = Tall 1 (3/100) (1/2) 
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -166,14 +178,14 @@ myManageHook = (<+>) manageDocks $ composeAll
 -- Perform an arbitrary action on each internal state change or X event.
 -- See the 'XMonad.Hooks.DynamicLog' extension for examples.
 --
-myLogHook xmproc = dynamicLogWithPP xmobarPP {
-           ppOutput = hPutStrLn xmproc,
-           ppTitle = xmobarColor "#95e454" "" . shorten 50,
-           ppCurrent = xmobarColor "#eadead" "" . wrap "[" "]",
-           -- ppHidden = xmobarColor "#95e454" "",
-           ppOrder = \(ws:_:t:_) -> [ws,t],
-           ppSep = " | "
-        }
+-- myLogHook = dynamicLogWithPP xmobarPP {
+--            ppOutput = hPutStrLn xmproc,
+--            ppTitle = xmobarColor "#95e454" "" . shorten 50,
+--            ppCurrent = xmobarColor "#eadead" "" . wrap "[" "]",
+--            -- ppHidden = xmobarColor "#95e454" "",
+--            ppOrder = \(ws:_:t:_) -> [ws,t],
+--            ppSep = " | "
+--         }
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -192,11 +204,8 @@ myStartupHook = return ()
 --
 main = do
   -- xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
-  xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
-  xmonad $ myConfig xmproc
-
-
-myConfig xmproc = defaultConfig {
+  -- xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
+  xmonad =<< dzen defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -205,6 +214,8 @@ myConfig xmproc = defaultConfig {
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
+        handleEventHook = fullscreenEventHook, -- TODO works?
+
 
       -- key bindings
         keys               = myKeys,
@@ -213,8 +224,8 @@ myConfig xmproc = defaultConfig {
       -- hooks, layouts
         layoutHook         = myLayoutHook,
         manageHook         = myManageHook,
-        startupHook        = myStartupHook,
-        logHook            = myLogHook xmproc
+        startupHook        = myStartupHook
+        -- logHook            = myLogHook
     }
 
 -- Utility functions
@@ -222,18 +233,21 @@ myConfig xmproc = defaultConfig {
 env = unsafePerformIO getEnvironment
 envVarDefault e d = maybe d id $ lookup e env
 
-mySpawn s = spawn $ "nice -n " ++ n ++ " " ++ s
-  where n = show myAddNice
+mySpawn s = spawn $ "nice -n " ++ show myAddNice ++ " " ++ s
 
 mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic '" ++ c ++ "'")
 
+-- Handling info bar
+
+-- newtype InfoBar = InfoBar [Handle]
+
 -- Functions for disabling the mouse
 
-newtype MouseEnabled = ME Bool
+newtype MouseEnabled = MouseEnabled Bool
   deriving Typeable
 
 instance ExtensionClass MouseEnabled where
-  initialValue = ME True
+  initialValue = MouseEnabled True
 
 toggleMouse = do
   e <- mouseEnabled
@@ -250,15 +264,15 @@ disableMouse = do
 unsafeEnableMouse :: X ()
 unsafeEnableMouse = do
   spawn "synclient TouchpadOff=0"
-  XS.put (ME True)
+  XS.put (MouseEnabled True)
 
 unsafeDisableMouse :: X ()
 unsafeDisableMouse = do
   spawn "synclient TouchpadOff=1"
-  XS.put (ME False)
+  XS.put (MouseEnabled False)
 
 mouseEnabled :: X Bool
 mouseEnabled = do
-  ME b <- XS.get
+  MouseEnabled b <- XS.get
   return b
 
