@@ -46,7 +46,9 @@ syntax on
 
 if has('unix')
   " increases startup times
-  " silent !mkdir -p $XDG_CACHE_HOME/vim
+  if !isdirectory($XDG_CACHE_HOME . "/vim")
+    call mkdir($XDG_CACHE_HOME . "/vim","p")
+  endif
     " swap file location
   set directory=$XDG_CACHE_HOME/vim,.,~/tmp,/var/tmp,/tmp
     " viminfo location
@@ -90,7 +92,7 @@ set gdefault            " replace every occurrance by default
 " use aggressive regex by default
 
 " Wrapping {{{2
-set textwidth=80        " Hard-wrap text at nth column
+" set textwidth=80        " Hard-wrap text at nth column
 set linebreak           " Break existing lines at sane places
 set wrap                " Wrap long lines
 
@@ -124,7 +126,7 @@ silent! set formatoptions+=j    " allow sensible joining of comments,
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
 " set default commentstring
-set commentstring=#%s
+" set commentstring=#%s
 
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
@@ -138,9 +140,12 @@ let g:tex_flavor = "latex"
 
 " this option causes vim to flicker, perhaps can disable when syntastic is
 " upadeted
-let g:ycm_allow_changing_updatetime=0
-let g:ycm_register_as_syntastic_checker=0
+" let g:ycm_allow_changing_updatetime=0
+" let g:ycm_register_as_syntastic_checker=0
 " let g:ycm_seed_identifiers_with_syntax
+
+" let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/global_ycm_extra_conf.py'
+" let g:ycm_confirm_extra_conf = 0
 
 " Mappings {{{1
 let mapleader="-"
