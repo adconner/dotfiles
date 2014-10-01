@@ -59,8 +59,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
-    -- , ((modm,               xK_m     ), windows W.focusMaster  )
-    , ((modm,               xK_m     ), windows . W.shift $ myWorkspaces !! 1 )
+    , ((modm,               xK_m     ), windows W.focusMaster  )
     -- , ((modm,               xK_v     ), viewEmptyWorkspace )
     -- , ((modm .|. shiftMask, xK_v     ), tagToEmptyWorkspace )
     -- , ((modm,               xK_Return), windows W.swapMaster)
@@ -77,6 +76,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), mySpawn "xmonad --recompile; xmonad --restart")
     , ((modm              , xK_semicolon), toggleMouse)
+    , ((modm .|. shiftMask, xK_a     ), windows . W.shift $ myWorkspaces !! 1 )
     -- , ((modm              , xK_apostrophe), mySpawn "xdotool getwindowfocus click --window %1 1")
     --   --  needed for firefox, seems finnicky
      
