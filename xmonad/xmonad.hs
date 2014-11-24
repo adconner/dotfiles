@@ -129,7 +129,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
     ++ concat [
-    [ ((modm              , k        ), windows $ W.greedyView i),
+    [ ((modm              , k        ), cautiousView i),
       ((modm .|. shiftMask, k        ), windows $ W.shift i)
       -- ((modm .|. shiftMask, k        ), windows $ W.greedyView i . W.shift i)
     ] | (i, k) <- zip (XMonad.workspaces conf)
@@ -246,6 +246,30 @@ cycleRecentHiddenWS = cycleWindowSets options
 -- Handling info bar
 
 -- newtype InfoBar = InfoBar [Handle]
+
+-- cautious view
+
+newtype ViewedLast = ViewedLast String
+  deriving Typeable
+
+instance ExtensionClass ViewedLast where
+  initialValue = ViewedLast $ head myWorkspaces
+
+cautiousView :: String -> X ()
+cautiousView i = do
+  ws <- gets windowset
+  if i `elem` (map (W.tag . W.workspace) . W.visible $ ws) 
+      -- workspace visible and not current
+    then do 
+      ViewedLast l <- XS.get
+      if i == l
+        then windows $ W.greedyView i
+        else do
+          XS.put (ViewedLast i)
+          -- todo flash screen l is on?
+    else do 
+      XS.put (ViewedLast i)
+      windows $ W.greedyView i
 
 -- Functions for disabling the mouse
 
