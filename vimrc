@@ -254,7 +254,7 @@ let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion=['<S-Tab>', '<Up>']
 
 " " set so that <c-n> and <c-p> go forward and back
-let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
