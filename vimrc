@@ -12,7 +12,7 @@ silent! call vundle#rc()
 
 if exists(':Bundle')
   Bundle 'bitc/vim-hdevtools.git'
-  Bundle 'gmarix/vundle'
+  Bundle 'gmarik/vundle'
   Bundle 'godlygeek/tabular'
   Bundle 'honza/vim-snippets'
   Bundle 'kana/vim-textobj-user'
@@ -35,7 +35,7 @@ if exists(':Bundle')
   Bundle 'tpope/vim-tbone'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'Twinside/vim-haskellConceal'
-  Bundle 'Valloric/YouCompleteMe'
+  " Bundle 'Valloric/YouCompleteMe'
   Bundle 'wlangstroth/vim-haskell'
 endif
 
@@ -250,8 +250,8 @@ inoremap jj <Esc>
 " use c-n and c-p for completion selection
 " let g:ycm_key_list_select_completion=['<Down>']
 " let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
-let g:ycm_key_list_previous_completion=['<S-Tab>', '<Up>']
+"let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
+"let g:ycm_key_list_previous_completion=['<S-Tab>', '<Up>']
 
 " " set so that <c-n> and <c-p> go forward and back
 let g:UltiSnipsExpandTrigger="<c-j>"
