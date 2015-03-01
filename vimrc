@@ -290,6 +290,7 @@ command Gcq Gc|q
 "Alias ex commands easily capitalized
 " command -nargs=* -complete=file -bang W w<bang> <args>
 command -bang Q q<bang>
+command -bang Bd bd<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
 " Todo {{{1
