@@ -1,7 +1,6 @@
 alias vi="vim"
 alias v="vim"
 alias r="ranger-cd"
-alias info="info --vi"
 alias :q="exit"
 alias e='emacs'
 
@@ -15,7 +14,7 @@ alias ln="ln -iv"
 
 # xinerama settings
 dual () {
-    xrandr --output eDP1 --primary --below HDMI1 --output HDMI1 --auto
+    xrandr --output eDP1 --primary --left-of HDMI1 --output HDMI1 --auto
 }
 
 mirror () {
