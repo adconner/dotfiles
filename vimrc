@@ -92,7 +92,7 @@ set gdefault            " replace every occurrance by default
 " use aggressive regex by default
 
 " Wrapping {{{2
-" set textwidth=80        " Hard-wrap text at nth column
+set textwidth=80        " Hard-wrap text at nth column
 set linebreak           " Break existing lines at sane places
 set wrap                " Wrap long lines
 
