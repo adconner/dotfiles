@@ -114,6 +114,8 @@ set backspace=indent,eol,start " Allow backspacing on the given values
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
 set lazyredraw          " dont redraw screen during macro execution
+set exrc                " allow project local vimrc/exrc files
+set secure              " but maintain security for the above
 
 " makes mistakes if there are numbers in a block of text and one ends up at the
 " beginning of a line
