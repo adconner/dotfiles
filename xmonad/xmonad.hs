@@ -72,6 +72,36 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_m)     , mySpawnTerm "mutt")
         -- for some reason mutt sometimes has trouble rendering if
         -- the shell is not forced to be interactive
+        
+    -- XF86AudioPrev
+    , ((0 , 0x1008ff16)     , spawn "mpc prev")
+    -- XF86AudioStop
+    , ((0 , 0x1008ff15)     , spawn "mpc stop")
+    -- XF86AudioPlay
+    , ((0 , 0x1008ff14)     , spawn "mpc toggle")
+    -- XF86AudioNext
+    , ((0 , 0x1008ff17)     , spawn "mpc next")
+    -- XF86AudioLowerVolume
+    , ((0 , 0x1008ff11)     , spawn "amixer set Master 5%-")
+    -- XF86AudioRaiseVolume
+    , ((0 , 0x1008ff13)     , spawn "amixer set Master 5%+")
+    -- XF86AudioMute
+    , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
+    -- XF86MonBrightnessUp
+    , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 10")
+    -- XF86MonBrightnessDown
+    , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 10")
+    -- XF86KbdBrightnessUp TODO 
+    , ((0 , 0x1008ff05)     , spawn $ "dbus-send --type=method_call --print-reply=literal " 
+      ++ "--system --dest=\"org.freedesktop.UPower\" /org/freedesktop/UPower/KbdBacklight " 
+      ++ "org.freedesktop.UPower.KbdBacklight.GetBrightness")
+  -- dbus-send --type=method_call --print-reply=literal --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower/KbdBacklight org.freedesktop.UPower.KbdBacklight.SetBrightness int32:2
+    --  XF86KbdBrightnessDown
+    , ((0 , 0x1008ff06)     , spawn "amixer set Master toggle")
+
+    --   XF86TouchpadToggle
+    , ((0 , 0x1008ffa9)     , toggleMouse)
+ 
     ]
 
     ++ concat [
