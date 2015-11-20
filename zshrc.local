@@ -1,5 +1,5 @@
-alias vi="vim"
-alias v="vim"
+alias vi="nvim"
+alias v="nvim"
 alias r="ranger-cd"
 alias :q="exit"
 alias e='emacs'
