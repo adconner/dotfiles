@@ -17,9 +17,9 @@ if exists(':Bundle')
   Bundle 'honza/vim-snippets'
   Bundle 'kana/vim-textobj-user'
   Bundle 'kien/ctrlp.vim'
-  Bundle 'LaTeX-Box-Team/LaTeX-Box'
+  " Bundle 'LaTeX-Box-Team/LaTeX-Box'
   Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'scrooloose/syntastic.git'
+  " Bundle 'scrooloose/syntastic.git'
   Bundle 'Shougo/context_filetype.vim'
   Bundle 'SirVer/ultisnips'
   Bundle 'terryma/vim-multiple-cursors'
@@ -35,7 +35,8 @@ if exists(':Bundle')
   Bundle 'tpope/vim-tbone'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'Twinside/vim-haskellConceal'
-  " Bundle 'Valloric/YouCompleteMe'
+  Bundle 'Valloric/YouCompleteMe'
+  Bundle 'rdnetto/YCM-Generator'
   Bundle 'wlangstroth/vim-haskell'
 endif
 
@@ -44,7 +45,7 @@ syntax on
 
 " Support file locations {{{2
 
-if has('unix')
+if has('unix') && !has('nvim')
   " increases startup times
   if !isdirectory($XDG_CACHE_HOME . "/vim")
     call mkdir($XDG_CACHE_HOME . "/vim","p")
@@ -140,6 +141,8 @@ let g:UltiSnipsDontReverseSearchPath=0
 
 let g:tex_flavor = "latex"
 
+let g:ycm_autoclose_preview_window_after_completion = 0
+
 " this option causes vim to flicker, perhaps can disable when syntastic is
 " upadeted
 " let g:ycm_allow_changing_updatetime=0
@@ -182,7 +185,7 @@ nnoremap Y y$
 nnoremap gV `[v`]
 
 " split line
-nnoremap K i<cr><esc>
+nnoremap K i<cr><esc>k$
 " TODO K in visual or operator mode splits at sensible places in the line
 " (possibly filetype dependant). Ex. latex splits lines at binary relations
 
@@ -279,6 +282,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 " let g:UltiSnipsListSnippets="<c-e>"
+
+" Terminal Mode {{{2
+
+if has('nvim')
+  tnoremap jj <C-\><C-n>
+end
 
 " Command mode {{{2
 
