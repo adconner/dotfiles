@@ -203,6 +203,20 @@ nnoremap <leader>k :bp<cr>
 nnoremap <leader>m :resize<cr>:vertical resize<cr>
 nnoremap <leader>M <C-w>=
 
+
+" change buffer without affecting buffer mode
+" for normal, insert, terminal modes
+nnoremap <A-j> <C-w>w
+inoremap <A-j> <c-o><c-w>w
+nnoremap <A-k> <C-w>W
+inoremap <A-k> <c-o><c-w>W
+
+if has('nvim')
+  tnoremap <A-j> <C-\><C-n><C-w>w
+  tnoremap <A-k> <C-\><C-n><C-w>W
+end
+" TODO terminal maps dont change mode
+
 " Leader Mappings {{{3
 
 " use x-mode maps when mapping printible characters in visual mode
