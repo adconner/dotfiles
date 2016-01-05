@@ -26,7 +26,7 @@ myModMask            = mod4Mask
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9","0"]
 myNormalBorderColor  = "gray" -- "#dddddd"
 myFocusedBorderColor = "red" -- "#ff0000"
-myAddNice            = 10 -- keep xmonad at high priority
+myAddNice            = 10 -- keep xmonad at higher priority than other interactive programs
 
 ------------------------------------------------------------------------
 -- Key bindings
@@ -88,9 +88,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- XF86AudioMute
     , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
     -- XF86MonBrightnessUp
-    , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 10")
+    , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 5")
     -- XF86MonBrightnessDown
-    , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 10")
+    , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 5")
     -- XF86KbdBrightnessUp TODO 
     , ((0 , 0x1008ff05)     , spawn $ "dbus-send --type=method_call --print-reply=literal " 
       ++ "--system --dest=\"org.freedesktop.UPower\" /org/freedesktop/UPower/KbdBacklight " 
