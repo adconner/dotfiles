@@ -3,8 +3,8 @@
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cabal/bin:$PATH"
 
 export BROWSER='qutebrowser'
-export EDITOR='nvim'
-export VISUAL='nvim'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 export LANG='en_US.UTF-8'

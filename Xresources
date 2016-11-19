@@ -3,7 +3,8 @@ xterm*metaSendsEscape: true
 xterm*locale: true
 
 ! default font
-xterm*faceName: "DejaVu Sans Mono:antialias=false"
+xterm*faceName: "DejaVu Sans Mono:antialias=true"
+!xterm*faceName: "DejaVu Sans Mono:antialias=false"
 xterm*faceSize: 12
 
 ! alternate fonts, chosen by menu

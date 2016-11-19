@@ -35,8 +35,8 @@ if exists(':Bundle')
   Bundle 'tpope/vim-tbone'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'Twinside/vim-haskellConceal'
-  Bundle 'Valloric/YouCompleteMe'
-  Bundle 'rdnetto/YCM-Generator'
+  " Bundle 'Valloric/YouCompleteMe'
+  " Bundle 'rdnetto/YCM-Generator'
   Bundle 'wlangstroth/vim-haskell'
 endif
 
@@ -111,7 +111,7 @@ set nostartofline       " dont reset to start of line for large movements
 set showcmd             " show partial commands
 " set mouse-=a            " disable mouse
 set backspace=indent,eol,start " Allow backspacing on the given values
-" set undofile            " Use a persistent undo file
+set undofile            " Use a persistent undo file
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
 set lazyredraw          " dont redraw screen during macro execution
