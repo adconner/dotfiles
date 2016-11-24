@@ -191,10 +191,10 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc <- spawnPipe "/home/austin/.cabal/bin/xmobar /home/austin/.xmonad/xmobar.hs"
+  xmproc <- spawnPipe "xmobar /home/austin/.xmonad/xmobar.hs"
   xmonad $ myConfig xmproc
 
-myConfig xmproc = defaultConfig {
+myConfig xmproc = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
