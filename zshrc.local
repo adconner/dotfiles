@@ -15,11 +15,11 @@ alias ln="ln -iv"
 
 # xinerama settings
 dual () {
-    xrandr --output eDP1 --primary --left-of HDMI1 --output HDMI1 --auto
+    xrandr --primary --left-of HDMI1 --output HDMI1 --auto
 }
 
 mirror () {
-    xrandr --output eDP1 --primary --same-as HDMI1 --output HDMI1 --auto
+    xrandr --primary --same-as HDMI1 --output HDMI1 --auto
 }
 
 single () {
