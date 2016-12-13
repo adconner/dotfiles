@@ -16,6 +16,7 @@ import XMonad.Layout.NoBorders
 
 import XMonad.Actions.CycleRecentWS(cycleWindowSets)
 import XMonad.Actions.DwmPromote
+import qualified XMonad.Actions.FlexibleResize as XAFR
 
 import XMonad.Util.Run(spawnPipe)
 
@@ -140,7 +141,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((mod1Mask, button2), (\w ->
         focus w >> windows W.shiftMaster))
     , ((mod1Mask, button3), (\w ->
-        focus w >> float w >> mouseResizeWindow w >> windows W.shiftMaster))
+        focus w >> float w >> XAFR.mouseResizeWindow w >> windows W.shiftMaster))
     ]
 
 ------------------------------------------------------------------------
