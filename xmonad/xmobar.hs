@@ -11,17 +11,18 @@ Config { font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
                                    ["-t","<tempF> F <skyCondition>",
                                     "-L","65","-H","80","--normal","#95e454",
                                     "--high","#ff2026","--low","lightblue"] 36000
-                    , Run Wireless "wlan0" ["-t", "<essid> <quality>%"] 50
-                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>% <total3>%" ] 10
-                    , Run Memory ["-t","mem: <usedratio>%"] 10
-                    , Run Swap ["-t","swap: <usedratio>%"] 10
+                    , Run Wireless "wlan0" ["-t", "<essid> <quality>%"] 300
+                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>% <total3>%" ] 100
+                    , Run Memory ["-t","mem: <usedratio>%"] 100
+                    , Run Swap ["-t","swap: <usedratio>%"] 100
                     , Run Battery  ["-t", "<acstatus><timeleft> (<left>%)",
                                     "-L", "10", "-H", "80", "--",
                                     "-O", "<fc=#95e454>AC</fc> - ",
                                     "-o", "",
-                                    "-f", "ADP1/online"] 100 
-                    , Run Date "%a %b %_d %l:%M:%S" "date" 10
-                    , Run MPD ["-t", "<artist> - <title> <statei>"] 10
+                                    "-f", "ADP1/online"] 600 
+                    , Run Date "%a %b %_d %l:%M" "date" 600
+                    -- , Run Date "%a %b %_d %l:%M:%S" "date" 10
+                    , Run MPD ["-t", "<artist> - <title> <statei>"] 100
                     -- , Volume "default" "Master"  [] 10
                     --                ["-t", "<status><volume>%", "--",
                     --                 "-O", "", "-O", "<fc=#ff2026>mute</fc> - "] 10
