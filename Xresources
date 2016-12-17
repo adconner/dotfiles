@@ -2,6 +2,18 @@ xterm*termName: xterm-256color
 xterm*metaSendsEscape: true
 xterm*locale: true
 
+xterm*backarrowKey: false
+xterm*ttyModes: erase ^?
+
+!xterm*modifyOtherKeys: 2
+!xterm*formatOtherKeys: 1
+
+!XTerm*VT100.Translations:       #override\n\
+!        Ctrl<Key>m : string(0x7f)
+
+! XTerm*VT100.Translations:       #override\n\
+!         <KeyPress> BackSpace : string(0x7f)
+
 ! default font
 xterm*faceName: "DejaVu Sans Mono:antialias=true"
 !xterm*faceName: "DejaVu Sans Mono:antialias=false"
