@@ -11,32 +11,39 @@ set rtp+=~/.vim/bundle/vundle
 silent! call vundle#rc()
 
 if exists(':Bundle')
-  Bundle 'bitc/vim-hdevtools.git'
-  Bundle 'gmarik/vundle'
-  Bundle 'godlygeek/tabular'
-  Bundle 'honza/vim-snippets'
   Bundle 'kana/vim-textobj-user'
-  Bundle 'kien/ctrlp.vim'
-  " Bundle 'LaTeX-Box-Team/LaTeX-Box'
+  Bundle 'glts/vim-textobj-comment'
   Bundle 'michaeljsmith/vim-indent-object'
-  " Bundle 'scrooloose/syntastic.git'
-  Bundle 'Shougo/context_filetype.vim'
-  Bundle 'SirVer/ultisnips'
-  Bundle 'terryma/vim-multiple-cursors'
-  Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-commentary'
+  Bundle 'tpope/vim-repeat'
+  Bundle 'junegunn/fzf'
+  Bundle 'junegunn/fzf.vim' 
+    " binds to fzf, note that system executable is used
+  Bundle 'godlygeek/tabular'
+  Bundle 'SirVer/ultisnips'
+  Bundle 'honza/vim-snippets'
+  Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-eunuch'
   Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-repeat'
   Bundle 'tpope/vim-rsi'
-  Bundle 'tpope/vim-sensible'
   Bundle 'tpope/vim-speeddating'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-tbone'
   Bundle 'tpope/vim-unimpaired'
-  Bundle 'Twinside/vim-haskellConceal'
+  Bundle 'Shougo/context_filetype.vim'
+  Bundle 'Konfekt/FastFold'
+  Bundle 'airblade/vim-gitgutter'
+  Bundle 'christoomey/vim-tmux-navigator'
+  Bundle 'gmarik/vundle'
+
   " Bundle 'Valloric/YouCompleteMe'
   " Bundle 'rdnetto/YCM-Generator'
+  " Bundle 'bitc/vim-hdevtools.git'
+  " Bundle 'LaTeX-Box-Team/LaTeX-Box'
+  " Bundle 'scrooloose/syntastic.git'
+  " Bundle 'terryma/vim-multiple-cursors'
+  Bundle 'tpope/vim-sensible'
+  Bundle 'Twinside/vim-haskellConceal'
   Bundle 'wlangstroth/vim-haskell'
 endif
 
@@ -45,7 +52,7 @@ syntax on
 
 " Support file locations {{{2
 
-if has('unix') && !has('nvim')
+if has('unix')
   " increases startup times
   if !isdirectory($XDG_CACHE_HOME . "/vim")
     call mkdir($XDG_CACHE_HOME . "/vim","p")
@@ -87,10 +94,6 @@ set ignorecase          " Ignore search term case...
 set smartcase           " ... unless term contains an uppercase character
 set incsearch           " Highlight search...
 set hlsearch            " ... as you type
-set gdefault            " replace every occurrance by default
-" noremap / /\v
-" noremap ? ?\v
-" use aggressive regex by default
 
 " Wrapping {{{2
 set textwidth=80        " Hard-wrap text at nth column
@@ -114,16 +117,17 @@ set backspace=indent,eol,start " Allow backspacing on the given values
 set undofile            " Use a persistent undo file
 " set formatoptions+=a    " auto format
 set formatoptions+=1    " dont auto line break after one letter word if possible
+set formatoptions+=j    " all sensible joining of comments
 set lazyredraw          " dont redraw screen during macro execution
 set exrc                " allow project local vimrc/exrc files
 set secure              " but maintain security for the above
+set splitbelow
+set splitright
 
 " makes mistakes if there are numbers in a block of text and one ends up at the
 " beginning of a line
 " set formatoptions+=n    " format numbered lists correctly
 
-" this results in an error on machines without a sufficient vim version
-silent! set formatoptions+=j    " allow sensible joining of comments,
 
 " ignore files for tab completion and ctrlp
 set wildignore+=*.o,*.pdf,*.log,*.aux
@@ -144,7 +148,7 @@ let g:tex_flavor = "latex"
 let g:ycm_autoclose_preview_window_after_completion = 0
 
 " this option causes vim to flicker, perhaps can disable when syntastic is
-" upadeted
+" updated
 " let g:ycm_allow_changing_updatetime=0
 " let g:ycm_register_as_syntastic_checker=0
 " let g:ycm_seed_identifiers_with_syntax
@@ -165,8 +169,8 @@ noremap gj j
 noremap gk k
 
 " make scrolling more convenient
-noremap <c-j> <c-e>
-noremap <c-k> <c-y>
+" noremap <c-j> <c-e>
+" noremap <c-k> <c-y>
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 
@@ -184,15 +188,12 @@ nnoremap Y y$
 " select last edited text
 nnoremap gV `[v`]
 
-" split line
-nnoremap K i<cr><esc>k$
-" TODO K in visual or operator mode splits at sensible places in the line
-" (possibly filetype dependant). Ex. latex splits lines at binary relations
-
 noremap <silent> <leader><space> :noh<cr>
 
-
 " File Navigation {{{3
+
+" emulate CtrlP
+nnoremap <C-p> :Files<cr>
 
 " make tabs, windows, and buffers easier
 "   only in normal mode because in visual these lose the selection
@@ -203,20 +204,6 @@ nnoremap <leader>k :bp<cr>
 nnoremap <leader>m :resize<cr>:vertical resize<cr>
 nnoremap <leader>M <C-w>=
 
-
-" change buffer without affecting buffer mode
-" for normal, insert, terminal modes
-nnoremap <A-j> <C-w>w
-inoremap <A-j> <c-o><c-w>w
-nnoremap <A-k> <C-w>W
-inoremap <A-k> <c-o><c-w>W
-
-if has('nvim')
-  tnoremap <A-j> <C-\><C-n><C-w>w
-  tnoremap <A-k> <C-\><C-n><C-w>W
-end
-" TODO terminal maps dont change mode
-
 " Leader Mappings {{{3
 
 " use x-mode maps when mapping printible characters in visual mode
@@ -224,6 +211,8 @@ nmap     <leader>es V<leader>es
 xnoremap <leader>es !sage -q \| sed '$d' \| sed '$d' \| cut -c7-<cr>
 nnoremap <silent> <leader>ee cc<c-r>=pyeval(getreg("\""))<cr><esc>
 xmap     <leader>ee J<leader>ee
+xnoremap <leader>tt :Twrite<cr>
+nnoremap <leader>tt :Twrite<cr>
 nnoremap <leader>ev :exec getline('.')<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>
@@ -246,11 +235,10 @@ map <F1> <nop>
 
 " disable key which takes us away from buffer
 map Q <nop>
-" set keywordprg=man\ --regex
 
 nnoremap coS :SyntasticToggleMode<cr>
 " todo toggle completion
-" nnoremap coc :Ycm ...
+" nnoremap cop :Ycm ...
 
 " Insert Mode {{{2
 inoremap jj <Esc>
@@ -266,42 +254,17 @@ inoremap jj <Esc>
 " imap <c-]> <c-x><c-]>
 " imap <c-t> <c-x><c-]>
 
-" use c-n and c-p for completion selection
-" let g:ycm_key_list_select_completion=['<Down>']
-" let g:ycm_key_list_previous_completion=['<Up>']
-"let g:ycm_key_list_select_completion=['<Tab>', '<Down>']
-"let g:ycm_key_list_previous_completion=['<S-Tab>', '<Up>']
+inoremap <silent><expr> <c-p>
+\ pumvisible() ? "\<C-p>" :
+\ deoplete#mappings#manual_complete()
 
-" " set so that <c-n> and <c-p> go forward and back
+inoremap <silent><expr> <c-n>
+\ pumvisible() ? "\<C-n>" :
+\ deoplete#mappings#manual_complete()
+
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" function! g:UltiSnips_Complete()
-"     call UltiSnips_ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips_JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
-
-" " exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsListSnippets="<c-e>"
-
-" Terminal Mode {{{2
-
-if has('nvim')
-  tnoremap jj <C-\><C-n>
-end
 
 " Command mode {{{2
 
@@ -319,9 +282,8 @@ command -bang Bd bd<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
 " Todo {{{1
-" make it so cpp and h file open in parallel in vsplitted windows
-" select text just pasted
-" make auto complete case insensitive
+" fix sagemath eval
+" evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
 
 " vim: fdm=marker
