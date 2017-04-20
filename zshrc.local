@@ -13,6 +13,9 @@ alias mv="mv -iv"
 alias cp="cp -iv --reflink=auto"
 alias ln="ln -iv"
 
+bindkey -e
+bindkey -M emacs "jj" vi-cmd-mode
+
 # xinerama settings
 dual () {
     xrandr --output HDMI1 --auto --output eDP1 --primary --left-of HDMI1
