@@ -16,7 +16,7 @@ if exists(':Bundle')
   Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-repeat'
-  Bundle 'junegunn/fzf'
+  " Bundle 'junegunn/fzf'
   Bundle 'junegunn/fzf.vim' 
     " binds to fzf, note that system executable is used
   Bundle 'godlygeek/tabular'
@@ -35,6 +35,8 @@ if exists(':Bundle')
   Bundle 'airblade/vim-gitgutter'
   Bundle 'christoomey/vim-tmux-navigator'
   Bundle 'gmarik/vundle'
+  Bundle 'benmills/vimux'
+  Bundle 'tmux-plugins/vim-tmux-focus-events'
 
   " Bundle 'Valloric/YouCompleteMe'
   " Bundle 'rdnetto/YCM-Generator'
@@ -123,6 +125,7 @@ set exrc                " allow project local vimrc/exrc files
 set secure              " but maintain security for the above
 set splitbelow
 set splitright
+" set autoread " maybe use this manually
 
 " makes mistakes if there are numbers in a block of text and one ends up at the
 " beginning of a line
@@ -211,8 +214,10 @@ nmap     <leader>es V<leader>es
 xnoremap <leader>es !sage -q \| sed '$d' \| sed '$d' \| cut -c7-<cr>
 nnoremap <silent> <leader>ee cc<c-r>=pyeval(getreg("\""))<cr><esc>
 xmap     <leader>ee J<leader>ee
-xnoremap <leader>tt :Twrite<cr>
-nnoremap <leader>tt :Twrite<cr>
+xnoremap <leader>T :Twrite<cr>
+nnoremap <leader>T :Twrite<cr>
+nnoremap <leader>t :VimuxPromptCommand<cr>
+nnoremap <leader>c :up<cr>:VimuxRunLastCommand<cr>
 nnoremap <leader>ev :exec getline('.')<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>
@@ -225,8 +230,8 @@ nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>o  :RangerOpen<cr>
 nnoremap <leader>r  :%s/<c-r>//
 xnoremap <leader>r  :s/\%V<c-r>/\%V/
-nnoremap <leader>t= :Tabularize /=
-nnoremap <leader>t& :Tabularize /&
+nnoremap <leader>a= :Tabularize /=
+nnoremap <leader>a& :Tabularize /&
 
 " Misc Mappings {{{3
 
