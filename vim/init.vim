@@ -38,7 +38,7 @@ if exists(':Bundle')
   Bundle 'benmills/vimux'
   Bundle 'tmux-plugins/vim-tmux-focus-events'
 
-  " Bundle 'Valloric/YouCompleteMe'
+  Bundle 'Valloric/YouCompleteMe'
   " Bundle 'rdnetto/YCM-Generator'
   " Bundle 'bitc/vim-hdevtools.git'
   " Bundle 'LaTeX-Box-Team/LaTeX-Box'
@@ -148,7 +148,7 @@ let g:UltiSnipsDontReverseSearchPath=0
 
 let g:tex_flavor = "latex"
 
-let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " this option causes vim to flicker, perhaps can disable when syntastic is
 " updated
@@ -232,6 +232,14 @@ nnoremap <leader>r  :%s/<c-r>//
 xnoremap <leader>r  :s/\%V<c-r>/\%V/
 nnoremap <leader>a= :Tabularize /=
 nnoremap <leader>a& :Tabularize /&
+nnoremap <leader>pp :YcmShowDetailedDiagnostic<cr>
+nnoremap <leader>pc :YcmForceCompileAndDiagnostics<cr>
+nnoremap <leader>pf :YcmCompleter FixIt<cr>
+nnoremap <leader>pt :YcmCompleter GetType<cr>
+nnoremap <leader>pd :YcmCompleter GetDoc<cr>
+nnoremap <leader>pD :YcmCompleter GetDocImprecise<cr>
+nnoremap gd :YcmCompleter Goto<cr>
+nnoremap gD :YcmCompleter GotoImprecise<cr>
 
 " Misc Mappings {{{3
 
@@ -258,14 +266,6 @@ inoremap jj <Esc>
 " imap <c-l> <c-x><c-l>
 " imap <c-]> <c-x><c-]>
 " imap <c-t> <c-x><c-]>
-
-inoremap <silent><expr> <c-p>
-\ pumvisible() ? "\<C-p>" :
-\ deoplete#mappings#manual_complete()
-
-inoremap <silent><expr> <c-n>
-\ pumvisible() ? "\<C-n>" :
-\ deoplete#mappings#manual_complete()
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
