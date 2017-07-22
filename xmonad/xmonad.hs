@@ -183,8 +183,7 @@ myLogHook xmproc = dynamicLogWithPP xmobarPP {
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 --
--- By default, do nothing.
-myStartupHook = return ()
+myStartupHook = docksStartupHook
 
 ------------------------------------------------------------------------
 -- Now run xmonad with the config we set up.
@@ -205,6 +204,7 @@ myConfig xmproc = def {
         normalBorderColor  = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
         -- handleEventHook    = fullscreenEventHook, -- TODO works?
+        handleEventHook    = docksEventHook,
 
       -- key bindings
         keys               = myKeys,
