@@ -267,9 +267,9 @@ inoremap jj <Esc>
 " imap <c-]> <c-x><c-]>
 " imap <c-t> <c-x><c-]>
 
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-u>"
 
 " Command mode {{{2
 
