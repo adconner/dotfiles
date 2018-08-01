@@ -9,9 +9,7 @@ alias e='emacs'
 alias less="less -R"
 
 # make fewer mistakes
-alias mv="mv -iv"
-alias cp="cp -iv --reflink=auto"
-alias ln="ln -iv"
+alias cp="cp --reflink=auto"
 
 bindkey -e
 bindkey -M emacs "jj" vi-cmd-mode
