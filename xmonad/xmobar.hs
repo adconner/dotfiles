@@ -1,5 +1,6 @@
-Config { font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
---"-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
+Config { 
+  -- font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
+font = "-misc-fixed-bold-r-bold--18-120-100-100-c-90-iso10646-1"
        , borderColor = "#242424"
        , border = TopB
        , bgColor = "#242424"
@@ -11,7 +12,7 @@ Config { font = "-*-terminus-bold-r-*-*-*-140-*-*-*-*-iso8859-1"
                                    ["-t","<tempF> F <skyCondition>",
                                     "-L","65","-H","80","--normal","#95e454",
                                     "--high","#ff2026","--low","lightblue"] 36000
-                    , Run Wireless "wlan0" ["-t", "<essid> <quality>%"] 300
+                    , Run Wireless "wlp2s0" ["-t", "<essid> <quality>%"] 300
                     , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>% <total3>%" ] 100
                     , Run Memory ["-t","mem: <usedratio>%"] 100
                     , Run Swap ["-t","swap: <usedratio>%"] 100
