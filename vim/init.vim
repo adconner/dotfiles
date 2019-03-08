@@ -16,7 +16,7 @@ if exists(':Bundle')
   Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-repeat'
-  " Bundle 'junegunn/fzf'
+  Bundle 'junegunn/fzf'
   Bundle 'junegunn/fzf.vim' 
     " binds to fzf, note that system executable is used
   Bundle 'godlygeek/tabular'
@@ -33,13 +33,13 @@ if exists(':Bundle')
   Bundle 'Shougo/context_filetype.vim'
   Bundle 'Konfekt/FastFold'
   Bundle 'airblade/vim-gitgutter'
-  Bundle 'christoomey/vim-tmux-navigator'
+  " Bundle 'christoomey/vim-tmux-navigator'
   Bundle 'gmarik/vundle'
   Bundle 'benmills/vimux'
   Bundle 'tmux-plugins/vim-tmux-focus-events'
 
-  Bundle 'Valloric/YouCompleteMe'
-  " Bundle 'rdnetto/YCM-Generator'
+  " Bundle 'Valloric/YouCompleteMe'
+  Bundle 'rdnetto/YCM-Generator'
   " Bundle 'bitc/vim-hdevtools.git'
   " Bundle 'LaTeX-Box-Team/LaTeX-Box'
   " Bundle 'scrooloose/syntastic.git'
@@ -118,7 +118,7 @@ set showcmd             " show partial commands
 set backspace=indent,eol,start " Allow backspacing on the given values
 set undofile            " Use a persistent undo file
 " set formatoptions+=a    " auto format
-set formatoptions+=1    " dont auto line break after one letter word if possible
+" set formatoptions+=1    " dont auto line break after one letter word if possible
 set formatoptions+=j    " all sensible joining of comments
 set lazyredraw          " dont redraw screen during macro execution
 set exrc                " allow project local vimrc/exrc files
