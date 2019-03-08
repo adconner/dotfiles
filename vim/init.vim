@@ -11,16 +11,30 @@ set rtp+=~/.vim/bundle/vundle
 silent! call vundle#rc()
 
 if exists(':Bundle')
+  Bundle 'gmarik/vundle'
+
+  Bundle 'SirVer/ultisnips'
+  Bundle 'junegunn/fzf'
+  Bundle 'junegunn/fzf.vim' 
+  " Bundle 'Valloric/YouCompleteMe'
+  " Bundle 'rdnetto/YCM-Generator'
+  " Bundle 'scrooloose/syntastic.git'
+  Bundle 'benmills/vimux'
+
+  " Bundle 'prabirshrestha/vim-lsp'
+  " Bundle 'w0rp/ale'
+  Bundle 'Shougo/deoplete.nvim'
+    " for Vim8 only and deoplete support:
+    Bundle 'roxma/nvim-yarp'
+    Bundle 'roxma/vim-hug-neovim-rpc'
+
+
   Bundle 'kana/vim-textobj-user'
   Bundle 'glts/vim-textobj-comment'
   Bundle 'michaeljsmith/vim-indent-object'
   Bundle 'tpope/vim-commentary'
   Bundle 'tpope/vim-repeat'
-  Bundle 'junegunn/fzf'
-  Bundle 'junegunn/fzf.vim' 
-    " binds to fzf, note that system executable is used
   Bundle 'godlygeek/tabular'
-  Bundle 'SirVer/ultisnips'
   Bundle 'honza/vim-snippets'
   Bundle 'tpope/vim-characterize'
   Bundle 'tpope/vim-eunuch'
@@ -28,26 +42,23 @@ if exists(':Bundle')
   Bundle 'tpope/vim-rsi'
   Bundle 'tpope/vim-speeddating'
   Bundle 'tpope/vim-surround'
-  Bundle 'tpope/vim-tbone'
+  Bundle 'tpope/vim-sensible'
   Bundle 'tpope/vim-unimpaired'
   Bundle 'Shougo/context_filetype.vim'
   Bundle 'Konfekt/FastFold'
   Bundle 'airblade/vim-gitgutter'
   " Bundle 'christoomey/vim-tmux-navigator'
-  Bundle 'gmarik/vundle'
-  Bundle 'benmills/vimux'
-  Bundle 'tmux-plugins/vim-tmux-focus-events'
 
-  " Bundle 'Valloric/YouCompleteMe'
-  Bundle 'rdnetto/YCM-Generator'
+  " filetype plugins
+
+  Bundle 'deoplete-plugins/deoplete-jedi'
+  Bundle 'Rip-Rip/clang_complete'
   " Bundle 'bitc/vim-hdevtools.git'
   " Bundle 'LaTeX-Box-Team/LaTeX-Box'
-  " Bundle 'scrooloose/syntastic.git'
-  " Bundle 'terryma/vim-multiple-cursors'
-  Bundle 'tpope/vim-sensible'
-  Bundle 'Twinside/vim-haskellConceal'
-  Bundle 'wlangstroth/vim-haskell'
+  " Bundle 'Twinside/vim-haskellConceal'
+  " Bundle 'wlangstroth/vim-haskell'
 endif
+let g:deoplete#enable_at_startup = 1
 
 filetype plugin indent on
 syntax on
@@ -74,15 +85,7 @@ let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 " Appearance {{{2
 
-if has('gui_running')
-  silent! colorscheme wombat      " Set the colorscheme
-else
-  silent! colorscheme wombat
-endif
-
-if has('gui_win32')
-  set guifont=courier_new:h11
-endif
+silent! colorscheme wombat
 
 " Tabbing {{{2
 set shiftwidth=2        " Number of spaces to use in auto(indent)
@@ -132,7 +135,7 @@ set splitright
 " set formatoptions+=n    " format numbered lists correctly
 
 
-" ignore files for tab completion and ctrlp
+" ignore files for tab completion
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
 " set default commentstring
@@ -159,7 +162,16 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/global_ycm_extra_conf.py'
 " let g:ycm_confirm_extra_conf = 0
 
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function() abort
+"   return deoplete#close_popup() . "\<CR>"
+" endfunction
+
 " Mappings {{{1
+"
 let mapleader="-"
 
 " Normal/Visual modes {{{2
@@ -172,8 +184,6 @@ noremap gj j
 noremap gk k
 
 " make scrolling more convenient
-" noremap <c-j> <c-e>
-" noremap <c-k> <c-y>
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 
@@ -210,15 +220,9 @@ nnoremap <leader>M <C-w>=
 " Leader Mappings {{{3
 
 " use x-mode maps when mapping printible characters in visual mode
-nmap     <leader>es V<leader>es
-xnoremap <leader>es !sage -q \| sed '$d' \| sed '$d' \| cut -c7-<cr>
-nnoremap <silent> <leader>ee cc<c-r>=pyeval(getreg("\""))<cr><esc>
-xmap     <leader>ee J<leader>ee
-xnoremap <leader>T :Twrite<cr>
-nnoremap <leader>T :Twrite<cr>
 nnoremap <leader>t :VimuxPromptCommand<cr>
 nnoremap <leader>c :up<cr>:VimuxRunLastCommand<cr>
-nnoremap <leader>ev :exec getline('.')<cr>
+
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gd :Gdiff<cr>
@@ -227,19 +231,13 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
+
 nnoremap <leader>o  :RangerOpen<cr>
+
 nnoremap <leader>r  :%s/<c-r>//
 xnoremap <leader>r  :s/\%V<c-r>/\%V/
 nnoremap <leader>a= :Tabularize /=
 nnoremap <leader>a& :Tabularize /&
-nnoremap <leader>pp :YcmShowDetailedDiagnostic<cr>
-nnoremap <leader>pc :YcmForceCompileAndDiagnostics<cr>
-nnoremap <leader>pf :YcmCompleter FixIt<cr>
-nnoremap <leader>pt :YcmCompleter GetType<cr>
-nnoremap <leader>pd :YcmCompleter GetDoc<cr>
-nnoremap <leader>pD :YcmCompleter GetDocImprecise<cr>
-nnoremap gd :YcmCompleter Goto<cr>
-nnoremap gD :YcmCompleter GotoImprecise<cr>
 
 " Misc Mappings {{{3
 
@@ -251,7 +249,7 @@ map Q <nop>
 
 nnoremap coS :SyntasticToggleMode<cr>
 " todo toggle completion
-" nnoremap cop :Ycm ...
+nnoremap cop :call deoplete#toggle()<cr>
 
 " Insert Mode {{{2
 inoremap jj <Esc>
@@ -287,8 +285,11 @@ command -bang Bd bd<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
 
 " Todo {{{1
-" fix sagemath eval
 " evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
+" maybe more general semantic highlighting
+" language server implementation
+" better vundle binds
+" better split navigation (does tmux-navigator hang tmux if vim is blocked?)
 
 " vim: fdm=marker
