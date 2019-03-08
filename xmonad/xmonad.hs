@@ -116,7 +116,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 
     ++ concat [
-    [ ((modm              , k        ), cautiousView i),
+    [ ((modm              , k        ), windows $ W.greedyView i),
       ((modm .|. shiftMask, k        ), windows $ W.shift i)
       -- ((modm .|. shiftMask, k        ), windows $ W.greedyView i . W.shift i)
     ] | (i, k) <- zip (XMonad.workspaces conf)
