@@ -23,10 +23,10 @@ if exists(':Bundle')
 
   " Bundle 'prabirshrestha/vim-lsp'
   " Bundle 'w0rp/ale'
-  Bundle 'Shougo/deoplete.nvim'
+  " Bundle 'Shougo/deoplete.nvim'
     " for Vim8 only and deoplete support:
-    Bundle 'roxma/nvim-yarp'
-    Bundle 'roxma/vim-hug-neovim-rpc'
+    " Bundle 'roxma/nvim-yarp'
+    " Bundle 'roxma/vim-hug-neovim-rpc'
 
 
   Bundle 'kana/vim-textobj-user'
@@ -51,8 +51,9 @@ if exists(':Bundle')
 
   " filetype plugins
 
-  Bundle 'deoplete-plugins/deoplete-jedi'
-  Bundle 'Rip-Rip/clang_complete'
+  " Bundle 'deoplete-plugins/deoplete-jedi'
+  " Bundle 'Rip-Rip/clang_complete'
+
   " Bundle 'bitc/vim-hdevtools.git'
   " Bundle 'LaTeX-Box-Team/LaTeX-Box'
   " Bundle 'Twinside/vim-haskellConceal'
