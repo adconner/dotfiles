@@ -23,7 +23,8 @@ export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
 mkdir -p -m 700 $(readlink $XDG_CACHE_HOME || echo $XDG_CACHE_HOME)
 
 cd ~
-/usr/bin/xrdb -load ~/.Xresources &
+/usr/bin/xrdb -merge ~/.Xresources &
+# /usr/bin/xrdb -load ~/.Xresources &
 /usr/bin/setxkbmap dvorak && /usr/bin/xmodmap ~/.Xmodmap &
 xset +fp /usr/share/fonts/local && xset fp rehash &
 
