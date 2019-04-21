@@ -7,62 +7,64 @@ set nocompatible
 
 " Set up vundle...
 filetype off
-set rtp+=~/.vim/bundle/vundle
-silent! call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+silent! call vundle#begin()
 
-if exists(':Bundle')
-  Bundle 'gmarik/vundle'
+if exists(':Plugin')
+  Plugin 'VundleVim/Vundle.vim'
 
-  Bundle 'SirVer/ultisnips'
-  Bundle 'junegunn/fzf'
-  Bundle 'junegunn/fzf.vim' 
-  " Bundle 'Valloric/YouCompleteMe'
-  " Bundle 'rdnetto/YCM-Generator'
-  " Bundle 'scrooloose/syntastic.git'
-  Bundle 'benmills/vimux'
+  Plugin 'SirVer/ultisnips'
+  Plugin 'junegunn/fzf'
+  Plugin 'junegunn/fzf.vim' 
+  " Plugin 'Valloric/YouCompleteMe'
+  " Plugin 'rdnetto/YCM-Generator'
+  " Plugin 'scrooloose/syntastic.git'
+  Plugin 'benmills/vimux'
 
-  " Bundle 'prabirshrestha/vim-lsp'
-  " Bundle 'w0rp/ale'
-  " Bundle 'Shougo/deoplete.nvim'
+  " Plugin 'prabirshrestha/vim-lsp'
+  " Plugin 'w0rp/ale'
+  " Plugin 'Shougo/deoplete.nvim'
     " for Vim8 only and deoplete support:
-    " Bundle 'roxma/nvim-yarp'
-    " Bundle 'roxma/vim-hug-neovim-rpc'
+    " Plugin 'roxma/nvim-yarp'
+    " Plugin 'roxma/vim-hug-neovim-rpc'
 
 
-  Bundle 'kana/vim-textobj-user'
-  Bundle 'glts/vim-textobj-comment'
-  Bundle 'michaeljsmith/vim-indent-object'
-  Bundle 'tpope/vim-commentary'
-  Bundle 'tpope/vim-repeat'
-  Bundle 'godlygeek/tabular'
-  Bundle 'honza/vim-snippets'
-  Bundle 'tpope/vim-characterize'
-  Bundle 'tpope/vim-eunuch'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-rsi'
-  Bundle 'tpope/vim-speeddating'
-  Bundle 'tpope/vim-surround'
-  Bundle 'tpope/vim-sensible'
-  Bundle 'tpope/vim-unimpaired'
-  Bundle 'Shougo/context_filetype.vim'
-  Bundle 'Konfekt/FastFold'
-  Bundle 'airblade/vim-gitgutter'
-  " Bundle 'christoomey/vim-tmux-navigator'
+  Plugin 'kana/vim-textobj-user'
+  Plugin 'glts/vim-textobj-comment'
+  Plugin 'michaeljsmith/vim-indent-object'
+  Plugin 'tpope/vim-commentary'
+  Plugin 'tpope/vim-repeat'
+  Plugin 'godlygeek/tabular'
+  Plugin 'honza/vim-snippets'
+  Plugin 'tpope/vim-characterize'
+  Plugin 'tpope/vim-eunuch'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-rsi'
+  Plugin 'tpope/vim-speeddating'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-sensible'
+  Plugin 'tpope/vim-unimpaired'
+  Plugin 'Shougo/context_filetype.vim'
+  Plugin 'Konfekt/FastFold'
+  Plugin 'airblade/vim-gitgutter'
+  " Plugin 'christoomey/vim-tmux-navigator'
 
   " filetype plugins
 
-  " Bundle 'deoplete-plugins/deoplete-jedi'
-  " Bundle 'Rip-Rip/clang_complete'
+  " Plugin 'deoplete-plugins/deoplete-jedi'
+  " Plugin 'Rip-Rip/clang_complete'
 
-  " Bundle 'bitc/vim-hdevtools.git'
-  " Bundle 'LaTeX-Box-Team/LaTeX-Box'
-  " Bundle 'Twinside/vim-haskellConceal'
-  " Bundle 'wlangstroth/vim-haskell'
+  " Plugin 'bitc/vim-hdevtools.git'
+  " Plugin 'LaTeX-Box-Team/LaTeX-Box'
+  " Plugin 'Twinside/vim-haskellConceal'
+  " Plugin 'wlangstroth/vim-haskell'
 endif
-let g:deoplete#enable_at_startup = 1
 
+call vundle#end()
 filetype plugin indent on
 syntax on
+
+let g:deoplete#enable_at_startup = 1
 
 " Support file locations {{{2
 
