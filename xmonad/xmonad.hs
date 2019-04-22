@@ -34,8 +34,8 @@ myBorderWidth        = 1
 myModMask            = mod4Mask
 myWorkspaces         = ["1","2","3","4","5","6","7","8","9","0"]
 myNormalBorderColor  = "gray" -- "#dddddd"
-myFocusedBorderColor = "red" -- "#ff0000"
-myAddNice            = 10 -- keep xmonad at higher priority than other interactive programs
+myFocusedBorderColor = "#4286f4"
+-- myFocusedBorderColor = "red" -- "#ff0000"
 
 ------------------------------------------------------------------------
 -- Key bindings
@@ -47,7 +47,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_d     ), kill)
     , ((modm,               xK_space ), sendMessage NextLayout)
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    , ((modm,               xK_n     ), refresh)
+    -- , ((modm .|. shiftMask, xK_n     ), refresh) -- what does this do?
     , ((modm,               xK_Tab   ), windows W.focusDown)
     , ((modm,               xK_j     ), windows W.focusDown)
     , ((modm,               xK_k     ), windows W.focusUp  )
@@ -65,7 +65,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
     , ((modm              , xK_q     ), mySpawn "xmonad --recompile; xmonad --restart")
     , ((modm              , xK_semicolon), toggleMouse)
-    , ((modm .|. shiftMask, xK_a     ), windows . W.shift $ myWorkspaces !! 1 )
      
     , ((mod1Mask          , xK_Tab   ), cycleRecentHiddenWS [xK_Alt_L] xK_Tab xK_apostrophe)
 
@@ -102,17 +101,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 5")
     -- XF86MonBrightnessDown
     , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 5")
-    -- XF86KbdBrightnessUp TODO 
-    , ((0 , 0x1008ff05)     , spawn $ "dbus-send --type=method_call --print-reply=literal " 
-      ++ "--system --dest=\"org.freedesktop.UPower\" /org/freedesktop/UPower/KbdBacklight " 
-      ++ "org.freedesktop.UPower.KbdBacklight.GetBrightness")
-  -- dbus-send --type=method_call --print-reply=literal --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower/KbdBacklight org.freedesktop.UPower.KbdBacklight.SetBrightness int32:2
-    --  XF86KbdBrightnessDown
-    , ((0 , 0x1008ff06)     , spawn "amixer set Master toggle")
-
     --   XF86TouchpadToggle
     , ((0 , 0x1008ffa9)     , toggleMouse)
- 
     ]
 
     ++ concat [
@@ -222,7 +212,8 @@ myConfig xmproc = def {
 env = unsafePerformIO getEnvironment
 envVarDefault e d = maybe d id $ lookup e env
 
-mySpawn s = spawn $ "nice -n " ++ show myAddNice ++ " " ++ s
+-- could do things like add nice
+mySpawn = spawn
 
 mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic '" ++ c ++ "'")
 
