@@ -13,6 +13,7 @@ import XMonad.Hooks.ManageHelpers
 
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
+import XMonad.Layout.GridVariants
 
 import XMonad.Actions.CycleRecentWS(cycleWindowSets)
 import XMonad.Actions.DwmPromote
@@ -137,9 +138,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Layouts:
 
--- myLayoutHook = tall ||| TwoPane (3/100) (1/2) ||| noBorders Full ||| Mirror tall
-myLayoutHook = avoidStruts ( tall ||| noBorders Full ||| Mirror tall )
-  where tall = Tall 1 (3/100) (1/2) 
+-- TwoPane (3/100) (1/2)
+-- Mirror tall
+
+myLayoutHook = avoidStruts (tall ||| noBorders Full ||| Grid (1/1))
+  where tall = TallGrid 1 1 (1/2) (1/1) (3/100)
+  -- where tall = Tall 1 (3/100) (1/2) 
 
 ------------------------------------------------------------------------
 -- Window rules:
