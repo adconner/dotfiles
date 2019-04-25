@@ -64,6 +64,7 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 
+let g:gitgutter_map_keys = 0
 let g:deoplete#enable_at_startup = 1
 
 " Support file locations {{{2
@@ -131,6 +132,7 @@ set exrc                " allow project local vimrc/exrc files
 set secure              " but maintain security for the above
 set splitbelow
 set splitright
+set updatetime=100      "for plugins (gitgutter)
 " set autoread " maybe use this manually
 
 " makes mistakes if there are numbers in a block of text and one ends up at the
@@ -224,7 +226,16 @@ nnoremap <leader>M <C-w>=
 
 " use x-mode maps when mapping printible characters in visual mode
 nnoremap <leader>t :VimuxPromptCommand<cr>
-nnoremap <leader>c :up<cr>:VimuxRunLastCommand<cr>
+nnoremap <leader>c :up<cr>:VimuxRunLastCommand<cr> 
+function! VimuxSlime()
+  " let @v=substitute(@v,'\n','','')
+  call VimuxSendText(@v)
+  call VimuxSendKeys("Enter")
+endfunction
+vnoremap <leader>h "vy :call VimuxSlime()<cr>
+nmap <leader>h ^v$<leader>h
+" nmap <leader>h vip<leader>h
+
 
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gc :Gcommit<cr>
@@ -234,6 +245,10 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
+" TODO fix below
+nnoremap <leader>gp <Plug>GitGutterPreviewHunk
+nnoremap <leader>ga <Plug>GitGutterStageHunk
+nnoremap <leader>gu <Plug>GitGutterUndoHunk
 
 nnoremap <leader>o  :RangerOpen<cr>
 
