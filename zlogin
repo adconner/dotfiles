@@ -16,7 +16,7 @@ export LANG='en_US.UTF-8'
 # export CDPATH="."
 export HISTFILE=$XDG_CACHE_HOME/zsh/zsh_history
 export LESSHISTFILE=$XDG_CACHE_HOME/lesshist
-export MAIL='~/.mail'
+# export MAIL='~/.mail'
 
 export WORDCHARS=$(echo $WORDCHARS | tr -d '/')
 
