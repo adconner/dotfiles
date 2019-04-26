@@ -5,7 +5,7 @@ source ~/.zlogin
 /usr/bin/setxkbmap dvorak && /usr/bin/xmodmap ~/.Xmodmap &
 xset +fp /usr/share/fonts/local && xset fp rehash &
 
-sh ~/.fehbg &
+sh ~/bin/fehbg &
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 # unclutter -jitter 200 -grab -idle 10 &
