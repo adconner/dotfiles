@@ -1,4 +1,5 @@
-Xft.dpi: 120
+Xft.dpi: 130
+/* Xft.dpi: 120 */
 xterm*termName: xterm-256color
 xterm*metaSendsEscape: true
 xterm*locale: true
@@ -16,9 +17,10 @@ xterm*ttyModes: erase ^?
 !         <KeyPress> BackSpace : string(0x7f)
 
 ! default font
-xterm*faceName: "Anonymous Pro:antialias=true"
-!xterm*faceName: "DejaVu Sans Mono:antialias=false"
+xterm*faceName: Anonymous Pro:antialias=true
+!xterm*faceName: DejaVu Sans Mono:antialias=true
 xterm*faceSize: 12
+xterm*renderFont: true
 
 ! alternate fonts, chosen by menu
 ! xterm*font: -*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*
