@@ -70,12 +70,24 @@ let g:syntastic_style_warning_symbol='⚠'
 
 let g:tex_flavor = "latex"
 
-if has('unix')
+if has('nvim')
   " increases startup times
+  if !isdirectory($XDG_CACHE_HOME . "/nvim")
+    call mkdir($XDG_CACHE_HOME . "/nvim","p")
+  endif
+  " swap file location
+  set directory=$XDG_CACHE_HOME/nvim,.
+    " viminfo location
+  " set viminfo+=n$XDG_CACHE_HOME/nvim/viminfo
+    " persistent undo location
+  set undodir=$XDG_CACHE_HOME/nvim,.
+    " dictionary for spell check
+  set dictionary+=/usr/share/dict/words
+else
   if !isdirectory($XDG_CACHE_HOME . "/vim")
     call mkdir($XDG_CACHE_HOME . "/vim","p")
   endif
-    " swap file location
+  " swap file location
   set directory=$XDG_CACHE_HOME/vim,.
     " viminfo location
   set viminfo+=n$XDG_CACHE_HOME/vim/viminfo

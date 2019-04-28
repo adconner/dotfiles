@@ -7,8 +7,8 @@ export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export MPD_HOST=/home/austin/.cache/mpd/socket
 
 export BROWSER='qutebrowser'
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 export LESS='-F -g -i -M -R -S -w -X -z-4'
 export LANG='en_US.UTF-8'
