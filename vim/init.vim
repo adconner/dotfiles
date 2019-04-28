@@ -11,12 +11,9 @@ silent! call vundle#begin()
 if exists(':Plugin')
   Plugin 'VundleVim/Vundle.vim'
 
+  " heavyweight plugins
   Plugin 'SirVer/ultisnips'
-  Plugin 'junegunn/fzf.vim' 
-  " Plugin 'Valloric/YouCompleteMe'
-  " Plugin 'rdnetto/YCM-Generator'
-  " Plugin 'scrooloose/syntastic.git'
-  Plugin 'benmills/vimux'
+  Plugin 'neoclide/coc.nvim'
 
   " Plugin 'prabirshrestha/vim-lsp'
   " Plugin 'w0rp/ale'
@@ -25,7 +22,8 @@ if exists(':Plugin')
     " Plugin 'roxma/nvim-yarp'
     " Plugin 'roxma/vim-hug-neovim-rpc'
 
-
+  Plugin 'junegunn/fzf.vim'
+  Plugin 'benmills/vimux'
   Plugin 'kana/vim-textobj-user'
   Plugin 'glts/vim-textobj-comment'
   Plugin 'michaeljsmith/vim-indent-object'
@@ -36,6 +34,7 @@ if exists(':Plugin')
   Plugin 'tpope/vim-characterize'
   Plugin 'tpope/vim-eunuch'
   Plugin 'tpope/vim-fugitive'
+  Plugin 'airblade/vim-gitgutter'
   Plugin 'tpope/vim-rsi'
   Plugin 'tpope/vim-speeddating'
   Plugin 'tpope/vim-surround'
@@ -43,7 +42,6 @@ if exists(':Plugin')
   Plugin 'tpope/vim-unimpaired'
   Plugin 'Shougo/context_filetype.vim'
   Plugin 'Konfekt/FastFold'
-  Plugin 'airblade/vim-gitgutter'
   " Plugin 'christoomey/vim-tmux-navigator'
 
   " filetype plugins
@@ -132,6 +130,13 @@ set splitright
 set updatetime=300      "for plugins (gitgutter)
 " set autoread " maybe use this manually
 
+" this block recommended by coc.nvim
+set nobackup " file backup doesnt play nice with some language servers
+set nowritebackup " on loss of power, we should have other means to recover
+" set cmdheight=2
+set shortmess+=c
+" set signcolumn=yes
+
 " ignore files for tab completion
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
@@ -153,27 +158,63 @@ let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-u>"
 
-noremap <Tab> %
-" use tab and S-tab to navigate completion menu when it is open
+
+" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : 
+"       \ <SID>check_back_space() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col-1] =~# '\s'
+" endfunction
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
+inoremap <silent><expr> <c-space> coc#refresh()
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+nmap <silent> <space>k <Plug>(coc-diagnostic-prev)
+nmap <silent> <space>j <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<cr>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" nnoremap <silent> <space>a :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>c :<C-u>CocList commands<cr>
+" nnoremap <silent> <space>o :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>j :<C-u>CocNext<cr>
+" nnoremap <silent> <space>k :<C-u>CocPrev<cr>
+" nnoremap <silent> <space>p :<C-u>CocListResume<cr>
+
+noremap <Tab> %
 noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
-
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
-
 " make forward line searches easier to reach
 noremap ; ,
 noremap , ;
-
 nnoremap Y y$
 " disable help key (especially important in gui)
 map <F1> <nop>
-
 " disable key which takes us away from buffer
 map Q <nop>
 
