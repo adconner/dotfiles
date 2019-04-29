@@ -235,6 +235,7 @@ let mapleader="-"
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
 nnoremap <leader>k :bp<cr>
+nnoremap <leader>b :Buffers<cr>
 
 " "me" - make current pane large
 nnoremap <leader>m :resize<cr>:vertical resize<cr>
@@ -284,6 +285,13 @@ command Gcq Gc|q
 command -bang Q q<bang>
 command -bang Bd bd<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
+
+highlight Error ctermbg=52
+highlight NvimInternalError ctermfg=88 ctermbg=88
+highlight SpellBad ctermbg=88 cterm=undercurl
+highlight SpellCap ctermbg=17
+highlight ColorColumn ctermbg=88
+highlight Todo ctermfg=237 ctermbg=11 cterm=italic
 
 " evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
