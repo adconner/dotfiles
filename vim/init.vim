@@ -171,17 +171,18 @@ let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-u>"
 
 
-" inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : 
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col-1] =~# '\s'
-" endfunction
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : 
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col-1] =~# '\s'
+endfunction
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 inoremap <silent><expr> <c-space> coc#refresh()
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -201,7 +202,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
   else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
   endif
 endfunction
 
@@ -294,6 +295,7 @@ highlight SpellBad ctermbg=88 cterm=undercurl
 highlight SpellCap ctermbg=17
 highlight ColorColumn ctermbg=88
 highlight Todo ctermfg=237 ctermbg=11 cterm=italic
+highlight CocHighlightText ctermbg=236
 
 " evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
