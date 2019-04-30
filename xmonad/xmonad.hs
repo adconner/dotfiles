@@ -142,8 +142,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Mirror tall
 
 myLayoutHook = avoidStruts (tall ||| noBorders Full ||| Grid (1/1))
-  where tall = TallGrid 1 1 (1/2) (1/1) (3/100)
-  -- where tall = Tall 1 (3/100) (1/2) 
+  where tall = TallGrid 1 1 (1/2) (3/2) (3/100) -- where tall = Tall 1 (3/100) (1/2) 
 
 ------------------------------------------------------------------------
 -- Window rules:
