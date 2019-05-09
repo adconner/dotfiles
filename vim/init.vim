@@ -60,13 +60,7 @@ filetype plugin indent on
 syntax on
 
 let g:gitgutter_map_keys = 0
-let g:deoplete#enable_at_startup = 1
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol='✗'
-let g:syntastic_style_warning_symbol='⚠'
 
 let g:tex_flavor = "latex"
 
@@ -162,6 +156,8 @@ set wildignore+=*.o,*.pdf,*.log,*.aux
 " CTRL-v insert literal
 
 inoremap jj <Esc>
+" tnoremap jj <C-\><C-n>
+
 nnoremap <C-p> :Files<cr>
 
 " nnoremap coS :SyntasticToggleMode<cr>
