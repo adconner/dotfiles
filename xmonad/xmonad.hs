@@ -258,24 +258,16 @@ instance ExtensionClass MouseEnabled where
 
 toggleMouse = do
   e <- mouseEnabled
-  if e then unsafeDisableMouse else unsafeEnableMouse
+  if e then disableMouse else enableMouse
 
+enableMouse :: X ()
 enableMouse = do
-  e <- mouseEnabled
-  if e then return () else unsafeEnableMouse
-
-disableMouse = do
-  e <- mouseEnabled
-  if e then unsafeDisableMouse else return ()
-
-unsafeEnableMouse :: X ()
-unsafeEnableMouse = do
-  spawn "synclient TouchpadOff=0"
+  spawn "xinput enable \"04CA00B1:00 04CA:00B1 Touchpad\""
   XS.put (MouseEnabled True)
 
-unsafeDisableMouse :: X ()
-unsafeDisableMouse = do
-  spawn "synclient TouchpadOff=1"
+disableMouse :: X ()
+disableMouse = do
+  spawn "xinput disable \"04CA00B1:00 04CA:00B1 Touchpad\""
   XS.put (MouseEnabled False)
 
 mouseEnabled :: X Bool
