@@ -179,7 +179,8 @@ endfunction
 " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<cr>"
 inoremap <silent><expr> <c-space> coc#refresh()
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -244,11 +245,13 @@ nnoremap <leader>M <C-w>=
 
 nnoremap <leader>t :VimuxPromptCommand<cr>
 nnoremap <leader>c :up<cr>:VimuxRunLastCommand<cr> 
+nnoremap <leader>i :up<cr>:VimuxRunLastCommand<cr> 
+nnoremap <leader>z :up<cr>:VimuxZoomRunner<cr> 
 function! VimuxSlime()
   " let @v=substitute(@v,'\n','','')
   " TODO fix for sage
   call VimuxSendText(@v)
-  call VimuxSendKeys("Enter")
+  " call VimuxSendKeys("Enter")
 endfunction
 vnoremap <leader>h "vy :call VimuxSlime()<cr>
 nmap <leader>h ^v$<leader>h
@@ -287,7 +290,8 @@ command -nargs=* -complete=file -bang Make make<bang> <args>
 
 highlight Error ctermbg=52
 highlight NvimInternalError ctermfg=88 ctermbg=88
-highlight SpellBad ctermbg=88 cterm=undercurl
+highlight SpellBad cterm=undercurl
+" highlight SpellBad ctermbg=88 cterm=undercurl
 highlight SpellCap ctermbg=17
 highlight ColorColumn ctermbg=88
 highlight Todo ctermfg=237 ctermbg=11 cterm=italic
