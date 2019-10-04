@@ -1,5 +1,6 @@
+! actual dpi is 177
+!Xft.dpi: 140
 Xft.dpi: 130
-/* Xft.dpi: 120 */
 xterm*termName: xterm-256color
 xterm*metaSendsEscape: true
 xterm*locale: true
@@ -17,8 +18,12 @@ xterm*ttyModes: erase ^?
 !         <KeyPress> BackSpace : string(0x7f)
 
 ! default font
-xterm*faceName: Anonymous Pro:antialias=true
+!xterm*faceName: Inconsolita:antialias=true
+xterm*faceName: Source Code Pro:antialias=true
+!xterm*faceName: Nimbus Mono:antialias=true
 !xterm*faceName: DejaVu Sans Mono:antialias=true
+!xterm*faceName: Noto Sans Mono:antialias=true
+!xterm*faceName: Anonymous Pro:antialias=true
 xterm*faceSize: 12
 xterm*renderFont: true
 
