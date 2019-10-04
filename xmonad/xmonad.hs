@@ -59,7 +59,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
     , ((modm,               xK_h     ), sendMessage Shrink)
     , ((modm,               xK_l     ), sendMessage Expand)
-    , ((modm .|. shiftMask, xK_s     ), withFocused $ windows . W.sink)
+    , ((modm              , xK_s     ), withFocused $ windows . W.sink)
     , ((modm              , xK_comma ), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_period), sendMessage (IncMasterN 1))
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
