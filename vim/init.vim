@@ -159,6 +159,7 @@ inoremap jj <Esc>
 " tnoremap jj <C-\><C-n>
 
 nnoremap <C-p> :Files<cr>
+nnoremap <C-g> :Rg 
 
 " nnoremap coS :SyntasticToggleMode<cr>
 " nnoremap cop :call deoplete#toggle()<cr>
