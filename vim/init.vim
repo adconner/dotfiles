@@ -267,10 +267,9 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
-" TODO fix below
-nnoremap <leader>gp <Plug>GitGutterPreviewHunk
-nnoremap <leader>ga <Plug>GitGutterStageHunk
-nnoremap <leader>gu <Plug>GitGutterUndoHunk
+nmap <leader>gp <Plug>(GitGutterPreviewHunk)
+nmap <leader>ga <Plug>(GitGutterStageHunk)
+nmap <leader>gu <Plug>(GitGutterUndoHunk)
 
 nnoremap <leader>o  :RangerOpen<cr>
 
