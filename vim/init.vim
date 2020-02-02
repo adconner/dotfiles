@@ -290,12 +290,20 @@ command -nargs=* -complete=file -bang Make make<bang> <args>
 
 highlight Error ctermbg=52
 highlight NvimInternalError ctermfg=88 ctermbg=88
-highlight SpellBad cterm=undercurl
+highlight SpellBad cterm=undercurl ctermbg=234
 " highlight SpellBad ctermbg=88 cterm=undercurl
 highlight SpellCap ctermbg=17
 highlight ColorColumn ctermbg=88
 highlight Todo ctermfg=237 ctermbg=11 cterm=italic
 highlight CocHighlightText ctermbg=236
+highlight DiffAdd ctermbg=239
+highlight DiffDelete ctermbg=16
+highlight DiffChange ctermbg=237
+highlight DiffText ctermbg=237 cterm=underline
+" highlight DiffAdd      gui=none    guifg=NONE          guibg=#bada9f
+" highlight DiffChange   gui=none    guifg=NONE          guibg=#e5d5ac
+" highlight DiffDelete   gui=bold    guifg=#ff8080       guibg=#ffb0b0
+" highlight DiffText     gui=none    guifg=NONE          guibg=#8cbee2
 
 " evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
