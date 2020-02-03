@@ -13,7 +13,8 @@ if exists(':Plugin')
 
   " heavyweight plugins
   Plugin 'SirVer/ultisnips'
-  Plugin 'neoclide/coc.nvim'
+  " Plugin 'neoclide/coc.nvim'
+  Plugin 'lervag/vimtex'
 
   " Plugin 'prabirshrestha/vim-lsp'
   " Plugin 'w0rp/ale'
@@ -63,6 +64,7 @@ let g:gitgutter_map_keys = 0
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 let g:tex_flavor = "latex"
+let g:vimtex_view_method = "zathura"
 
 if has('nvim')
   " increases startup times
@@ -193,7 +195,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-set formatexpr=CocAction('formatSelected')
+" set formatexpr=CocAction('formatSelected')
 
 nnoremap <silent> K :call <SID>show_documentation()<cr>
 function! s:show_documentation()
@@ -204,7 +206,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " nnoremap <silent> <space>a :<C-u>CocList diagnostics<cr>
 " nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
