@@ -234,6 +234,7 @@ map <F1> <nop>
 map Q <nop>
 
 let mapleader="-"
+let maplocalleader="-"
 
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
