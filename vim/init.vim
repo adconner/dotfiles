@@ -301,8 +301,8 @@ highlight Todo ctermfg=237 ctermbg=11 cterm=italic
 highlight CocHighlightText ctermbg=236
 highlight DiffAdd ctermbg=239
 highlight DiffDelete ctermbg=16
-highlight DiffChange ctermbg=237
-highlight DiffText ctermbg=237 cterm=underline
+highlight DiffChange ctermbg=236
+highlight DiffText ctermbg=236 cterm=underline
 " highlight DiffAdd      gui=none    guifg=NONE          guibg=#bada9f
 " highlight DiffChange   gui=none    guifg=NONE          guibg=#e5d5ac
 " highlight DiffDelete   gui=bold    guifg=#ff8080       guibg=#ffb0b0
