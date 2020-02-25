@@ -273,6 +273,11 @@ nnoremap <leader>gw :Gwrite<cr>
 nmap <leader>gp <Plug>(GitGutterPreviewHunk)
 nmap <leader>ga <Plug>(GitGutterStageHunk)
 nmap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap <leader>gk <Plug>(GitGutterPrevHunk)
+nmap <leader>gj <Plug>(GitGutterNextHunk)
+nmap <leader>gn <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
 
 nnoremap <leader>o  :RangerOpen<cr>
 
@@ -293,9 +298,11 @@ command -nargs=* -complete=file -bang Make make<bang> <args>
 
 highlight Error ctermbg=52
 highlight NvimInternalError ctermfg=88 ctermbg=88
+" highlight SpellBad cterm=undercurl
 highlight SpellBad cterm=undercurl ctermbg=234
 " highlight SpellBad ctermbg=88 cterm=undercurl
-highlight SpellCap ctermbg=17
+highlight SpellCap cterm=undercurl ctermbg=234
+" highlight SpellCap cterm=bold ctermbg=234
 highlight ColorColumn ctermbg=88
 highlight Todo ctermfg=237 ctermbg=11 cterm=italic
 highlight CocHighlightText ctermbg=236
