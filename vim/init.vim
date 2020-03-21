@@ -65,6 +65,7 @@ let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
 
 let g:tex_flavor = "latex"
 let g:vimtex_view_method = "zathura"
+" let g:vimtex_view_method = "mupdf"
 let g:vimtex_quickfix_open_on_warning = 0
 
 if has('nvim')
@@ -233,6 +234,9 @@ nnoremap Y y$
 map <F1> <nop>
 " disable key which takes us away from buffer
 map Q <nop>
+
+nnoremap / /\v
+nnoremap ? ?\v
 
 let mapleader="-"
 let maplocalleader="-"
