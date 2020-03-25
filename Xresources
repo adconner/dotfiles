@@ -24,6 +24,7 @@ xterm*faceName: Source Code Pro:antialias=true
 !xterm*faceName: DejaVu Sans Mono:antialias=true
 !xterm*faceName: Noto Sans Mono:antialias=true
 !xterm*faceName: Anonymous Pro:antialias=true
+!xterm*faceName: Hack:antialias=true
 xterm*faceSize: 12
 xterm*renderFont: true
 
