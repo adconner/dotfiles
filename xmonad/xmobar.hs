@@ -1,5 +1,7 @@
 Config { 
-         font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
+         font = "xft:Source Code Pro:size=12:antialias=true"
+         -- font = "xft:Bitstream Vera Sans Mono:size=12:antialias=true"
+         -- font = "xft:Hack:size=12:antialias=true"
        , borderColor = "#242424"
        , border = TopB
        , bgColor = "#242424"
