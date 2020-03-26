@@ -29,7 +29,7 @@ import qualified Data.Map        as M
 -- import Graphics.X11.Xlib
 -- import Graphics.X11.Xlib.Extras
 
-myTerminal           = envVarDefault "XTERM" "xterm"
+myTerminal           = envVarDefault "XTERM" "alacritty"
 myShell              = envVarDefault "SHELL" "bash"
 myBorderWidth        = 1
 myModMask            = mod4Mask
@@ -71,7 +71,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print ), mySpawn "scrot -e 'mv $f ~/common/shots'")
-    , ((modm              , xK_f     ), mySpawn $ envVarDefault "BROWSER" "chromium")
+    , ((modm              , xK_f     ), mySpawn $ envVarDefault "BROWSER" "firefox")
     , ((modm              , xK_e     ), mySpawnTerm $ envVarDefault "EDITOR" "vim")
     , ((modm              , xK_t     ), mySpawnTerm "ranger")
     , ((modm .|. shiftMask, xK_t     ), mySpawnTerm "vim ~/documents/todo/todo")
