@@ -19,6 +19,7 @@ xterm*ttyModes: erase ^?
 
 ! default font
 !xterm*faceName: Inconsolita:antialias=true
+!xterm*faceName: Fira:antialias=true
 xterm*faceName: Source Code Pro:antialias=true
 !xterm*faceName: Nimbus Mono:antialias=true
 !xterm*faceName: DejaVu Sans Mono:antialias=true
