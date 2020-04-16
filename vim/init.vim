@@ -163,7 +163,8 @@ inoremap jj <Esc>
 " tnoremap jj <C-\><C-n>
 
 nnoremap <C-p> :Files<cr>
-nnoremap <C-g> :Rg 
+" nnoremap <C-g> :Rg 
+nnoremap <C-g> :RG<cr>
 
 " nnoremap coS :SyntasticToggleMode<cr>
 " nnoremap cop :call deoplete#toggle()<cr>
@@ -300,6 +301,16 @@ command Gcq Gc|q
 command -bang Q q<bang>
 command -bang Bd bd<bang>
 command -nargs=* -complete=file -bang Make make<bang> <args>
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 highlight Error ctermbg=52
 highlight NvimInternalError ctermfg=88 ctermbg=88
