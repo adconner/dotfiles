@@ -330,6 +330,11 @@ highlight DiffText ctermbg=236 cterm=underline
 " highlight DiffChange   gui=none    guifg=NONE          guibg=#e5d5ac
 " highlight DiffDelete   gui=bold    guifg=#ff8080       guibg=#ffb0b0
 " highlight DiffText     gui=none    guifg=NONE          guibg=#8cbee2
+highlight GitGutterAdd ctermfg=34 ctermbg=232
+highlight GitGutterDelete ctermfg=124 ctermbg=232
+highlight GitGutterChange ctermfg=226 ctermbg=232
+highlight GitGutterChangeDelete ctermfg=226 ctermbg=232
+
 
 " evaluate and map other fzf uses
 " visual paren matching plugin (what was that one called again?)
