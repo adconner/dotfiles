@@ -330,7 +330,7 @@ highlight DiffText ctermbg=236 cterm=underline
 " highlight DiffChange   gui=none    guifg=NONE          guibg=#e5d5ac
 " highlight DiffDelete   gui=bold    guifg=#ff8080       guibg=#ffb0b0
 " highlight DiffText     gui=none    guifg=NONE          guibg=#8cbee2
-highlight GitGutterAdd ctermfg=156 ctermbg=232
+highlight GitGutterAdd ctermfg=157 ctermbg=232
 highlight GitGutterDelete ctermfg=210 ctermbg=232
 highlight GitGutterChange ctermfg=229 ctermbg=232
 highlight GitGutterChangeDelete ctermfg=229 ctermbg=232
