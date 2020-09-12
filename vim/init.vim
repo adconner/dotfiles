@@ -46,6 +46,7 @@ if exists(':Plugin')
   " Plugin 'christoomey/vim-tmux-navigator'
 
   " filetype plugins
+  Plugin 'wes1138/gap-vim'
 
   " Plugin 'deoplete-plugins/deoplete-jedi'
   " Plugin 'Rip-Rip/clang_complete'
