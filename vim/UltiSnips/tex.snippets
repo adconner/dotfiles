@@ -25,6 +25,9 @@ snippet doc "Initialization" b
 \usepackage{booktabs}
 ${1:%}\usepackage[margin=1in]{geometry}
 
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -33,21 +36,13 @@ ${1:%}\usepackage[margin=1in]{geometry}
 \newcommand{\FF}{\mathbb{F}}
 \newcommand{\PP}{\mathbb{P}}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-
-\let\originalleft\left
-\let\originalright\right
-\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
-\renewcommand{\right}{\aftergroup\egroup\originalright}
+\newcommand{\ot}{\otimes}
+\newcommand{\op}{\oplus}
+\newcommand{\ww}{\wedge}
 
 \newcommand{\abs}[1]{\lvert #1 \rvert}
 \newcommand{\Abs}[1]{\left\lvert #1 \right\rvert}
 \newcommand{\norm}[1]{\lVert #1 \rVert}
-
-% \renewcommand{\bar}[1]{\overline{#1}}
-\renewcommand{\iff}{\Leftrightarrow}
-\renewcommand{\implies}{\Rightarrow}
 
 \DeclareMathOperator{\im}{im}
 
