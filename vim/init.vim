@@ -335,6 +335,7 @@ highlight GitGutterAdd ctermfg=157 ctermbg=232
 highlight GitGutterDelete ctermfg=210 ctermbg=232
 highlight GitGutterChange ctermfg=229 ctermbg=232
 highlight GitGutterChangeDelete ctermfg=229 ctermbg=232
+highlight SignColumn ctermfg=229 ctermbg=232
 
 
 " evaluate and map other fzf uses
