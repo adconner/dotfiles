@@ -268,9 +268,9 @@ vnoremap <leader>h "vy :call VimuxSlime()<cr>
 nmap <leader>h ^v$<leader>h
 " nmap <leader>h vip<leader>h
 
-nnoremap <leader>gb :Gblame<cr>
-nnoremap <leader>gc :Gcommit<cr>
-nnoremap <leader>gC :Gcommit --amend<cr>
+nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gc :Git commit<cr>
+nnoremap <leader>gC :Git commit --amend<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Ggrep 
 nnoremap <leader>gl :Glog<cr>
