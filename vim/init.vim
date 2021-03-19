@@ -262,7 +262,7 @@ function! VimuxSlime()
   " let @v=substitute(@v,'\n','','')
   " TODO fix for sage
   call VimuxSendText(@v)
-  " call VimuxSendKeys("Enter")
+  call VimuxSendKeys("Enter")
 endfunction
 vnoremap <leader>h "vy :call VimuxSlime()<cr>
 nmap <leader>h ^v$<leader>h
