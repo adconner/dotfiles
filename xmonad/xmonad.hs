@@ -76,6 +76,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_t     ), mySpawnTerm "ranger")
     , ((modm .|. shiftMask, xK_t     ), mySpawnTerm "vim ~/documents/todo/todo")
     , ((modm              , xK_a     ), mySpawnTerm "alsamixer")
+    , ((modm              , xK_m     ), mySpawn "amixer set Master toggle")
     , ((modm              , xK_w     ), mySpawnTerm "iw wlan0 scan dump | less")
     , ((modm .|. shiftMask, xK_l     ), mySpawnTerm "journalctl -f")
     , ((modm              , xK_n     ), mySpawnTerm "ncmpcpp")
