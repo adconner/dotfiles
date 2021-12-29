@@ -14,8 +14,8 @@ Config {
                                     "-L","65","-H","80","--normal","#95e454",
                                     "--high","#ff2026","--low","lightblue"] 36000
                     , Run Wireless "wlp0s20f3" ["-t", "<essid> <quality>%"] 300
-                    , Run MultiCpu ["-t", "cpu: <total0>% <total1>% <total2>% <total3>% <total4>% <total5>% <total6>% <total7>%" ] 100
-                    , Run Memory ["-t","mem: <usedratio>%"] 100
+                    , Run MultiCpu ["-t", "<total0>% <total1>% <total2>% <total3>% <total4>% <total5>% <total6>% <total7>%" ] 100
+                    , Run Memory ["-t","<usedratio>%"] 100
                     -- , Run Swap ["-t","swap: <usedratio>%"] 100
                     , Run BatteryP ["CMB0"] ["-t", "<acstatus><timeleft> (<left>%)",
                                     "-L", "10", "-H", "80", "--",
