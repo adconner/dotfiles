@@ -6,7 +6,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export MPD_HOST=/home/austin/.cache/mpd/socket
 
-export BROWSER='firefox'
+export BROWSER='qutebrowser'
 export EDITOR='nvim'
 export VISUAL='nvim'
 export PAGER='less'
