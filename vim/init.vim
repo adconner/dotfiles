@@ -44,9 +44,13 @@ if exists(':Plugin')
   Plugin 'Shougo/context_filetype.vim'
   Plugin 'Konfekt/FastFold'
   " Plugin 'christoomey/vim-tmux-navigator'
+  " " need to explicity add matchit? :h matchit
 
   " filetype plugins
   Plugin 'wes1138/gap-vim'
+  Plugin 'coreysharris/Macaulay2.vim'
+  Plugin 'JuliaEditorSupport/julia-vim'
+  Plugin 'coyotebush/vim-pweave'
 
   " Plugin 'deoplete-plugins/deoplete-jedi'
   " Plugin 'Rip-Rip/clang_complete'
@@ -237,8 +241,8 @@ map <F1> <nop>
 " disable key which takes us away from buffer
 map Q <nop>
 
-nnoremap / /\v
-nnoremap ? ?\v
+" nnoremap / /\v
+" nnoremap ? ?\v
 
 let mapleader="-"
 let maplocalleader="-"
