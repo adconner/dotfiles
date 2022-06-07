@@ -23,7 +23,7 @@ import XMonad.Util.Run(spawnPipe)
 
 import qualified XMonad.Util.ExtensibleState as XS
 import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
+import qualified Data.Map.Strict as M
 
 -- for mouse cursor
 -- import Graphics.X11.Xlib
@@ -154,8 +154,8 @@ myManageHook = (<+>) manageDocks $ composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore
-    , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
+    , resource  =? "kdesktop"       --> doIgnore]
+    -- , isFullscreen --> (doF W.focusDown <+> doFullFloat)]
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -229,13 +229,13 @@ cycleRecentHiddenWS = cycleWindowSets options
 
 -- Cautious view
 
-newtype ViewedLast = ViewedLast String
+newtype ViewedLast = ViewedLast WorkspaceId
   deriving Typeable
 
 instance ExtensionClass ViewedLast where
   initialValue = ViewedLast $ head myWorkspaces
 
-cautiousView :: String -> X ()
+cautiousView :: WorkspaceId -> X ()
 cautiousView i = do
   ws <- gets windowset
   if i `elem` (map (W.tag . W.workspace) . W.visible $ ws) 
@@ -250,6 +250,22 @@ cautiousView i = do
     else do 
       XS.put (ViewedLast i)
       windows $ W.greedyView i
+
+-- view allowing duplicated logical workspaces
+
+newtype LogicalWorkspaces = LogicalWorkspaces (M.Map WorkspaceId [ScreenId])
+  deriving Typeable
+
+instance ExtensionClass LogicalWorkspaces where
+  initialValue = LogicalWorkspaces M.empty
+
+logicalView :: WorkspaceId -> X ()
+logicalView i = do
+  LogicalWorkspaces lws <- XS.get
+  case M.lookup i lws of
+    Just ss -> return ()
+    Nothing -> return ()
+  return ()
 
 -- Functions for disabling the mouse
 
