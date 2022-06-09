@@ -191,7 +191,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
-servers = { 'pyright', 'texlab', 'clangd' }
+servers = { 'pyright', 'texlab', 'clangd', 'rust_analyzer' }
 for _, lsp in pairs(servers) do 
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -201,7 +201,7 @@ end
 
 -- tree-sitter setup
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "python", "cpp", "latex" },
+  ensure_installed = { "c", "lua", "python", "cpp", "latex", "rust" },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
