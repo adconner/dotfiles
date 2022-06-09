@@ -9,6 +9,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'tpope/vim-rsi'
 
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
