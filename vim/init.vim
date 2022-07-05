@@ -25,6 +25,11 @@ let maplocalleader="-"
 
 inoremap jj <Esc>
 
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
 nnoremap <leader>k :bp<cr>
