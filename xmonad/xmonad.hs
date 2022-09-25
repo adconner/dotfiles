@@ -67,14 +67,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), mySpawn "xmonad --recompile; xmonad --restart")
     , ((modm              , xK_semicolon), toggleMouse)
      
-    , ((mod1Mask          , xK_Tab   ), cycleRecentHiddenWS [xK_Alt_L] xK_Tab xK_apostrophe)
+    -- , ((mod1Mask          , xK_Tab   ), cycleRecentHiddenWS [xK_Alt_L] xK_Tab xK_apostrophe)
 
       -- ((controlMask          , xK_Print) , mySpawn "sleep 0.2; scrot -s -e 'mv $f ~/common/shots'")
     , ((0                 , xK_Print ), mySpawn "scrot -e 'mv $f ~/common/shots'")
     , ((modm              , xK_f     ), mySpawn $ envVarDefault "BROWSER" "firefox")
     , ((modm              , xK_e     ), mySpawnTerm $ envVarDefault "EDITOR" "vim")
     , ((modm              , xK_t     ), mySpawnTerm "ranger")
-    , ((modm .|. shiftMask, xK_t     ), mySpawnTerm "vim ~/documents/todo/todo")
+    , ((modm .|. shiftMask, xK_t     ), mySpawnTerm "nvim ~/documents/todo/todo")
     -- , ((modm              , xK_a     ), mySpawnTerm "alsamixer")
     , ((modm              , xK_a     ), mySpawnTerm "pulsemixer")
     -- , ((modm              , xK_m     ), mySpawn "amixer set Master toggle")
@@ -223,9 +223,9 @@ mySpawn = spawn
 
 mySpawnTerm c = mySpawn (myTerminal ++ " -e " ++ myShell ++ " -ic '" ++ c ++ "'")
 
-cycleRecentHiddenWS = cycleWindowSets options
-  where options w = map (W.view `flip` w) (recentTags w)
-        recentTags w = map W.tag $ W.hidden w ++ [W.workspace (W.current w)]
+-- cycleRecentHiddenWS = cycleWindowSets options
+--   where options w = map (W.view `flip` w) (recentTags w)
+--         recentTags w = map W.tag $ W.hidden w ++ [W.workspace (W.current w)]
 
 -- Cautious view
 
