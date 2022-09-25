@@ -25,10 +25,13 @@ let maplocalleader="-"
 
 inoremap jj <Esc>
 
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
+noremap <Tab> %
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+noremap <Del> <C-e>
+noremap <Insert> <C-y>
 
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
@@ -37,6 +40,13 @@ nnoremap <leader>k :bp<cr>
 nnoremap <leader>b :Buffers<cr>
 nnoremap <C-p> :Files<cr>
 nnoremap <C-g> :RG<cr>
+
+" "me" - make current pane large
+nnoremap <leader>m :resize<cr>:vertical resize<cr>
+nnoremap <leader>M <C-w>=
+
+nnoremap <leader>r  :%s/<c-r>//
+xnoremap <leader>r  :s/\%V<c-r>/\%V/
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
@@ -77,6 +87,12 @@ nmap ]c <Plug>(GitGutterNextHunk)
 set completeopt=menu,menuone,noselect
 set shiftwidth=2        " Number of spaces to use in auto(indent)
 set expandtab           " Insert tabs as spaces
+set scrolloff=3
+set undofile
+set exrc
+set secure
+
+set wildignore+=*.o,*.pdf,*.log,*.aux
 
 highlight Error ctermbg=52
 highlight NvimInternalError ctermfg=88 ctermbg=88
