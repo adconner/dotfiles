@@ -67,14 +67,14 @@ nnoremap <leader>gl :Glog<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
-nmap <leader>gp <Plug>(GitGutterPreviewHunk)
-nmap <leader>ga <Plug>(GitGutterStageHunk)
-nmap <leader>gu <Plug>(GitGutterUndoHunk)
-nmap <leader>gk <Plug>(GitGutterPrevHunk)
-nmap <leader>gj <Plug>(GitGutterNextHunk)
-nmap <leader>gn <Plug>(GitGutterNextHunk)
-nmap [c <Plug>(GitGutterPrevHunk)
-nmap ]c <Plug>(GitGutterNextHunk)
+nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
+nnoremap <leader>ga <Plug>(GitGutterStageHunk)
+nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
+nnoremap <leader>gk <Plug>(GitGutterPrevHunk)
+nnoremap <leader>gj <Plug>(GitGutterNextHunk)
+nnoremap <leader>gn <Plug>(GitGutterNextHunk)
+nnoremap [c <Plug>(GitGutterPrevHunk)
+nnoremap ]c <Plug>(GitGutterNextHunk)
 
 " " Expand or jump, these are handled by completion below
 " imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
