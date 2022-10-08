@@ -99,6 +99,7 @@ set scrolloff=3
 set undofile
 set exrc
 set secure
+set updatetime=100
 
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
