@@ -10,7 +10,11 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tpope/vim-rsi'
-
+Plug 'tpope/vim-unimpaired'
+Plug 'machakann/vim-sandwich'
+Plug 'nvim-zh/better-escape.vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'simnalamburt/vim-mundo'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -23,7 +27,9 @@ silent! colorscheme wombat
 let mapleader="-"
 let maplocalleader="-"
 
-inoremap jj <Esc>
+let g:better_escape_shortcut = 'jj'
+let g:better_escape_interval = 250
+" inoremap jj <Esc>
 
 noremap <Tab> %
 noremap j gj
@@ -47,6 +53,8 @@ nnoremap <leader>M <C-w>=
 
 nnoremap <leader>r  :%s/<c-r>//
 xnoremap <leader>r  :s/\%V<c-r>/\%V/
+
+nnoremap <leader>u :MundoToggle<cr>
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
@@ -222,7 +230,11 @@ end
 
 -- tree-sitter setup
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "c", "lua", "python", "cpp", "latex", "rust" },
+  -- ensure_installed = { "c", "lua", "python", "cpp", "latex", "rust" },
+  ensure_installed = "all",
+  sync_install = false,
+  auto_install = true,
+  ignore_install = { "phpdoc" },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
