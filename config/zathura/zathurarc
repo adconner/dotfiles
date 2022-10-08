@@ -2,3 +2,4 @@ map d scroll half-down
 map u scroll half-up
 map D toggle_page_mode
 set highlight-transparency 0.1
+set synctex-editor-command "nvim --headless -c 'VimtexInverseSearch %{line} %{input}'"
