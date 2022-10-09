@@ -67,14 +67,14 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gs :Git<cr>
 nnoremap <leader>gc :Git commit<cr>
 nnoremap <leader>gC :Git commit --amend<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Ggrep 
-nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gl :Gclog<cr>
 nnoremap <leader>gr :Gread<cr>
-nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
 nnoremap <leader>ga <Plug>(GitGutterStageHunk)
