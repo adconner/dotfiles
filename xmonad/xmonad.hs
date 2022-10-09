@@ -13,7 +13,11 @@ import XMonad.Hooks.ManageHelpers
 
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.NoBorders
-import XMonad.Layout.GridVariants
+-- import XMonad.Layout.GridVariants
+import XMonad.Layout.Dwindle
+-- import XMonad.Layout.Tabbed
+-- import XMonad.Layout.TwoPane
+-- import XMonad.Layout.BinarySpacePartition
 
 import XMonad.Actions.CycleRecentWS(cycleWindowSets)
 import XMonad.Actions.DwmPromote
@@ -144,8 +148,14 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- TwoPane (3/100) (1/2)
 -- Mirror tall
 
-myLayoutHook = avoidStruts (tall ||| noBorders Full ||| Grid (1/1))
-  where tall = TallGrid 1 1 (1/2) (3/2) (3/100) -- where tall = Tall 1 (3/100) (1/2) 
+-- myLayoutHook = avoidStruts (tall ||| noBorders Full ||| Grid (1/1))
+myLayoutHook = avoidStruts (
+    Dwindle XMonad.Layout.Dwindle.R XMonad.Layout.Dwindle.CW 1.0 1.1 
+    -- TallGrid 1 1 (1/2) (3/2) (3/100)
+    ||| noBorders Full)
+    -- ||| noBorders simpleTabbed)
+    -- ||| TwoPane (3/100) (1/2)
+    -- ||| Grid (1/1))
 
 ------------------------------------------------------------------------
 -- Window rules:
