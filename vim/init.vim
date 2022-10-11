@@ -101,6 +101,7 @@ set undofile
 set exrc
 set secure
 set updatetime=100
+set ignorecase
 
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
@@ -122,6 +123,11 @@ highlight GitGutterDelete ctermfg=210 ctermbg=232
 highlight GitGutterChange ctermfg=229 ctermbg=232
 highlight GitGutterChangeDelete ctermfg=229 ctermbg=232
 highlight SignColumn ctermfg=229 ctermbg=232
+
+command -bang Q q<bang>
+command -bang W w<bang>
+command -bang Bd bd<bang>
+command -nargs=* -complete=file -bang Make make<bang> <args>
 
 lua <<EOF
 
