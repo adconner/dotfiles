@@ -25,3 +25,7 @@ function ranger-cd {
     fi
     rm -f -- "$tempfile"
 }
+
+if [ -e /usr/share/fzf/completion.zsh ]; then . /usr/share/fzf/completion.zsh; fi
+if [ -e /usr/share/fzf/key-bindings.zsh ]; then . /usr/share/fzf/key-bindings.zsh; fi
+
