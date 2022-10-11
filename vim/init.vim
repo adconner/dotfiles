@@ -102,6 +102,8 @@ set exrc
 set secure
 set updatetime=100
 set ignorecase
+set number
+set relativenumber
 
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
