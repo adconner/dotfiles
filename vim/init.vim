@@ -30,9 +30,7 @@ let maplocalleader="-"
 
 let g:better_escape_shortcut = 'jj'
 let g:better_escape_interval = 250
-" inoremap jj <Esc>
 
-noremap <Tab> %
 noremap j gj
 noremap k gk
 noremap gj j
