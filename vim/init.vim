@@ -98,7 +98,7 @@ set updatetime=100
 set ignorecase
 set number
 set relativenumber
-set virtualedit=all
+set virtualedit=block
 
 set wildignore+=*.o,*.pdf,*.log,*.aux
 
