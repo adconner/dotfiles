@@ -31,10 +31,6 @@ let maplocalleader="-"
 let g:better_escape_shortcut = 'jj'
 let g:better_escape_interval = 250
 
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 
