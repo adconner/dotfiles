@@ -33,6 +33,7 @@ let g:better_escape_interval = 250
 
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
+nnoremap gp `[v`]
 
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
