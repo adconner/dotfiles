@@ -73,32 +73,17 @@ let g:vimtex_view_method = "zathura"
 " let g:vimtex_view_method = "mupdf"
 let g:vimtex_quickfix_open_on_warning = 0
 
-if has('nvim')
-  " increases startup times
-  if !isdirectory($XDG_CACHE_HOME . "/nvim")
-    call mkdir($XDG_CACHE_HOME . "/nvim","p")
-  endif
-  " swap file location
-  set directory=$XDG_CACHE_HOME/nvim,.
-    " viminfo location
-  " set viminfo+=n$XDG_CACHE_HOME/nvim/viminfo
-    " persistent undo location
-  set undodir=$XDG_CACHE_HOME/nvim,.
-    " dictionary for spell check
-  set dictionary+=/usr/share/dict/words
-else
-  if !isdirectory($XDG_CACHE_HOME . "/vim")
-    call mkdir($XDG_CACHE_HOME . "/vim","p")
-  endif
-  " swap file location
-  set directory=$XDG_CACHE_HOME/vim,.
-    " viminfo location
-  set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-    " persistent undo location
-  set undodir=$XDG_CACHE_HOME/vim,.
-    " dictionary for spell check
-  set dictionary+=/usr/share/dict/words
+if !isdirectory($XDG_CACHE_HOME . "/vim")
+  call mkdir($XDG_CACHE_HOME . "/vim","p")
 endif
+" swap file location
+set directory=$XDG_CACHE_HOME/vim,.
+  " viminfo location
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+  " persistent undo location
+set undodir=$XDG_CACHE_HOME/vim,.
+  " dictionary for spell check
+set dictionary+=/usr/share/dict/words
 
 silent! colorscheme wombat
 
@@ -318,7 +303,6 @@ endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 highlight Error ctermbg=52
-highlight NvimInternalError ctermfg=88 ctermbg=88
 " highlight SpellBad cterm=undercurl
 highlight SpellBad cterm=undercurl ctermbg=234
 " highlight SpellBad ctermbg=88 cterm=undercurl
