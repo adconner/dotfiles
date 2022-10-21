@@ -106,9 +106,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- XF86AudioMute
     , ((0 , 0x1008ff12)     , spawn "amixer set Master toggle")
     -- XF86MonBrightnessUp
-    , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 5")
+    -- , ((0 , 0x1008ff02)     , spawn "xbacklight -inc 5")
+    , ((0 , 0x1008ff02)     , spawn "brightnessctl set 5%+")
     -- XF86MonBrightnessDown
-    , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 5")
+    -- , ((0 , 0x1008ff03)     , spawn "xbacklight -dec 5")
+    , ((0 , 0x1008ff03)     , spawn "brightnessctl set 5%-")
     --   XF86TouchpadToggle
     , ((0 , 0x1008ffa9)     , toggleMouse)
     ]
