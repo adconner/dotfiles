@@ -6,10 +6,10 @@ source ~/.zlogin
 xset +fp /usr/share/fonts/local && xset fp rehash &
 
 # xinput --list-props [id] to see options 
-# enable tapping
-xinput set-prop "04CA00B1:00 04CA:00B1 Touchpad" 340 1
-# natural scrolling
-xinput set-prop "04CA00B1:00 04CA:00B1 Touchpad" 320 1
+# # enable tapping
+# xinput set-prop "04CA00B1:00 04CA:00B1 Touchpad" 340 1
+# # natural scrolling
+# xinput set-prop "04CA00B1:00 04CA:00B1 Touchpad" 320 1
 
 sh ~/bin/fehbg &
 autocutsel -fork &
