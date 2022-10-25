@@ -16,6 +16,7 @@ autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 # unclutter -jitter 200 -grab -idle 10 &
 unclutter -grab -idle 10 &
+redshift -l 47:9 &
 # syndaemon -k -t -i 10 -R -d &
 # syndaemon -k -i 5 -R -d &
 # syndaemon -k -i 1 -R -d &
