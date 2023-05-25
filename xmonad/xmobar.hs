@@ -9,11 +9,12 @@ Config {
        , position = Top
        , lowerOnStart = True
        , allDesktops = True
-       , commands = [ Run Weather "KBNA" 
-                                   ["-t","<tempF> F <skyCondition>",
-                                    "-L","65","-H","80","--normal","#95e454",
-                                    "--high","#ff2026","--low","lightblue"] 36000
-                    , Run Wireless "wlp0s20f3" ["-t", "<essid> <quality>%"] 300
+       , commands = [ 
+                       -- Run Weather "KBNA" 
+                       --             ["-t","<tempF> F <skyCondition>",
+                       --              "-L","65","-H","80","--normal","#95e454",
+                       --              "--high","#ff2026","--low","lightblue"] 36000
+                    Run Wireless "wlp0s20f3" ["-t", "<essid> <quality>%"] 300
                     , Run MultiCpu ["-t", "<total0>% <total1>% <total2>% <total3>% <total4>% <total5>% <total6>% <total7>%" ] 100
                     , Run Memory ["-t","<usedratio>%"] 100
                     -- , Run Swap ["-t","swap: <usedratio>%"] 100
@@ -33,6 +34,7 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
+       -- , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
        -- , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %mpd% | %KBNA% | <fc=#eadead>%date%</fc>"
+       , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %mpd% | <fc=#eadead>%date%</fc>"
        }
