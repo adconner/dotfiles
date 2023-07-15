@@ -2,7 +2,7 @@ source ~/.zlogin
 
 /usr/bin/xrdb -merge ~/.Xresources &
 # /usr/bin/xrdb -load ~/.Xresources &
-/usr/bin/setxkbmap dvorak && /usr/bin/xmodmap ~/.Xmodmap &
+/usr/bin/setxkbmap us dvorak && /usr/bin/xmodmap ~/.Xmodmap &
 xset +fp /usr/share/fonts/local && xset fp rehash &
 
 # xinput --list-props [id] to see options 
