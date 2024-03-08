@@ -36,5 +36,6 @@ Config {
        , alignSep = "}{"
        -- , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %KBNA% | <fc=#eadead>%date%</fc>"
        -- , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %mpd% | %KBNA% | <fc=#eadead>%date%</fc>"
+       -- , template = "%battery% | %multicpu% | %memory% } %StdinReader% { %mpd% | <fc=#eadead>%date%</fc>"
        , template = "%battery% | %multicpu% | %memory% | %wlp0s20f3wi% } %StdinReader% { %mpd% | <fc=#eadead>%date%</fc>"
        }

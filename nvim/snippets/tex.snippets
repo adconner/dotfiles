@@ -1,56 +1,39 @@
-snippet proveiff "both forward and backward cases" b
-$\Longrightarrow$) ${0}
+snippet [
+	\[
+	  ${0:${VISUAL}}
+	\]
 
-$\Longleftarrow$)
+snippet doc
+	\documentclass{article}
+	\usepackage{amsmath,amssymb,amsthm,mathrsfs,microtype}
+	\usepackage{booktabs}
+	${1:%}\usepackage[margin=1in]{geometry}
 
-endsnippet
+	\newtheorem{theorem}{Theorem}
+	\newtheorem{lemma}[theorem]{Lemma}
 
-snippet [ "display math environment" b
-\[
-  ${0:${VISUAL}}
-\]
-endsnippet
+	\newcommand{\RR}{\mathbb{R}}
+	\newcommand{\CC}{\mathbb{C}}
+	\newcommand{\QQ}{\mathbb{Q}}
+	\newcommand{\ZZ}{\mathbb{Z}}
+	\newcommand{\NN}{\mathbb{N}}
+	\newcommand{\FF}{\mathbb{F}}
+	\newcommand{\PP}{\mathbb{P}}
 
-snippet wlog "Without loss of generality" w
-without loss of generality
-endsnippet
+	\newcommand{\ot}{\otimes}
+	\newcommand{\op}{\oplus}
+	\newcommand{\ww}{\wedge}
 
-snippet lr\| "left\| right\|" w
-\left\| ${1:${VISUAL}} \right\|
-endsnippet
+	\newcommand{\abs}[1]{\lvert #1 \rvert}
+	\newcommand{\Abs}[1]{\left\lvert #1 \right\rvert}
+	\newcommand{\norm}[1]{\lVert #1 \rVert}
 
-snippet doc "Initialization" b
-\documentclass{article}
-\usepackage{amsmath,amssymb,amsthm,mathrsfs,microtype}
-\usepackage{booktabs}
-${1:%}\usepackage[margin=1in]{geometry}
+	\DeclareMathOperator{\im}{im}
 
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
+	\title{${2:Title Here}}
+	\author{Austin Conner}
 
-\newcommand{\RR}{\mathbb{R}}
-\newcommand{\CC}{\mathbb{C}}
-\newcommand{\QQ}{\mathbb{Q}}
-\newcommand{\ZZ}{\mathbb{Z}}
-\newcommand{\NN}{\mathbb{N}}
-\newcommand{\FF}{\mathbb{F}}
-\newcommand{\PP}{\mathbb{P}}
-
-\newcommand{\ot}{\otimes}
-\newcommand{\op}{\oplus}
-\newcommand{\ww}{\wedge}
-
-\newcommand{\abs}[1]{\lvert #1 \rvert}
-\newcommand{\Abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand{\norm}[1]{\lVert #1 \rVert}
-
-\DeclareMathOperator{\im}{im}
-
-\title{${2:Title Here}}
-\author{Austin Conner}
-
-\begin{document}
-${3:%}\maketitle
-${0}
-\end{document}
-endsnippet
+	\begin{document}
+	${3:%}\maketitle
+	${0}
+	\end{document}

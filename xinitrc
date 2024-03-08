@@ -16,8 +16,8 @@ autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 # unclutter -jitter 200 -grab -idle 10 &
 unclutter -grab -idle 10 &
-redshift -l 47:9 & # Konstanz
-# redshift -l 42:-71 & # Boston
+# redshift -l 47:9 & # Konstanz
+redshift -l 42:-71 & # Boston
 # syndaemon -k -t -i 10 -R -d &
 # syndaemon -k -i 5 -R -d &
 # syndaemon -k -i 1 -R -d &

@@ -1,14 +1,27 @@
+" ThePrimeagen/refactoring.nvim
+" glepnir/lspsaga
+" dcampos/nvim-snippy
+" vim-slime
 call plug#begin()
+Plug 'ThePrimeagen/vim-be-good'
 Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-path'
 " Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
+
 Plug 'hrsh7th/vim-vsnip'
-Plug 'rafamadriz/friendly-snippets'
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'hrsh7th/cmp-vsnip'
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'rafamadriz/friendly-snippets'
+
+" Plug 'dcampos/nvim-snippy'
+" Plug 'dcampos/cmp-snippy'
+" Plug 'honza/vim-snippets'
+
 Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-surround'
@@ -34,6 +47,11 @@ let g:better_escape_interval = 250
 noremap <Del> <C-e>
 noremap <Insert> <C-y>
 nnoremap gp `[v`]
+
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 
 noremap <silent> <leader><space> :noh<cr>
 nnoremap <leader>j :bn<cr>
@@ -80,13 +98,23 @@ nnoremap <leader>gn <Plug>(GitGutterNextHunk)
 nnoremap [c <Plug>(GitGutterPrevHunk)
 nnoremap ]c <Plug>(GitGutterNextHunk)
 
-" " Expand or jump, these are handled by completion below
-" imap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-" smap <expr> <Tab>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
-" imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-" smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
-" imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
-" smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+let g:vsnip_snippet_dir = stdpath("config") . '/snippets'
+" imap <expr> <C-e>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-e>'
+" smap <expr> <C-e>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-e>'
+imap <expr> <C-e>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-e>'
+smap <expr> <C-e>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-e>'
+imap <expr> <c-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<c-j>'
+smap <expr> <c-j>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<c-j>'
+imap <expr> <c-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<c-k>'
+smap <expr> <c-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<c-k>'
+" xmap        <c-e>   <Plug>(vsnip-select-text)
+xmap        <c-e>   <Plug>(vsnip-cut-text)
+
+" " imap <expr> <c-e> snippy#can_expand_or_advance() ? '<Plug>(snippy-expand-or-advance)' : '<c-e>'
+" " smap <expr> <c-e> snippy#can_jump(1) ? '<Plug>(snippy-next)' : '<c-e>'
+" " imap <expr> <c-u> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<c-u>'
+" " smap <expr> <c-u> snippy#can_jump(-1) ? '<Plug>(snippy-previous)' : '<c-u>'
+" " xmap <c-e> <Plug>(snippy-cut-text)
 
 set completeopt=menu,menuone,noselect
 set shiftwidth=2        " Number of spaces to use in auto(indent)
@@ -96,7 +124,7 @@ set undofile
 set exrc
 set secure
 set updatetime=100
-set ignorecase
+" set ignorecase
 set number
 set relativenumber
 set virtualedit=block
@@ -160,10 +188,10 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif vim.fn["vsnip#available"](1) == 1 then 
-        feedkey("<Plug>(vsnip-expand-or-jump)", "")
-      elseif vim.fn["vsnip#jumpable"](1) == 1 then
-        feedkey("<Plug>(vsnip-jump-next)", "")
+      -- elseif vim.fn["vsnip#available"](1) == 1 then 
+      --   feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      -- elseif vim.fn["vsnip#jumpable"](1) == 1 then
+      --   feedkey("<Plug>(vsnip-jump-next)", "")
       elseif has_words_before() then
         cmp.complete()
       else
@@ -173,8 +201,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-        feedkey("<Plug>(vsnip-jump-prev)", "")
+      -- elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+      --   feedkey("<Plug>(vsnip-jump-prev)", "")
       end
     end, { "i", "s" }),
   },
@@ -224,7 +252,7 @@ end
 
 -- servers = { 'pyright', 'texlab', 'clangd', 'rust_analyzer' }
 -- servers = { 'pylsp', 'texlab', 'clangd', 'rust_analyzer' }
-servers = { 'texlab', 'clangd', 'rust_analyzer' }
+servers = { 'texlab', 'clangd', 'rust_analyzer', 'julials' }
 for _, lsp in pairs(servers) do 
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -241,7 +269,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { "phpdoc" },
   highlight = {
     enable = true,
-    disable = { "latex" },
+    disable = { "latex", "python" },
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -249,7 +277,8 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
   indent = {
-    enable = true
+    enable = true,
+    disable = { "python" }
   }
 }
 
