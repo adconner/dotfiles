@@ -264,7 +264,7 @@ end
 -- tree-sitter setup
 require'nvim-treesitter.configs'.setup {
   -- ensure_installed = { "c", "lua", "python", "cpp", "latex", "rust" },
-  ensure_installed = "all",
+  -- ensure_installed = "all",
   sync_install = false,
   auto_install = true,
   ignore_install = { "phpdoc" },
