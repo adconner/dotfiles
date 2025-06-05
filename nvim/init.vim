@@ -59,7 +59,7 @@ nnoremap <leader>k :bp<cr>
 
 nnoremap <leader>b :Buffers<cr>
 nnoremap <C-p> :Files<cr>
-nnoremap <C-y> :GFiles<cr>
+nnoremap <A-p> :GFiles<cr>
 nnoremap <C-g> :RG<cr>
 
 " "me" - make current pane large
