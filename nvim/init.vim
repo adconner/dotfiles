@@ -87,7 +87,7 @@ nnoremap <leader>gC :Git commit --amend<cr>
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gg :Ggrep 
-nnoremap <leader>gl :Gclog!<cr>
+nnoremap <leader>gl :0Gclog!<cr>
 nnoremap <leader>gr :Gread<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
