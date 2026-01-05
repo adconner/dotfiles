@@ -13,7 +13,7 @@
       enable = true;
       lspkind.enable = true;
       nvim-docs-view.enable = true;
-      harper-ls.enable = true;
+      # harper-ls.enable = true;
     };
 
     startPlugins = with pkgs.vimPlugins; [ "vim-repeat" vim-rsi nvim-bqf ];

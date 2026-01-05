@@ -154,6 +154,7 @@
   home-manager.backupFileExtension = "bak";
   home-manager.users.austin = { pkgs, ... }: {
     home.packages = with pkgs; [ 
+      self'.packages.neovim
       atool
       wget
       clang
@@ -177,7 +178,7 @@
       rclone
       texliveFull
       zathura
-      self'.packages.neovim
+      pianobar
     ];
     
     programs.zsh = {
