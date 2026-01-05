@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, lib, inputs, self', ... }:
 
 {
   imports =
@@ -177,6 +177,7 @@
       rclone
       texliveFull
       zathura
+      self'.packages.neovim
     ];
     
     programs.zsh = {
@@ -293,7 +294,8 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
     programs.direnv.enable = true;
     programs.zoxide.enable = true;
     
-    programs.neovim.enable = true;
+    # programs.neovim.enable = true;
+    # programs.neovim.package = self'.packages.neovim;
     programs.neovim.defaultEditor = true;
 
     # This value determines the Home Manager release that your configuration is
