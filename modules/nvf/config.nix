@@ -44,6 +44,7 @@
     autocomplete.blink-cmp.enable = true;
     undoFile.enable = true;
     ui.fastaction.enable = true;
+    clipboard.providers.wl-copy.enable = true;
     # debugger.nvim-dap = {
     #   enable = true;
     #   ui.enable = true;
@@ -65,6 +66,7 @@
     # yanky with hydra
     # smart-splits with tmux
 
+
     keymaps = [
       { action = "<Esc>"; key = "jj"; mode = "i"; }
       { action = ":FzfLua global<cr>"; key = "<c-p>"; mode = "n"; }
@@ -79,6 +81,7 @@
       { action = ":Gitsigns toggle_word_diff<cr>"; key = "<leader>gtw"; mode = "n"; }
       { action = ":Gitsigns blame<cr>"; key = "<leader>gb"; mode = "n"; }
       { action = ":Git commit --allow-empty-message -m ''<cr>"; key = "<leader>gc"; mode = "n"; }
+      { action = ":lua vim.lsp.stop_client(vim.lsp.get_clients())<cr>"; key = "<leader>cs"; mode = "n"; }
     ];
 
     languages = {
@@ -95,5 +98,13 @@
       nix.enable = true;
       markdown.enable = true;
     };
+
+    luaConfigRC.myconfig = /* lua */ ''
+      vim.cmd [[
+        command -bang Q q<bang>
+        command -bang W w<bang>
+        command -nargs=* -complete=file -bang Make make<bang> <args>
+      ]]
+      '';
   };
 }

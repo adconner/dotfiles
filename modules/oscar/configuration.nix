@@ -165,7 +165,7 @@
       fzf
       fd
       jujutsu
-      # sage
+      sage
       pyright
       viddy
       mosh
@@ -173,7 +173,6 @@
       nvitop
       nix-search-cli
       nnn
-      yazi
       pulsemixer
       rclone
       texliveFull
@@ -291,13 +290,22 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
       };
     };
 
+    programs.yazi = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     programs.htop.enable = true;
     programs.direnv.enable = true;
     programs.zoxide.enable = true;
     
     # programs.neovim.enable = true;
     # programs.neovim.package = self'.packages.neovim;
-    programs.neovim.defaultEditor = true;
+    # programs.neovim.defaultEditor = true;
+
+    home.sessionVariables = {
+      EDITOR = "nvim";
+    };
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
