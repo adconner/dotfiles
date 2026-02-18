@@ -27,6 +27,7 @@
       # lush.package = lush-nvim;
       rsi.package = vim-rsi;
       bqf.package = nvim-bqf;
+      yank-assassin.package = YankAssassin-vim;
     };
 
     lsp = {
