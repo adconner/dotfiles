@@ -38,7 +38,23 @@
 
     startPlugins = with pkgs.vimPlugins; [ "vim-repeat" ];
     fzf-lua.enable = true;
-    tabline.nvimBufferline.enable = true;
+    tabline.nvimBufferline = {
+      enable = true;
+      mappings = {
+        cycleNext = "]b";
+        cyclePrevious = "[b";
+        pick = null;
+        sortByExtension = null;
+        sortByDirectory = null;
+        sortById = null;
+        moveNext = null;
+        movePrevious = null;
+      };
+      setupOpts.options = {
+        always_show_bufferline = false;
+        sort_by = "id";
+      };
+    };
     visuals.nvim-web-devicons.enable = true;
     # visuals.indent-blankline.enable = true;
     utility.oil-nvim = {
@@ -67,7 +83,7 @@
     # autopairs.nvim-autopairs.enable = true;
     autocomplete.blink-cmp.enable = true;
     undoFile.enable = true;
-    ui.fastaction.enable = true;
+    # ui.fastaction.enable = true;
     clipboard.providers.wl-copy.enable = true;
     # debugger.nvim-dap = {
     #   enable = true;
@@ -109,12 +125,20 @@
       { action = ":lua vim.lsp.stop_client(vim.lsp.get_clients())<cr>"; key = "<leader>cs"; mode = "n"; }
     ];
 
+    options = {
+      shiftwidth = 2;
+    };
+
     languages = {
       enableFormat = true;
       enableTreesitter = true;
       enableExtraDiagnostics = true;
 
-      python.enable = true;
+      python = {
+        enable = true;
+        lsp.servers = [ "ruff" ];
+        format.type = [ "ruff" ];
+      };
       clang.enable = true;
       rust = {
         enable = true;
