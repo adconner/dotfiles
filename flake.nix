@@ -8,6 +8,10 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # wombat = {
+    #   url = "github:ViViDboarder/wombat.nvim";
+    #   flake = false;
+    # };
   };
 
   outputs = { flake-parts, ... }@inputs:

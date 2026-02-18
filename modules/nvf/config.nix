@@ -1,12 +1,32 @@
-{pkgs, ...}: 
+{pkgs, inputs, ...}: 
 {
   config.vim = {
 
     theme = {
       enable = true;
-      name = "gruvbox";
-      style = "dark";
+      name = "everforest";
+      style = "hard";
       transparent = false;
+    };
+
+    extraPlugins = with pkgs.vimPlugins; {
+      # wombat = {
+      #   package = pkgs.vimUtils.buildVimPlugin {
+      #     name = "wombat-nvim";
+      #     src = inputs.wombat;
+      #     nvimSkipModule = [
+      #       "wombat.ansi_256mod"
+      #       "wombat.ansi_ghostty"
+      #       "wombat.ansi_iterm2"
+      #       "wombat.ansi_lush"
+      #     ];
+      #   };
+      #   # setup = "require('wombat').setup({})";
+      #   after = [ "lush" ];
+      # };
+      # lush.package = lush-nvim;
+      rsi.package = vim-rsi;
+      bqf.package = nvim-bqf;
     };
 
     lsp = {
@@ -16,11 +36,11 @@
       # harper-ls.enable = true;
     };
 
-    startPlugins = with pkgs.vimPlugins; [ "vim-repeat" vim-rsi nvim-bqf ];
+    startPlugins = with pkgs.vimPlugins; [ "vim-repeat" ];
     fzf-lua.enable = true;
     tabline.nvimBufferline.enable = true;
     visuals.nvim-web-devicons.enable = true;
-    visuals.indent-blankline.enable = true;
+    # visuals.indent-blankline.enable = true;
     utility.oil-nvim = {
       enable = true;
       gitStatus.enable = true;
@@ -40,7 +60,7 @@
     };
     utility.sleuth.enable = true;
     comments.comment-nvim.enable = true;
-    autopairs.nvim-autopairs.enable = true;
+    # autopairs.nvim-autopairs.enable = true;
     autocomplete.blink-cmp.enable = true;
     undoFile.enable = true;
     ui.fastaction.enable = true;

@@ -3,7 +3,7 @@
     packages.default = self'.packages.neovim;
     packages.neovim = (inputs.nvf.lib.neovimConfiguration {
       inherit pkgs;
-      modules = [ (import ./config.nix systemInputs) ];
+      modules = [ (import ./config.nix (systemInputs // { inherit inputs; }) ) ];
     }).neovim;
   };
 }
