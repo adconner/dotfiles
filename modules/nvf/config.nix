@@ -44,6 +44,10 @@
     utility.oil-nvim = {
       enable = true;
       gitStatus.enable = true;
+      setupOpts.keymaps = {
+        "-" = false;
+        " " = "actions.parent";
+      };
     };
     git = {
       enable = true;
@@ -86,13 +90,14 @@
     # yanky with hydra
     # smart-splits with tmux
 
+    globals.mapleader = "-";
 
     keymaps = [
       { action = "<Esc>"; key = "jj"; mode = "i"; }
       { action = ":FzfLua global<cr>"; key = "<c-p>"; mode = "n"; }
       { action = ":FzfLua live_grep<cr>"; key = "<c-g>"; mode = "n"; }
       { action = ":FzfLua buffers<cr>"; key = "<leader>b"; mode = "n"; }
-      { action = ":Oil<cr>"; key = "-"; mode = "n"; }
+      { action = ":Oil<cr>"; key = " "; mode = "n"; }
       { action = "`[v`]"; key = "gp"; mode = "n"; }
       { action = ":resize<cr>:vertical resize<cr>"; key = "<leader>m"; mode = "n"; }
       { action = "<c-w>="; key = "<leader>M"; mode = "n"; }
