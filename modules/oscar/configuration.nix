@@ -176,11 +176,22 @@
       pulsemixer
       rclone
       texliveFull
-      zathura
       pianobar
     ];
     
     programs.alacritty.enable = true;
+    programs.zathura = {
+      enable = true;
+      mappings = {
+        "d" = "scroll half-down";
+        "u" = "scroll half-up";
+        "D" = "toggle_page_mode";
+      };
+      options = {
+        "highlight-transparency" = 0.1;
+        synctex-editor-command = "nvim --headless -c 'VimtexInverseSearch %{line} %{input}'";
+      };
+    };
     programs.zsh = {
       enable = true;
       initContent = ''

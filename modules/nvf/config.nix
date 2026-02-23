@@ -28,16 +28,47 @@
       rsi.package = vim-rsi;
       bqf.package = nvim-bqf;
       yank-assassin.package = YankAssassin-vim;
+      vimtex.package = vimtex;
     };
 
     lsp = {
       enable = true;
       lspkind.enable = true;
       nvim-docs-view.enable = true;
-      # harper-ls.enable = true;
+      # harper-ls.enable = true     servers = {
+      servers = {
+        texlab = {
+          enable = true;
+          cmd = ["${pkgs.texlab}/bin/texlab"];
+          filetypes = ["tex"];
+        };
+      };
     };
 
     startPlugins = with pkgs.vimPlugins; [ "vim-repeat" ];
+
+    globals = {
+      mapleader = "-";
+      maplocalleader = "-";
+
+      tex_flavor = "latex";
+      vimtex_compiler_method = "latexmk";
+      vimtex_view_method = "zathura";
+      vimtex_compiler_latexmk = {
+        callback = 1;
+        continuous = 1;
+        executable = "latexmk";
+        hooks = [];
+        options = [
+          "-verbose"
+          "-file-line-error"
+          "-synctex=1"
+          "-interaction=nonstopmode"
+          "-shell-escape"
+        ];
+      };
+    };
+
     fzf-lua.enable = true;
     tabline.nvimBufferline = {
       enable = true;
@@ -107,8 +138,6 @@
     # yanky with hydra
     # smart-splits with tmux
 
-    globals.mapleader = "-";
-
     keymaps = [
       { action = "<Esc>"; key = "jj"; mode = "i"; }
       { action = ":FzfLua global<cr>"; key = "<c-p>"; mode = "n"; }
@@ -147,6 +176,7 @@
       };
       nix.enable = true;
       markdown.enable = true;
+      ts.enable = true;
     };
 
     luaConfigRC.myconfig = /* lua */ ''
