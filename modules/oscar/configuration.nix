@@ -180,6 +180,7 @@
       pianobar
     ];
     
+    programs.alacritty.enable = true;
     programs.zsh = {
       enable = true;
       initContent = ''
