@@ -165,7 +165,7 @@
       fzf
       fd
       jujutsu
-      sage
+      # sage
       pyright
       viddy
       mosh
@@ -189,7 +189,8 @@
       };
       options = {
         "highlight-transparency" = 0.1;
-        synctex-editor-command = "nvim --headless -c 'VimtexInverseSearch %{line} %{input}'";
+        synctex-editor-command = "nvim -v --not-a-term -T dumb -c \"VimtexInverseSearch %{line}:%{column} '%{input}'\"";
+        # synctex-editor-command = "nvim --headless -c 'VimtexInverseSearch %{line} %{input}'";
       };
     };
     programs.zsh = {
