@@ -10,21 +10,8 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; {
-      # wombat = {
-      #   package = pkgs.vimUtils.buildVimPlugin {
-      #     name = "wombat-nvim";
-      #     src = inputs.wombat;
-      #     nvimSkipModule = [
-      #       "wombat.ansi_256mod"
-      #       "wombat.ansi_ghostty"
-      #       "wombat.ansi_iterm2"
-      #       "wombat.ansi_lush"
-      #     ];
-      #   };
-      #   # setup = "require('wombat').setup({})";
-      #   after = [ "lush" ];
-      # };
-      # lush.package = lush-nvim;
+      nightfox.package = nightfox-nvim;
+      wombat.package = wombat256-vim;
       rsi.package = vim-rsi;
       bqf.package = nvim-bqf;
       yank-assassin.package = YankAssassin-vim;
