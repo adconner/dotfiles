@@ -100,7 +100,10 @@
     utility.sleuth.enable = true;
     comments.comment-nvim.enable = true;
     # autopairs.nvim-autopairs.enable = true;
-    autocomplete.blink-cmp.enable = true;
+    autocomplete.blink-cmp = {
+      enable = true;
+      friendly-snippets.enable = true;
+    };
     undoFile.enable = true;
     # ui.fastaction.enable = true;
     clipboard.providers.wl-copy.enable = true;
