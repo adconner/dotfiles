@@ -139,6 +139,7 @@
       { action = "<c-w>="; key = "<leader>M"; mode = "n"; }
       { action = ":%s/<c-r>//"; key = "<leader>r"; mode = "n"; }
       { action = ":s/\\%V<c-r>/\\%V/"; key = "<leader>r"; mode = "x"; }
+      { action = "<Cmd>nohlsearch|diffupdate|normal! <c-l><CR>"; key = "<leader><space>"; mode = "n"; }
       { action = ":Gitsigns toggle_word_diff<cr>"; key = "<leader>gtw"; mode = "n"; }
       { action = ":Gitsigns blame<cr>"; key = "<leader>gb"; mode = "n"; }
       { action = ":Git commit --allow-empty-message -m ''<cr>"; key = "<leader>gc"; mode = "n"; }
