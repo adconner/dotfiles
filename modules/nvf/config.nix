@@ -102,6 +102,9 @@
     # autopairs.nvim-autopairs.enable = true;
     autocomplete.blink-cmp = {
       enable = true;
+      setupOpts = {
+        completion.list.selection.preselect = false;
+      };
       friendly-snippets.enable = true;
     };
     undoFile.enable = true;
