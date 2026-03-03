@@ -56,7 +56,10 @@
       };
     };
 
-    fzf-lua.enable = true;
+    fzf-lua = {
+      enable = true;
+      setupOpts.keymap.fzf."ctrl-q" = "select-all+accept";
+    };
     tabline.nvimBufferline = {
       enable = true;
       mappings = {
