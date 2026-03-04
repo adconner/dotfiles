@@ -60,23 +60,23 @@
       enable = true;
       setupOpts.keymap.fzf."ctrl-q" = "select-all+accept";
     };
-    tabline.nvimBufferline = {
-      enable = true;
-      mappings = {
-        cycleNext = "]b";
-        cyclePrevious = "[b";
-        pick = null;
-        sortByExtension = null;
-        sortByDirectory = null;
-        sortById = null;
-        moveNext = null;
-        movePrevious = null;
-      };
-      setupOpts.options = {
-        always_show_bufferline = false;
-        sort_by = "id";
-      };
-    };
+    # tabline.nvimBufferline = {
+    #   enable = true;
+    #   mappings = {
+    #     cycleNext = "]b";
+    #     cyclePrevious = "[b";
+    #     pick = null;
+    #     sortByExtension = null;
+    #     sortByDirectory = null;
+    #     sortById = null;
+    #     moveNext = null;
+    #     movePrevious = null;
+    #   };
+    #   setupOpts.options = {
+    #     always_show_bufferline = false;
+    #     sort_by = "id";
+    #   };
+    # };
     visuals.nvim-web-devicons.enable = true;
     # visuals.indent-blankline.enable = true;
     utility.oil-nvim = {
