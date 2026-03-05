@@ -155,7 +155,18 @@
   home-manager.users.austin = { pkgs, ... }: {
     home.packages = with pkgs; [ 
       self'.packages.neovim
+
       atool
+      gzip
+      bzip3
+      ncompress
+      zip
+      unzip
+      xz
+      lzop
+      p7zip
+      # rar
+
       wget
       clang
       dfc
