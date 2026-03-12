@@ -22,7 +22,7 @@
       enable = true;
       lspkind.enable = true;
       nvim-docs-view.enable = true;
-      # harper-ls.enable = true     servers = {
+      # harper-ls.enable = true;
       servers = {
         texlab = {
           enable = true;
