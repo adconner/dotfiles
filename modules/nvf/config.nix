@@ -16,6 +16,10 @@
       bqf.package = nvim-bqf;
       yank-assassin.package = YankAssassin-vim;
       vimtex.package = vimtex;
+      resolver.package = pkgs.vimUtils.buildVimPlugin {
+        name = "resolver-nvim";
+        src = inputs.resolver-nvim;
+      };
     };
 
     lsp = {
