@@ -190,7 +190,8 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
-        "resolver-nvim": "resolver-nvim"
+        "resolver-nvim": "resolver-nvim",
+        "zsh-jj": "zsh-jj"
       }
     },
     "systems": {
@@ -205,6 +206,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zsh-jj": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1743436478,
+        "narHash": "sha256-GDHTp53uHAcyVG+YI3Q7PI8K8M3d3i2+C52zxnKbSmw=",
+        "owner": "rkh",
+        "repo": "zsh-jj",
+        "rev": "b6453d6ff5d233d472e5088d066c6469eb05c71b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rkh",
+        "repo": "zsh-jj",
         "type": "github"
       }
     }

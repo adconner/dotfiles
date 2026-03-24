@@ -12,6 +12,10 @@
       url = "github:yeshwanthyk/resolver.nvim";
       flake = false;
     };
+    zsh-jj = {
+      url = "github:rkh/zsh-jj";
+      flake = false;
+    };
   };
 
   outputs = { flake-parts, ... }@inputs:
