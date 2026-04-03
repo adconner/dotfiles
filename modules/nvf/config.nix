@@ -105,12 +105,14 @@
       };
     };
     utility.sleuth.enable = true;
-    comments.comment-nvim.enable = true;
+    # comments.comment-nvim.enable = true;
     # autopairs.nvim-autopairs.enable = true;
     autocomplete.blink-cmp = {
       enable = true;
       setupOpts = {
         completion.list.selection.preselect = false;
+        # tab seems to doesnt insert first match with tab, this seems to be a bug
+        cmdline.enabled = false;
       };
       friendly-snippets.enable = true;
     };
@@ -167,7 +169,7 @@
 
       python = {
         enable = true;
-        lsp.servers = [ "ruff" ];
+        # lsp.servers = [ "ruff" ];
         format.type = [ "ruff" ];
       };
       clang.enable = true;
