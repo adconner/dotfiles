@@ -109,6 +109,7 @@
 
     keymaps = [
       { action = "<Esc>"; key = "jj"; mode = "i"; }
+      { action = "<C-\\><C-n>"; key = "jj"; mode = "t"; }
       { action = ":FzfLua global<cr>"; key = "<c-p>"; mode = "n"; }
       { action = ":FzfLua live_grep<cr>"; key = "<c-g>"; mode = "n"; }
       { action = ":FzfLua buffers<cr>"; key = "<leader>b"; mode = "n"; }
