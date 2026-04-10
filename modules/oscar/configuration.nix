@@ -155,6 +155,7 @@
   home-manager.users.austin = { pkgs, ... }: {
     home.packages = with pkgs; [ 
       self'.packages.neovim
+      opencode
 
       atool
       gzip
@@ -189,6 +190,7 @@
       texliveFull
       pianobar
       sxiv
+
     ];
     
     programs.alacritty.enable = true;
@@ -346,6 +348,7 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
   nixpkgs.overlays = [
     (self: super: {
       btop = super.btop.override { cudaSupport = true; };
+      llama-cpp = super.llama-cpp.override { cudaSupport = true; };
     })
   ];
 
@@ -353,6 +356,7 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     btop
+    llama-cpp
     
     ##xmonad desktop utils
     #xmobar
@@ -409,6 +413,14 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
   #   };
   # };
 # };
+
+  # services.ollama = {
+  #   enable = true;
+  #   loadModels = [ "gemma4:26b" ];
+  #   package = pkgs.ollama-cuda;
+  # };
+
+  # services.llama-cpp.enable = true;
 
 
   nix.settings.experimental-features = [ 
