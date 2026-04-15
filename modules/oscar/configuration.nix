@@ -156,6 +156,7 @@
     home.packages = with pkgs; [ 
       self'.packages.neovim
       opencode
+      pi-coding-agent
 
       atool
       gzip
