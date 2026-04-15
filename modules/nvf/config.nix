@@ -62,7 +62,12 @@
 
     fzf-lua = {
       enable = true;
-      setupOpts.keymap.fzf."ctrl-q" = "select-all+accept";
+      setupOpts = {
+        keymap.fzf."ctrl-q" = "select-all+accept";
+        fzf_opts = {
+          "--exact" = true;
+        };
+      };
     };
     visuals.nvim-web-devicons.enable = true;
     utility.oil-nvim = {
