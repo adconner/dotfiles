@@ -16,6 +16,11 @@
       url = "github:rkh/zsh-jj";
       flake = false;
     };
+
+    llama-cpp = {
+      url = "github:/ggml-org/llama.cpp";
+      flake = false;
+    };
   };
 
   outputs = { flake-parts, ... }@inputs:

@@ -349,7 +349,7 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
   nixpkgs.overlays = [
     (self: super: {
       btop = super.btop.override { cudaSupport = true; };
-      llama-cpp = super.llama-cpp.override { cudaSupport = true; };
+      llama-cpp = (super.llama-cpp.override { cudaSupport = true; }).overrideAttrs { src = inputs.llama-cpp; };
     })
   ];
 
