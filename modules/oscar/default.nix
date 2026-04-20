@@ -1,11 +1,15 @@
-{ inputs, self, withSystem, ... }: {
-  flake.nixosConfigurations.default = self.flake.nixosConfigurations.oscar;
-  flake.nixosConfigurations.oscar = withSystem "x86_64-linux" ({self', ...} :
-    inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit inputs;
-      inherit self';
+{ config, inputs, self, ... }:
+{
+  config.configurations.nixos.oscar = {
+    module = { pkgs, lib, ... }: {
+      imports = [
+        ./_hardware-configuration.nix
+        config.flake.modules.nixos.base
+        config.flake.modules.nixos.desktop
+      ];
+
+      system.stateVersion = "25.05";
     };
-    modules = [ ./configuration.nix ];
-  });
+  };
+  config.flake.nixosConfigurations.default = config.flake.nixosConfigurations.oscar;
 }

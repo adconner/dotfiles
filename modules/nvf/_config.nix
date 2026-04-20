@@ -152,7 +152,7 @@
       };
       nix.enable = true;
       markdown.enable = true;
-      ts.enable = true;
+      typescript.enable = true;
     };
 
     luaConfigRC.myconfig = /* lua */ ''
