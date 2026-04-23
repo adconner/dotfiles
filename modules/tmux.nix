@@ -10,6 +10,8 @@ unbind-key -T copy-mode-vi C-h
 unbind-key -T copy-mode-vi C-j
 bind-key -r C-b send-prefix
 set -g repeat-time 700
+set -g extended-keys on
+set -g extended-keys-format csi-u
 
 bind-key C-v split-window -h
 bind-key v split-window -h
