@@ -1,11 +1,11 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   flake.modules.homeManager.base = { pkgs, ... }: {
     home.packages = with pkgs; [ 
       # Use the neovim package from nvf
       (inputs.nvf.lib.neovimConfiguration { 
         inherit pkgs; 
-        modules = [ (import ./nvf/_config.nix { inherit pkgs inputs; }) ]; 
+        modules = [ (import ./nvf/_config.nix { inherit pkgs inputs lib; }) ]; 
       }).neovim
       opencode
       pi-coding-agent

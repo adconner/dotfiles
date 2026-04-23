@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: 
+{pkgs, inputs, lib, ...}: 
 {
   config.vim = {
 
@@ -108,6 +108,26 @@
     #   enable = true;
     #   ui.enable = true;
     # };
+    assistant.codecompanion-nvim = {
+      enable = true;
+      setupOpts = lib.generators.mkLuaInline ''{
+        adapters = {
+          http = {
+            llamacpp = function()
+              return require("codecompanion.adapters").extend("openai_compatible", {
+                env = {
+                  url = "http://127.0.0.1:8080",
+                },
+              })
+            end,
+          },
+        },
+        interactions = {
+          chat = { adapter = "llamacpp", },
+          inline = { adapter = "llamacpp", },
+        }
+      }'';
+    };
 
     # yanky with hydra
     # smart-splits with tmux
@@ -162,5 +182,7 @@
         command -nargs=* -complete=file -bang Make make<bang> <args>
       ]]
       '';
+
+
   };
 }
