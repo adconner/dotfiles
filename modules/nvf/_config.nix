@@ -10,18 +10,29 @@
     };
 
     extraPlugins = with pkgs.vimPlugins; {
-      nightfox.package = nightfox-nvim;
-      wombat.package = wombat256-vim;
       rsi.package = vim-rsi;
       bqf.package = nvim-bqf;
       yank-assassin.package = YankAssassin-vim;
-      vimtex.package = vimtex;
-      resolver.package = pkgs.vimUtils.buildVimPlugin {
-        name = "resolver-nvim";
-        src = inputs.resolver-nvim;
+      vimtex.package = vimtex; # maybe lazy load instead
+      minuet-ai = {
+        package = minuet-ai-nvim;
+        setup = ''require('minuet').setup({
+          provider = "openai_fim_compatible",
+          provider_options = {
+            openai_fim_compatible = {
+              end_point = "http://localhost:8080/v1/completions",
+              api_key = "TERM",
+              name = "llama-cpp",
+              stream = true,
+              template = {
+                prompt = "<|fim_prefix|>{{prefix}}<|fim_suffix|>{{suffix}}<|fim_middle|>",
+                suffix = "",
+              },
+            },
+          },
+        })'';
       };
     };
-
     lsp = {
       enable = true;
       lspkind.enable = true;

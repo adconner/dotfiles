@@ -186,22 +186,6 @@
         "type": "github"
       }
     },
-    "resolver-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768321326,
-        "narHash": "sha256-FtimFBf8F+RSr7DS4Sm0IshIp6UsLZW8I7ojBWmzURk=",
-        "owner": "yeshwanthyk",
-        "repo": "resolver.nvim",
-        "rev": "a95b76781dca6621d0c088d7224e06e4174bf146",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yeshwanthyk",
-        "repo": "resolver.nvim",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -210,7 +194,6 @@
         "llama-cpp": "llama-cpp",
         "nixpkgs": "nixpkgs",
         "nvf": "nvf",
-        "resolver-nvim": "resolver-nvim",
         "zsh-jj": "zsh-jj"
       }
     },

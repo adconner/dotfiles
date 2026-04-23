@@ -12,10 +12,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     import-tree.url = "github:vic/import-tree";
-    resolver-nvim = {
-      url = "github:yeshwanthyk/resolver.nvim";
-      flake = false;
-    };
     zsh-jj = {
       url = "github:rkh/zsh-jj";
       flake = false;
