@@ -25,9 +25,42 @@
               name = "llama-cpp",
               stream = true,
               template = {
-                prompt = "<|fim_prefix|>{{prefix}}<|fim_suffix|>{{suffix}}<|fim_middle|>",
-                suffix = "",
+                prompt = function(context_before_cursor, context_after_cursor, _)
+                    return '<|fim_prefix|>'
+                        .. context_before_cursor
+                        .. '<|fim_suffix|>'
+                        .. context_after_cursor
+                        .. '<|fim_middle|>'
+                end,
+                suffix = false,
               },
+            },
+          },
+          duet = {
+            provider = "openai_compatible",
+            provider_options = {
+              openai_compatible = {
+                end_point = "http://localhost:8080/v1/chat/completions",
+                api_key = "TERM",
+                name = "llama-cpp",
+              },
+            },
+          },
+          virtualtext = {
+            auto_trigger_ft = {},
+            keymap = {
+                -- accept whole completion
+                accept = '<A-A>',
+                -- accept one line
+                accept_line = '<A-a>',
+                -- accept n lines (prompts for number)
+                -- e.g. "A-z 2 CR" will accept 2 lines
+                accept_n_lines = '<A-z>',
+                -- Cycle to prev completion item, or manually invoke completion
+                prev = '<A-[>',
+                -- Cycle to next completion item, or manually invoke completion
+                next = '<A-]>',
+                dismiss = '<A-e>',
             },
           },
         })'';
