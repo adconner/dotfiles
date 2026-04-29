@@ -7,6 +7,7 @@
         src = inputs.llama-cpp; 
         npmDepsHash = "sha256-iYJB0z2YHG8OzEA9EwHUZrDa5obr5m2sbnIH+of28o0=";
       };
+      sage = super.sage.override { requireSageTests = false; };
     })
   ];
 
