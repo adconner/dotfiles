@@ -3,7 +3,10 @@
   nixpkgs.overlays = [
     (self: super: {
       btop = super.btop.override { cudaSupport = true; };
-      llama-cpp = (super.llama-cpp.override { cudaSupport = true; }).overrideAttrs { src = inputs.llama-cpp; };
+      llama-cpp = (super.llama-cpp.override { cudaSupport = true; }).overrideAttrs { 
+        src = inputs.llama-cpp; 
+        npmDepsHash = "sha256-iYJB0z2YHG8OzEA9EwHUZrDa5obr5m2sbnIH+of28o0=";
+      };
     })
   ];
 
