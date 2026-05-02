@@ -5,7 +5,7 @@
       btop = super.btop.override { cudaSupport = true; };
       llama-cpp = (super.llama-cpp.override { cudaSupport = true; }).overrideAttrs { 
         src = inputs.llama-cpp; 
-        npmDepsHash = "sha256-iYJB0z2YHG8OzEA9EwHUZrDa5obr5m2sbnIH+of28o0=";
+        npmDepsHash = "sha256-k62LIbyY2DXvs7XXbX0lNPiYxuYzeJUyQtS4eA+68f8=";
       };
       sage = super.sage.override { requireSageTests = false; };
     })
