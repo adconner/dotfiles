@@ -28,7 +28,7 @@
       fzf
       fd
       jujutsu
-      sage
+      # sage
       pyright
       viddy
       mosh
@@ -51,4 +51,10 @@
       btop
     ];
   };
+
+  # nixpkgs.overlays = [
+  #   (self: super: {
+  #     sage = super.sage.override { requireSageTests = false; };
+  #   })
+  # ];
 }

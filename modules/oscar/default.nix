@@ -1,4 +1,4 @@
-{ config, inputs, self, ... }:
+{ config, inputs, ... }:
 {
   config.configurations.nixos.oscar = {
     module = { pkgs, lib, ... }: {
@@ -6,7 +6,10 @@
         ./_hardware-configuration.nix
         config.flake.modules.nixos.base
         config.flake.modules.nixos.desktop
+        config.flake.modules.nixos.cuda
       ];
+
+      networking.hostName = "oscar";
 
       system.stateVersion = "25.05";
     };

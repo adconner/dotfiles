@@ -1,15 +1,5 @@
 { inputs, lib, ... }:
 {
-  nixpkgs.overlays = [
-    (self: super: {
-      btop = super.btop.override { cudaSupport = true; };
-      llama-cpp = (super.llama-cpp.override { cudaSupport = true; }).overrideAttrs { 
-        src = inputs.llama-cpp; 
-        npmDepsHash = "sha256-cV3noOyKmst9vfxyvkCNhihPgwfVGhmPPT4UMloeWZM=";
-      };
-      sage = super.sage.override { requireSageTests = false; };
-    })
-  ];
 
   flake.modules.nixos.base = { pkgs, lib, ... }: {
     nix.settings.substituters = [

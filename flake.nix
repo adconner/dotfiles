@@ -16,16 +16,18 @@
       url = "github:rkh/zsh-jj";
       flake = false;
     };
-    llama-cpp = {
-      url = "github:ggml-org/llama.cpp";
-      flake = false;
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
   };
 
   outputs = { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
     imports = [
       (inputs.import-tree ./modules)
+      inputs.disko.flakeModules.default
     ];
     systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
     flake = {
