@@ -34,11 +34,12 @@
       mosh
       devenv
       nvitop
-      nix-search-cli
       nnn
       pulsemixer
       rclone
       texliveFull
+      nix-search-cli
+      hydra-check
     ];
   };
 
