@@ -28,7 +28,7 @@
       fzf
       fd
       jujutsu
-      # sage
+      sage
       pyright
       viddy
       mosh
