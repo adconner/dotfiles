@@ -53,9 +53,9 @@
     ];
   };
 
-  # nixpkgs.overlays = [
-  #   (self: super: {
-  #     sage = super.sage.override { requireSageTests = false; };
-  #   })
-  # ];
+  nixpkgs.overlays = [
+    (self: super: {
+      sage = super.sage.override { requireSageTests = false; };
+    })
+  ];
 }

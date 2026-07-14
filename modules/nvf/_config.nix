@@ -209,7 +209,7 @@
         # lsp.servers = [ "ruff" ];
         format.type = [ "ruff" ];
       };
-      clang.enable = true;
+      # clang.enable = true;
       rust = {
         enable = true;
         extensions.crates-nvim.enable = true;
