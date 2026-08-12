@@ -67,6 +67,9 @@ set -g status-left-length 20
 setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=colour50]#F '
 
 setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
+
+set -g set-clipboard on
+set-option -g allow-passthrough on
 '';
     };
   };
