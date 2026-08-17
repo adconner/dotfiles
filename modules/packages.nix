@@ -39,6 +39,7 @@
       pulsemixer
       rclone
       texliveFull
+      glow
     ];
   };
 
