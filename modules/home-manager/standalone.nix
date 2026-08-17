@@ -9,6 +9,9 @@
           {
             home.username = "aconner";
             home.homeDirectory = "/home/aconner";
+
+            home.sessionVariables.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+
             # nsw namespace prevents zsh from setting USERNAME via getpwuid;
             # %n expands to USERNAME which stays empty. Replace with $USER after grml builds PROMPT.
             programs.zsh.initContent = ''
