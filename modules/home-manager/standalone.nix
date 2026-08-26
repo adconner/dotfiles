@@ -20,6 +20,9 @@
                 PROMPT="''${PROMPT//\%n/$USER}"
                 RPROMPT="''${RPROMPT//\%n/$USER}"
               }
+
+              export FZF_ALT_C_COMMAND="${pkgs.fd}/bin/fd --type d --hidden --no-ignore-vcs --exclude=.git --exclude=.jj --exclude=node_modules --exclude='bazel-*' --exclude=__pycache__ --exclude=.claude/worktrees --exclude=00_BLOG_00 --exclude=scratch"
+              export FZF_CTRL_T_COMMAND="${pkgs.fd}/bin/fd --type f --type d --hidden --no-ignore-vcs --exclude=.git --exclude=.jj --exclude=node_modules --exclude='bazel-*' --exclude=__pycache__ --exclude=.claude/worktrees --exclude=00_BLOG_00 --exclude=scratch"
             '';
           }
         ];
