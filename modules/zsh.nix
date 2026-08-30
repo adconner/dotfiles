@@ -10,6 +10,8 @@
     programs.zsh = {
       enable = true;
       initContent = ''
+        # Skip compaudit (nix store has fixed perms, audit is slow I/O on nsw mounts)
+        zstyle ':grml:completion:compinit' arguments -C
         source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
         source ${pkgs.fzf}/share/fzf/key-bindings.zsh
         fpath+=${inputs.zsh-jj}/functions
@@ -18,7 +20,7 @@
         source <(COMPLETE=zsh jj)
       '';
 
-      enableCompletion = true;
+      enableCompletion = false;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
 

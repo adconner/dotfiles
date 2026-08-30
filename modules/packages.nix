@@ -40,6 +40,7 @@
       texliveFull
       nix-search-cli
       hydra-check
+      mdcat
     ];
   };
 

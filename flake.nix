@@ -29,7 +29,7 @@
       (inputs.import-tree ./modules)
       inputs.disko.flakeModules.default
     ];
-    systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+    systems = [ "x86_64-linux" "aarch64-linux" ];
     flake = {
       meta.owner = {
         name = "Austin Conner";
