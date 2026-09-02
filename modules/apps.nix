@@ -19,7 +19,10 @@
     };
     programs.htop.enable = true;
     programs.direnv.enable = true;
-    programs.zoxide.enable = true;
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     home.sessionVariables = {
       EDITOR = "nvim";
     };
