@@ -68,8 +68,9 @@ setw -g window-status-current-format ' #I#[fg=colour250]:#[fg=colour255]#W#[fg=c
 
 setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
 
-set -g set-clipboard on
-set-option -g allow-passthrough on
+set -s set-clipboard on
+set -as terminal-features ',xterm*:clipboard,alacritty*:clipboard'
+set -s allow-passthrough on
 '';
     };
   };
