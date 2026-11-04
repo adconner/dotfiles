@@ -147,7 +147,6 @@
     };
     undoFile.enable = true;
     # ui.fastaction.enable = true;
-    clipboard.providers.wl-copy.enable = true;
     # debugger.nvim-dap = {
     #   enable = true;
     #   ui.enable = true;
@@ -195,6 +194,15 @@
       { action = ":lua vim.lsp.stop_client(vim.lsp.get_clients())<cr>"; key = "<leader>cs"; mode = "n"; }
     ];
 
+    clipboard = {
+      enable = true;
+      registers = "unnamedplus";
+      providers.wl-copy = {
+        enable = true;
+        package = null;
+      };
+    };
+
     options = {
       shiftwidth = 2;
     };
@@ -218,6 +226,19 @@
       markdown.enable = true;
       typescript.enable = true;
     };
+
+    luaConfigRC.osc52 = /* lua */ ''
+      -- Headless remote session: no local X11/Wayland clipboard exists, so
+      -- force nvim's built-in OSC 52 provider (copy escapes forward through
+      -- tmux/mosh to the terminal; paste queries are answered by tmux itself
+      -- via its get-clipboard=buffer default).
+      local function present(v)
+        return v ~= nil and #v > 0
+      end
+      if not present(vim.env.DISPLAY) and not present(vim.env.WAYLAND_DISPLAY) then
+        vim.g.clipboard = 'osc52'
+      end
+      '';
 
     luaConfigRC.myconfig = /* lua */ ''
       vim.cmd [[
