@@ -43,10 +43,13 @@
         wallpaper.enabled = false;
         dock.enabled = false;
         system.monitor.enabled = false;
-        lockscreen.transition = [ ];
+        lockscreen = {
+          enabled = false;
+          transition = [ ];
+        };
         idle.behavior = {
-          lock = { enabled = true; timeout = 300; action = "lock"; };
-          screen-off = { enabled = true; timeout = 330; action = "screen_off"; };
+          lock.enabled = false;
+          screen-off.enabled = false;
         };
       };
     };
