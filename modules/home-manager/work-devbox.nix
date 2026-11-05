@@ -20,6 +20,11 @@
             home.file.".terminfo/x/xterm-ghostty".source =
               "${pkgs.ghostty.terminfo}/share/terminfo/x/xterm-ghostty";
 
+            # zsh here always starts under a login bash that already ran the host's
+            # /etc/profile; the host's global zsh files would source its profile.d
+            # scripts again in every shell (most of a new tmux pane's startup time).
+            programs.zsh.envExtra = "setopt no_global_rcs";
+
             # A namespace wrapper prevents zsh from setting USERNAME via getpwuid;
             # %n expands to USERNAME which stays empty. Replace with $USER after grml builds PROMPT.
             programs.zsh.initContent = ''
