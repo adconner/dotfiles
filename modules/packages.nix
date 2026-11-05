@@ -7,7 +7,6 @@
         inherit pkgs; 
         modules = [ (import ./nvf/_config.nix { inherit pkgs inputs lib; }) ]; 
       }).neovim
-      opencode
       pi-coding-agent
       atool
       gzip
