@@ -18,7 +18,7 @@
     programs.zsh = {
       enable = true;
       initContent = ''
-        # Skip compaudit (nix store has fixed perms, audit is slow I/O on nsw mounts)
+        # Skip compaudit (nix store has fixed perms, audit is slow I/O on some mounts)
         zstyle ':grml:completion:compinit' arguments -C
         source ${pkgs.grml-zsh-config}/etc/zsh/zshrc
         source ${pkgs.fzf}/share/fzf/key-bindings.zsh

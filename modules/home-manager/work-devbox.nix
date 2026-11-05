@@ -6,6 +6,7 @@
         inherit pkgs;
         modules = [
           config.flake.modules.homeManager.base
+          config.flake.modules.homeManager.heavy
           {
             home.username = "aconner";
             home.homeDirectory = "/home/aconner";
@@ -19,7 +20,7 @@
             home.file.".terminfo/x/xterm-ghostty".source =
               "${pkgs.ghostty.terminfo}/share/terminfo/x/xterm-ghostty";
 
-            # nsw namespace prevents zsh from setting USERNAME via getpwuid;
+            # A namespace wrapper prevents zsh from setting USERNAME via getpwuid;
             # %n expands to USERNAME which stays empty. Replace with $USER after grml builds PROMPT.
             programs.zsh.initContent = ''
               add-zsh-hook precmd _fix_username_prompt

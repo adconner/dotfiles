@@ -11,7 +11,6 @@
     };
 
     home.packages = with pkgs; [ 
-      pi-coding-agent
       atool
       gzip
       bzip3
@@ -24,26 +23,33 @@
       # rar
 
       wget
-      clang
       dfc
       tree
       ripgrep
       fzf
       fd
       jujutsu
-      sage
-      pyright
       viddy
       mosh
-      devenv
       nvitop
       nnn
       pulsemixer
       rclone
-      texliveFull
       nix-search-cli
       hydra-check
       mdcat
+    ];
+  };
+
+  # Costly to build from source; each configuration decides whether to import it.
+  flake.modules.homeManager.heavy = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      pi-coding-agent
+      clang
+      sage
+      pyright
+      devenv
+      texliveFull
     ];
   };
 
