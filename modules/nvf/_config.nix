@@ -1,4 +1,4 @@
-{pkgs, inputs, lib, ...}: 
+{pkgs, lib, ...}:
 {
   config.vim = {
 
@@ -136,6 +136,14 @@
       };
     };
     utility.sleuth.enable = true;
+    # Inline images in markdown buffers via the kitty graphics protocol
+    # (kitty, ghostty). snacks wraps the escapes for tmux passthrough itself.
+    utility.snacks-nvim = {
+      enable = true;
+      setupOpts.image.enabled = true;
+    };
+    # snacks.image converts every format except PNG with ImageMagick.
+    extraPackages = [ pkgs.imagemagick ];
     autocomplete.blink-cmp = {
       enable = true;
       setupOpts = {
@@ -223,7 +231,10 @@
         extensions.crates-nvim.enable = true;
       };
       nix.enable = true;
-      markdown.enable = true;
+      markdown = {
+        enable = true;
+        extensions.render-markdown-nvim.enable = true;
+      };
       typescript.enable = true;
     };
 

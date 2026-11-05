@@ -20,9 +20,6 @@
     programs.htop.enable = true;
     programs.direnv.enable = true;
     programs.zoxide.enable = true;
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
   };
 
   flake.modules.homeManager.gui = { pkgs, lib, ... }: {
