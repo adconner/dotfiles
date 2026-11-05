@@ -23,9 +23,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-    home.sessionVariables = {
-      EDITOR = "nvim";
-    };
   };
 
   flake.modules.homeManager.gui = { pkgs, lib, ... }: {

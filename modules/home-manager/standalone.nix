@@ -12,6 +12,13 @@
 
             home.sessionVariables.NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
 
+            # The nix-built tmux/ncurses searches only its own terminfo, ~/.terminfo and
+            # TERMINFO_DIRS, so ssh sessions from kitty/ghostty need their entries here.
+            home.file.".terminfo/x/xterm-kitty".source =
+              "${pkgs.kitty.terminfo}/share/terminfo/x/xterm-kitty";
+            home.file.".terminfo/x/xterm-ghostty".source =
+              "${pkgs.ghostty.terminfo}/share/terminfo/x/xterm-ghostty";
+
             # nsw namespace prevents zsh from setting USERNAME via getpwuid;
             # %n expands to USERNAME which stays empty. Replace with $USER after grml builds PROMPT.
             programs.zsh.initContent = ''
