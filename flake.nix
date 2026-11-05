@@ -16,6 +16,10 @@
       url = "github:rkh/zsh-jj";
       flake = false;
     };
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      flake = false;
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -58,6 +58,33 @@ let
         jujutsu = prev.jujutsu.override {
           gnupg = final.gnupg.override { withTpm2Tss = false; };
         };
+        # Ghostty's man pages need pandoc (GHC); its build always emits docs as a
+        # system package unless told not to. postFixup still links $man/share/man.
+        # Its GStreamer plugins only serve the audio bell, which plays through
+        # gtk4's media backend (disabled below).
+        ghostty = prev.ghostty.overrideAttrs (old: {
+          nativeBuildInputs = final.lib.remove final.pandoc old.nativeBuildInputs;
+          buildInputs = final.lib.subtractLists (with final.gst_all_1; [
+            gstreamer
+            gst-plugins-base
+            gst-plugins-good
+          ]) old.buildInputs;
+          zigBuildFlags = old.zigBuildFlags ++ [ "-Demit-docs=false" ];
+          postInstall = old.postInstall + ''
+            mkdir -p $man/share/man
+          '';
+        });
+        # gtk4's GStreamer media backend (video widgets, unused by Ghostty) pulls
+        # in ffmpeg, pipewire and more.
+        gtk4 = prev.gtk4.overrideAttrs (old: {
+          buildInputs = final.lib.subtractLists [
+            final.gst_all_1.gst-plugins-base
+            final.gst_all_1.gst-plugins-bad
+          ] old.buildInputs;
+          mesonFlags = old.mesonFlags ++ [ "-Dmedia-gstreamer=disabled" ];
+        });
+        # wayland's docs need graphviz.
+        wayland = prev.wayland.override { withDocumentation = false; };
       })
     ];
   };
@@ -107,6 +134,30 @@ in
               substitute = true;
             };
           }
+          (
+            { config, ... }:
+            {
+              # Nix-built OpenGL programs can't load the host's GPU drivers; nixGL
+              # wraps them to use Mesa from this store (built with the overlay above).
+              targets.genericLinux.nixGL.packages =
+                let
+                  nixgl = import inputs.nixgl {
+                    inherit pkgs;
+                    enable32bits = false;
+                    enableIntelX86Extensions = false;
+                  };
+                in
+                nixgl
+                // {
+                  # Its wrapper script is linted with shellcheck, which needs GHC.
+                  nixGLIntel = nixgl.nixGLIntel.overrideAttrs { checkPhase = ""; };
+                };
+              programs.ghostty = {
+                enable = true;
+                package = config.lib.nixGL.wrap pkgs.ghostty;
+              };
+            }
+          )
         ];
       };
 }
