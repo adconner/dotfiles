@@ -2,11 +2,19 @@
 {
   flake.modules.nixos.base = { pkgs, lib, ... }:
   {
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      enableGlobalCompInit = false;
+      promptInit = "";
+    };
     users.users.${config.flake.meta.owner.username}.shell = pkgs.zsh;
   };
 
-  flake.modules.homeManager.base = { pkgs, lib, ... }: {
+  flake.modules.homeManager.base = { pkgs, lib, ... }: let
+    jjCompletion = pkgs.runCommand "jj-completion.zsh" {} ''
+      COMPLETE=zsh ${pkgs.jujutsu}/bin/jj > "$out"
+    '';
+  in {
     programs.zsh = {
       enable = true;
       initContent = ''
@@ -17,7 +25,7 @@
         fpath+=${inputs.zsh-jj}/functions
         zstyle ':vcs_info:*' enable jj
         alias cd="z"
-        source <(COMPLETE=zsh jj)
+        source ${jjCompletion}
       '';
 
       enableCompletion = false;
