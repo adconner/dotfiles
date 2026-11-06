@@ -70,7 +70,7 @@ setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244
 
 set -s set-clipboard on
 set -as terminal-features ',xterm*:clipboard,alacritty*:clipboard'
-set -s allow-passthrough on
+set -g allow-passthrough on
 '';
     };
   };
