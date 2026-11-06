@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ inputs, lib, pkgs, ... }:
 {
   # The work desktop's nvim is for notes, and its store is built from source
   # (no cache.nixos.org): keep the markdown tooling, drop the coding language
@@ -6,9 +6,8 @@
   config.vim = {
     # nvf builds blink-cmp from its own nixpkgs instance, which lacks the work
     # desktop overlay (test fixes) and would duplicate python/rustc/LLVM builds.
-    # nixpkgs names it blink.cmp, but nvf lazy-loads it by its pack directory
-    # name, blink-cmp.
-    pluginOverrides.blink-cmp = pkgs.vimPlugins.blink-cmp.overrideAttrs { pname = "blink-cmp"; };
+    # Build nvf's recipe with these pkgs instead (inputs here are nvf's).
+    pluginOverrides.blink-cmp = pkgs.callPackage "${inputs.self}/flake/pkgs/by-name/blink-cmp/package.nix" { };
     lsp.servers.texlab = {
       enable = lib.mkForce false;
       # The disabled server's cmd is still written to init.lua; don't let its
