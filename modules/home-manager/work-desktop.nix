@@ -138,20 +138,41 @@ in
             { config, ... }:
             {
               # Nix-built OpenGL programs can't load the host's GPU drivers; nixGL
-              # wraps them to use Mesa from this store (built with the overlay above).
-              targets.genericLinux.nixGL.packages =
-                let
-                  nixgl = import inputs.nixgl {
-                    inherit pkgs;
-                    enable32bits = false;
-                    enableIntelX86Extensions = false;
+              # wraps them with a driver from this store. The display GPU runs
+              # NVIDIA's driver, which Mesa has no support for, so the wrapper bundles
+              # NVIDIA's user-space driver. It must match the host's kernel module
+              # (/proc/driver/nvidia/version): update the version and hash with it.
+              targets.genericLinux.nixGL = {
+                packages =
+                  let
+                    nixgl = pkgs.callPackage "${inputs.nixgl}/nixGL.nix" {
+                      nvidiaVersion = "595.99.02";
+                      nvidiaHash = "sha256-6HR3lYv3YwcFSTJL1a1slI66btIQ5EAFs+/4SUD24ew=";
+                      enable32bits = false;
+                      intel-media-driver = null;
+                      # nixGL passes `kernel` to nixpkgs' NVIDIA package, which no longer
+                      # takes it. Its bundled 32-bit libraries would need an i686 toolchain.
+                      linuxPackages.nvidia_x11 = pkgs.lib.makeOverridable (
+                        {
+                          kernel ? null,
+                          libsOnly ? false,
+                        }:
+                        pkgs.linuxPackages.nvidia_x11.override {
+                          inherit libsOnly;
+                          disable32Bit = true;
+                        }
+                      ) { };
+                    };
+                    # Its wrapper scripts are linted with shellcheck, which needs GHC.
+                    noLint = wrapper: wrapper.overrideAttrs { checkPhase = ""; };
+                  in
+                  nixgl
+                  // {
+                    nixGLIntel = noLint nixgl.nixGLIntel;
+                    nixGLNvidia = noLint nixgl.nixGLNvidia;
                   };
-                in
-                nixgl
-                // {
-                  # Its wrapper script is linted with shellcheck, which needs GHC.
-                  nixGLIntel = nixgl.nixGLIntel.overrideAttrs { checkPhase = ""; };
-                };
+                defaultWrapper = "nvidia";
+              };
               programs.ghostty = {
                 enable = true;
                 package = config.lib.nixGL.wrap pkgs.ghostty;
