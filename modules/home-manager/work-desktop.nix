@@ -176,6 +176,9 @@ in
               programs.ghostty = {
                 enable = true;
                 package = config.lib.nixGL.wrap pkgs.ghostty;
+                # Start zsh rather than the login shell from passwd, which can't be
+                # changed here; Ghostty then sets up its zsh shell integration.
+                settings.command = "${config.programs.zsh.package}/bin/zsh";
               };
             }
           )
