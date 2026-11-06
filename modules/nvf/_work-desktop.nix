@@ -6,7 +6,9 @@
   config.vim = {
     # nvf builds blink-cmp from its own nixpkgs instance, which lacks the work
     # desktop overlay (test fixes) and would duplicate python/rustc/LLVM builds.
-    pluginOverrides.blink-cmp = pkgs.vimPlugins.blink-cmp;
+    # nixpkgs names it blink.cmp, but nvf lazy-loads it by its pack directory
+    # name, blink-cmp.
+    pluginOverrides.blink-cmp = pkgs.vimPlugins.blink-cmp.overrideAttrs { pname = "blink-cmp"; };
     lsp.servers.texlab = {
       enable = lib.mkForce false;
       # The disabled server's cmd is still written to init.lua; don't let its
