@@ -177,8 +177,17 @@ in
                 enable = true;
                 package = config.lib.nixGL.wrap pkgs.ghostty;
                 # Start zsh rather than the login shell from passwd, which can't be
-                # changed here; Ghostty then sets up its zsh shell integration.
-                settings.command = "${config.programs.zsh.package}/bin/zsh";
+                # changed here, and make it $SHELL for everything started inside
+                # (tmux, nvim). The profile path survives garbage collection of old
+                # generations, which long-running tmux servers may outlive.
+                settings =
+                  let
+                    zsh = "${config.home.profileDirectory}/bin/zsh";
+                  in
+                  {
+                    command = zsh;
+                    env = [ "SHELL=${zsh}" ];
+                  };
               };
             }
           )
