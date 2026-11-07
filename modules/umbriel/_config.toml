@@ -1,0 +1,138 @@
+# Noctalia is started by Umbriel here; its systemd service is scoped to Niri.
+[general]
+autostart = ["noctalia"]
+
+[input.keyboard]
+layout = "us"
+variant = "dvorak"
+options = "ctrl:nocaps"
+
+[input.touchpad]
+tap = true
+natural_scroll = true
+disable_while_typing = true
+
+# Fixed inventory: keep only these workspaces, including when empty.
+[output.DP-1]
+workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+scale = 1.5
+
+[layout]
+mode = "scrolling"
+gap = 8
+extent_presets = [0.33333, 0.5, 0.66667]
+
+[layout.scrolling]
+default_extent_fraction = 0.5
+center_focused = "on_overflow"
+
+[appearance]
+prefer_no_csd = true
+border_width = 2
+
+[appearance.blur]
+enabled = false
+
+[animation]
+enabled = false
+
+[[window_rule]]
+match.app_id = "^dev.noctalia.Noctalia$"
+default_floating = true
+
+# Default shortcuts from the pinned Umbriel starting configuration,
+# with Mod+D to close and Mod+[Shift+]Return to open Ghostty.
+[keybinds]
+
+# Applications and session
+"Mod+Return" = { action = "spawn ghostty", repeat = false }
+"Mod+Shift+Return" = { action = "spawn ghostty", repeat = false }
+"Mod+F" = { action = "spawn firefox", repeat = false }
+"Mod+P" = "spawn noctalia msg panel-toggle launcher"
+"Mod+D" = { action = "window-close", repeat = false }
+"Mod+Escape" = "session-quit"
+"Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
+
+# Media, volume and brightness keys from any input device, routed through the
+# Noctalia shell so its OSDs show. Safe while the session is locked.
+# https://docs.noctalia.dev/noctalia/compositor-settings/umbriel
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down", allow_when_locked = true }
+
+# Focus and movement
+"Mod+H" = "window-focus-left"
+"Mod+J" = "window-focus-down"
+"Mod+K" = "window-focus-up"
+"Mod+L" = "window-focus-right"
+"Mod+Shift+H" = "column-move-left"
+"Mod+Shift+J" = "window-move-down"
+"Mod+Shift+K" = "window-move-up"
+"Mod+Shift+L" = "column-move-right"
+"Alt+Tab" = "window-focus-next"
+"Alt+Shift+Tab" = "window-focus-previous"
+
+# Window state and layout
+"Mod+T" = { action = "window-toggle-floating", repeat = false }
+"Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
+# "Mod+P" = { action = "window-toggle-pinned", repeat = false }
+"Mod+M" ={ action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+Shift+M" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+Space" = { action = "workspace-set-layout toggle", repeat = false}
+"Mod+Shift+Space" = { action = "workspace-set-layout scrolling", repeat = false}
+"Mod+R" = "window-cycle-primary-extent"
+"Mod+Shift+R" = "window-cycle-primary-extent-back"
+"Mod+Comma" = "window-consume-left"
+"Mod+Period" = "window-consume-right"
+"Mod+Ctrl+Comma" = "window-consume-from-left"
+"Mod+Ctrl+Period" = "window-consume-from-right"
+# Needs layout.mode = "dwindle".
+# "Mod+Alt+T" = "layout-toggle-split"
+"Mod+W" = { action = "column-toggle-tabbed", repeat = false }
+# "Mod+Alt+Right" = "column-focus-tab-next"
+# "Mod+Alt+Left" = "column-focus-tab-previous"
+# "Mod+J" = "column-focus-tab-next"
+# "Mod+K" = "column-focus-tab-previous"
+"Mod+WheelUp" = "window-focus-left"
+"Mod+WheelDown" = "window-focus-right"
+"Mod+O" = { action = "overview-toggle", repeat = false }
+
+# Workspaces
+
+# Move the whole workspace, retaining its name, layout, and windows.
+# "Mod+Ctrl+Page_Down" = "workspace-move-to-output-next"
+# "Mod+Ctrl+Page_Up" = "workspace-move-to-output-previous"
+# "Mod+Ctrl+W" = "workspace-move-to-output current WEB --output DP-1"
+"Mod+1" = "workspace-switch --name 1"
+"Mod+2" = "workspace-switch --name 2"
+"Mod+3" = "workspace-switch --name 3"
+"Mod+4" = "workspace-switch --name 4"
+"Mod+5" = "workspace-switch --name 5"
+"Mod+6" = "workspace-switch --name 6"
+"Mod+7" = "workspace-switch --name 7"
+"Mod+8" = "workspace-switch --name 8"
+"Mod+9" = "workspace-switch --name 9"
+"Mod+0" = "workspace-switch --name 0"
+# Send windows without switching away from the current workspace.
+"Mod+Shift+1" = "window-move-to-workspace-silent --name 1"
+"Mod+Shift+2" = "window-move-to-workspace-silent --name 2"
+"Mod+Shift+3" = "window-move-to-workspace-silent --name 3"
+"Mod+Shift+4" = "window-move-to-workspace-silent --name 4"
+"Mod+Shift+5" = "window-move-to-workspace-silent --name 5"
+"Mod+Shift+6" = "window-move-to-workspace-silent --name 6"
+"Mod+Shift+7" = "window-move-to-workspace-silent --name 7"
+"Mod+Shift+8" = "window-move-to-workspace-silent --name 8"
+"Mod+Shift+9" = "window-move-to-workspace-silent --name 9"
+"Mod+Shift+0" = "window-move-to-workspace-silent --name 0"
+
+# # Scratchpad
+# "Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
+# "Mod+Space" = "scratchpad-toggle"
+# "Mod+Ctrl+Space" = { action = "window-restore-from-scratchpad", repeat = false }
+# "Mod+Tab" = "scratchpad-focus-next"
+
