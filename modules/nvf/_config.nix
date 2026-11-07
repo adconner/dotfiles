@@ -138,6 +138,9 @@
         # snacks' LaTeX math template with a wider box (plain varwidth caps it at
         # the default text width, cutting off long formulas) and no equation
         # numbers, which would sit at the box's right edge and always read (1).
+        # The display sits between empty lines; space them by a strut's height
+        # and depth instead of display skips and baselineskip, so the box spans
+        # at least a line of text, like the rows inline formulas are fitted to.
         math.latex.tpl = ''
           \documentclass[preview,border=0pt,varwidth=40cm,12pt]{standalone}
           \usepackage{''${packages}}
@@ -145,9 +148,16 @@
           \begin{document}
           ''${header}
           { \''${font_size} \selectfont
+            \global\lineskip=0pt \global\lineskiplimit=0pt
+            \global\baselineskip=.3\normalbaselineskip \baselineskip=.7\normalbaselineskip
+            \abovedisplayskip=0pt \belowdisplayskip=0pt
+            \abovedisplayshortskip=0pt \belowdisplayshortskip=0pt
             \color[HTML]{''${color}}
           ''${content}}
           \end{document}'';
+        # Trim only the sides: trimming the top and bottom to the ink would blow
+        # up short formulas (a lone x) to the full row height.
+        convert.magick.math = [ "-density" 192 "{src}[{page}]" "-define" "trim:edges=east,west" "-trim" ];
       };
     };
     # snacks.image converts every format except PNG with ImageMagick. The Big
