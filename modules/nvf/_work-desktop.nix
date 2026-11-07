@@ -8,12 +8,6 @@
     # desktop overlay (test fixes) and would duplicate python/rustc/LLVM builds.
     # Build nvf's recipe with these pkgs instead (inputs here are nvf's).
     pluginOverrides.blink-cmp = pkgs.callPackage "${inputs.self}/flake/pkgs/by-name/blink-cmp/package.nix" { };
-    lsp.servers.texlab = {
-      enable = lib.mkForce false;
-      # The disabled server's cmd is still written to init.lua; don't let its
-      # store path pull texlab into the build.
-      cmd = lib.mkForce [ "texlab" ];
-    };
     languages = {
       enableFormat = lib.mkForce false;
       enableExtraDiagnostics = lib.mkForce false;
@@ -22,6 +16,7 @@
       rust.lsp.enable = false;
       nix.lsp.enable = false;
       typescript.lsp.enable = false;
+      tex.lsp.enable = false;
       markdown = {
         # The defaults pull in .NET (marksman) and V8 (deno fmt).
         lsp.servers = [ "markdown-oxide" ];

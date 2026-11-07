@@ -71,13 +71,6 @@
       lspkind.enable = true;
       nvim-docs-view.enable = true;
       # harper-ls.enable = true;
-      servers = {
-        texlab = {
-          enable = true;
-          cmd = ["${pkgs.texlab}/bin/texlab"];
-          filetypes = ["tex"];
-        };
-      };
     };
 
     startPlugins = with pkgs.vimPlugins; [ "vim-repeat" ];
@@ -140,10 +133,27 @@
     # (kitty, ghostty). snacks wraps the escapes for tmux passthrough itself.
     utility.snacks-nvim = {
       enable = true;
-      setupOpts.image.enabled = true;
+      setupOpts.image = {
+        enabled = true;
+        # snacks' LaTeX math template with a wider box (plain varwidth caps it at
+        # the default text width, cutting off long formulas) and no equation
+        # numbers, which would sit at the box's right edge and always read (1).
+        math.latex.tpl = ''
+          \documentclass[preview,border=0pt,varwidth=40cm,12pt]{standalone}
+          \usepackage{''${packages}}
+          \mathtoolsset{showonlyrefs}
+          \begin{document}
+          ''${header}
+          { \''${font_size} \selectfont
+            \color[HTML]{''${color}}
+          ''${content}}
+          \end{document}'';
+      };
     };
-    # snacks.image converts every format except PNG with ImageMagick.
-    extraPackages = [ pkgs.imagemagick ];
+    # snacks.image converts every format except PNG with ImageMagick. The Big
+    # variant links Ghostscript for PDFs (including rendered LaTeX math); the
+    # default one runs whatever gs is on PATH.
+    extraPackages = [ pkgs.imagemagickBig ];
     autocomplete.blink-cmp = {
       enable = true;
       setupOpts = {
@@ -235,6 +245,10 @@
         enable = true;
         extensions.render-markdown-nvim.enable = true;
       };
+      # Its latex grammar also finds LaTeX math in markdown: snacks.image renders
+      # it as images (with pdflatex or tectonic) and render-markdown as unicode
+      # (with a converter on PATH).
+      tex.enable = true;
       typescript.enable = true;
     };
 
