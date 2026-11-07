@@ -33,7 +33,7 @@ import qualified Data.Map.Strict as M
 -- import Graphics.X11.Xlib
 -- import Graphics.X11.Xlib.Extras
 
-myTerminal           = envVarDefault "XTERM" "alacritty"
+myTerminal           = envVarDefault "XTERM" "ghostty"
 myShell              = envVarDefault "SHELL" "bash"
 myBorderWidth        = 1
 myModMask            = mod4Mask

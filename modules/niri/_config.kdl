@@ -46,7 +46,7 @@ debug {
 }
 
 binds {
-    Mod+Return { spawn "alacritty"; }
+    Mod+Return { spawn "ghostty"; }
     Mod+F { spawn "firefox"; }
     Mod+P { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
