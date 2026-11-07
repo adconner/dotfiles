@@ -1,0 +1,121 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "semicolon",
+    ): ToggleWindowFloating,
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "Return",
+        description: Some("Open a terminal"),
+    ): System(Terminal),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "p",
+    ): System(Launcher),
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "g",
+    ): MoveToOutput(Left),
+    (
+        modifiers: [
+            Super,
+        ],
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "k",
+    ): PreviousWorkspace,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "b",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "g",
+    ): SwitchOutput(Left),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "d",
+    ): Close,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "j",
+    ): NextWorkspace,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "t",
+    ): System(HomeFolder),
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "c",
+    ): MoveToOutput(Right),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "c",
+    ): SwitchOutput(Right),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "q",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "space",
+    ): Maximize,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "i",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "f",
+    ): System(WebBrowser),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "e",
+    ): Focus(In),
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "o",
+    ): ToggleOrientation,
+}

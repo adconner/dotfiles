@@ -9,9 +9,9 @@
     services.desktopManager.cosmic.enable = true;
     home-manager.sharedModules = [
       ({ config, lib, pkgs, ... }: {
-        # COSMIC edits these files itself; preserve its other shortcuts and defaults.
-        home.activation.ghosttyDefaultTerminal = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          run ${pkgs.writeShellScript "ghostty-default-terminal" ''
+        # Keep COSMIC's config writable; restore our shortcuts on activation.
+        home.activation.cosmicDesktopDefaults = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run ${pkgs.writeShellScript "cosmic-desktop-defaults" ''
             set -eu
             shortcuts=${lib.escapeShellArg "${config.xdg.configHome}/cosmic/com.system76.CosmicSettings.Shortcuts/v1"}
             mkdir -p "$shortcuts"
@@ -20,9 +20,7 @@
             else
               printf '{\n    Terminal: "ghostty",\n}\n' > "$shortcuts/system_actions"
             fi
-            if [ -f "$shortcuts/custom" ]; then
-              ${pkgs.gnused}/bin/sed -i 's/Spawn("alacritty")/System(Terminal)/g' "$shortcuts/custom"
-            fi
+            ${pkgs.coreutils}/bin/install -m 0644 ${./cosmic/_shortcuts.ron} "$shortcuts/custom"
             export XDG_CONFIG_HOME=${lib.escapeShellArg config.xdg.configHome}
             ${pkgs.xdg-utils}/bin/xdg-mime default com.mitchellh.ghostty.desktop application/x-terminal-emulator
             ${pkgs.xdg-utils}/bin/xdg-mime default com.mitchellh.ghostty.desktop x-scheme-handler/terminal
