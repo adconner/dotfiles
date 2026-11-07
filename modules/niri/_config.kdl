@@ -46,7 +46,7 @@ debug {
 }
 
 binds {
-    Mod+Return { spawn "ghostty"; }
+    Mod+Shift+Return { spawn "ghostty"; }
     Mod+F { spawn "firefox"; }
     Mod+P { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+S { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
@@ -86,7 +86,7 @@ binds {
     Mod+Shift+4 { move-column-to-workspace 4; }
     Mod+Shift+5 { move-column-to-workspace 5; }
 
-    Mod+R { switch-preset-column-width; }
+    Mod+Return { switch-preset-column-width; }
     Mod+C { center-column; }
     Mod+Space { fullscreen-window; }
     Mod+Shift+Space { toggle-window-floating; }
