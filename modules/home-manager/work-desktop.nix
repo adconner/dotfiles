@@ -96,6 +96,7 @@ in
         modules = [
           # Not homeManager.heavy: too costly to build from source for this store.
           config.flake.modules.homeManager.base
+          config.flake.modules.homeManager.ghostty
           {
             home.username = "aconner";
             home.homeDirectory = "/home/aconner";
@@ -174,7 +175,6 @@ in
                 defaultWrapper = "nvidia";
               };
               programs.ghostty = {
-                enable = true;
                 package = config.lib.nixGL.wrap pkgs.ghostty;
                 # Start zsh rather than the login shell from passwd, which can't be
                 # changed here, and make it $SHELL for everything started inside
