@@ -15,6 +15,9 @@
         keybind = [ "ctrl+shift+t=unbind" ];
         bell-features = "no-system,no-audio,no-attention,no-title,no-border";
         confirm-close-surface = false;
+        # Programs copy through the terminal (OSC 52) too, nvim on every yank and
+        # delete with clipboard=unnamedplus: no toast for each.
+        app-notifications = "no-clipboard-copy";
       };
     };
   };
