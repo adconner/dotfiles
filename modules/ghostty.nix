@@ -6,6 +6,7 @@
     programs.ghostty = {
       enable = true;
       settings = {
+        background = "#1f1f1f";
         font-family = "JetBrainsMono Nerd Font";
         font-size = 12;
         window-decoration = "none";
