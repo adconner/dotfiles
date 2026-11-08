@@ -30,11 +30,11 @@ center_focused = "on_overflow"
 prefer_no_csd = true
 border_width = 2
 
-[appearance.blur]
-enabled = false
+# [appearance.blur]
+# enabled = false
 
-[animation]
-enabled = false
+# [animation]
+# enabled = false
 
 [[window_rule]]
 match.app_id = "^dev.noctalia.Noctalia$"
