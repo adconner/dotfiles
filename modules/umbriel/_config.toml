@@ -87,6 +87,8 @@ default_floating = true
 "Mod+Shift+Space" = { action = "workspace-set-layout scrolling", repeat = false}
 "Mod+R" = "window-cycle-primary-extent"
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
+"Mod+minus" = "window-modify-primary-extent -0.1"
+"Mod+equal" = "window-modify-primary-extent 0.1"
 "Mod+Comma" = "window-consume-left"
 "Mod+Period" = "window-consume-right"
 "Mod+Ctrl+Comma" = "window-consume-from-left"
