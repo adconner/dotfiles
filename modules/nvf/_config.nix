@@ -136,8 +136,8 @@
       setupOpts.image = {
         enabled = true;
         # In cells; images are also capped at the window's size. A taller image
-        # couldn't be scrolled through: it is drawn in virtual lines, which scroll
-        # with their line as a whole.
+        # couldn't be seen whole: it is drawn in virtual lines, and a window shows
+        # at most its height minus one of them (the cursor needs a text line).
         doc.max_width = 180;
         doc.max_height = lib.generators.mkLuaInline "math.huge";
         # snacks' LaTeX math template with a wider box (plain varwidth caps it at
@@ -225,6 +225,29 @@
       { action = ":Gitsigns blame<cr>"; key = "<leader>gb"; mode = "n"; }
       { action = ":Git commit --allow-empty-message -m ''<cr>"; key = "<leader>gc"; mode = "n"; }
       { action = ":lua vim.lsp.stop_client(vim.lsp.get_clients())<cr>"; key = "<leader>cs"; mode = "n"; }
+      # Half-page scrolls with a count of <C-e>/<C-y>, which count the virtual lines
+      # images are drawn in. <C-d>/<C-u> move the cursor by buffer lines, then
+      # scroll on to show it, past tall images.
+      {
+        key = "<C-d>";
+        mode = "n";
+        lua = true;
+        action = ''
+          function()
+            if vim.v.count > 0 then vim.wo.scroll = vim.v.count end
+            vim.cmd.normal({ vim.wo.scroll .. vim.keycode("<C-e>"), bang = true })
+          end'';
+      }
+      {
+        key = "<C-u>";
+        mode = "n";
+        lua = true;
+        action = ''
+          function()
+            if vim.v.count > 0 then vim.wo.scroll = vim.v.count end
+            vim.cmd.normal({ vim.wo.scroll .. vim.keycode("<C-y>"), bang = true })
+          end'';
+      }
     ];
 
     clipboard = {
