@@ -26,32 +26,16 @@
       enable = true;
       # NixOS manages the service and ties it to the Niri session.
       systemd.enable = false;
-      settings = {
-        shell = {
-          font_family = "JetBrainsMono Nerd Font";
-          animation.enabled = false;
-          polkit_agent = true;
+      # Menu settings were exported from ~/.local/state/noctalia/settings.toml.
+      settings = let
+        wallpaper = "${./niri/_forestbnw.jpg}";
+      in pkgs.lib.recursiveUpdate
+        (builtins.fromTOML (builtins.readFile ./niri/_noctalia.toml))
+        {
+          wallpaper.default.path = wallpaper;
+          wallpaper.last.path = wallpaper;
+          wallpaper.monitors.DP-1.path = wallpaper;
         };
-        bar.main = {
-          margin_ends = 8;
-          compositor_blur = false;
-          start = [ "launcher" "workspaces" ];
-          center = [ "clock" ];
-          end = [ "tray" "notifications" "network" "volume" "brightness" "battery" "control-center" "session" ];
-        };
-        backdrop.enabled = false;
-        wallpaper.enabled = false;
-        dock.enabled = false;
-        system.monitor.enabled = false;
-        lockscreen = {
-          enabled = false;
-          transition = [ ];
-        };
-        idle.behavior = {
-          lock.enabled = false;
-          screen-off.enabled = false;
-        };
-      };
     };
   };
 }
