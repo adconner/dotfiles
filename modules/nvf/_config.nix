@@ -135,8 +135,11 @@
       enable = true;
       setupOpts.image = {
         enabled = true;
-        # In cells; images are also capped at the window width.
+        # In cells; images are also capped at the window's size. A taller image
+        # couldn't be scrolled through: it is drawn in virtual lines, which scroll
+        # with their line as a whole.
         doc.max_width = 180;
+        doc.max_height = lib.generators.mkLuaInline "math.huge";
         # snacks' LaTeX math template with a wider box (plain varwidth caps it at
         # the default text width, cutting off long formulas) and no equation
         # numbers, which would sit at the box's right edge and always read (1).
