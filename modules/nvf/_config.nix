@@ -135,6 +135,8 @@
       enable = true;
       setupOpts.image = {
         enabled = true;
+        # In cells; images are also capped at the window width.
+        doc.max_width = 180;
         # snacks' LaTeX math template with a wider box (plain varwidth caps it at
         # the default text width, cutting off long formulas) and no equation
         # numbers, which would sit at the box's right edge and always read (1).
