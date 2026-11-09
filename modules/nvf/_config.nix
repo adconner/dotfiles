@@ -264,16 +264,25 @@
       typescript.enable = true;
     };
 
-    # Fold collapsible sections (<details> ... </details>) in markdown. The parser
-    # has no node for them: the tags are separate HTML blocks around the content.
+    # Fold collapsible sections (<details> ... </details>) in markdown, showing
+    # their <summary> when closed. The parser has no node for them: the tags are
+    # separate HTML blocks around the content.
     autocmds = [
       {
         event = [ "FileType" ];
         pattern = [ "markdown" ];
-        command = "setlocal foldmethod=marker foldmarker=<details,</details>";
+        command = "setlocal foldmethod=marker foldmarker=<details,</details> foldtext=v:lua.details_foldtext()";
         desc = "Fold <details> sections";
       }
     ];
+    luaConfigRC.details_foldtext = /* lua */ ''
+      function _G.details_foldtext()
+        local lines = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1, math.min(vim.v.foldend, vim.v.foldstart + 9), false)
+        local summary = table.concat(lines, " "):match("<summary[^>]*>(.-)</summary>")
+        local text = summary and vim.trim((summary:gsub("<[^>]*>", ""):gsub("%s+", " "))) or vim.trim(lines[1])
+        return ("%s▸ %s (%d lines)"):format(string.rep("  ", vim.v.foldlevel - 1), text, vim.v.foldend - vim.v.foldstart + 1)
+      end
+    '';
 
     luaConfigRC.osc52 = /* lua */ ''
       -- Headless remote session: no local X11/Wayland clipboard exists, so
