@@ -264,6 +264,17 @@
       typescript.enable = true;
     };
 
+    # Fold collapsible sections (<details> ... </details>) in markdown. The parser
+    # has no node for them: the tags are separate HTML blocks around the content.
+    autocmds = [
+      {
+        event = [ "FileType" ];
+        pattern = [ "markdown" ];
+        command = "setlocal foldmethod=marker foldmarker=<details,</details>";
+        desc = "Fold <details> sections";
+      }
+    ];
+
     luaConfigRC.osc52 = /* lua */ ''
       -- Headless remote session: no local X11/Wayland clipboard exists, so
       -- force nvim's built-in OSC 52 provider (copy escapes forward through
