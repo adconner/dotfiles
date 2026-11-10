@@ -14,57 +14,6 @@
       bqf.package = nvim-bqf;
       yank-assassin.package = YankAssassin-vim;
       vimtex.package = vimtex; # maybe lazy load instead
-      minuet-ai = {
-        package = minuet-ai-nvim;
-        setup = ''require('minuet').setup({
-          provider = "openai_fim_compatible",
-          provider_options = {
-            openai_fim_compatible = {
-              end_point = "http://localhost:8080/v1/completions",
-              api_key = "TERM",
-              name = "llama-cpp",
-              stream = true,
-              template = {
-                prompt = function(context_before_cursor, context_after_cursor, _)
-                    return '<|fim_prefix|>'
-                        .. context_before_cursor
-                        .. '<|fim_suffix|>'
-                        .. context_after_cursor
-                        .. '<|fim_middle|>'
-                end,
-                suffix = false,
-              },
-            },
-          },
-          duet = {
-            provider = "openai_compatible",
-            provider_options = {
-              openai_compatible = {
-                end_point = "http://localhost:8080/v1/chat/completions",
-                api_key = "TERM",
-                name = "llama-cpp",
-              },
-            },
-          },
-          virtualtext = {
-            auto_trigger_ft = {},
-            keymap = {
-                -- accept whole completion
-                accept = '<A-A>',
-                -- accept one line
-                accept_line = '<A-a>',
-                -- accept n lines (prompts for number)
-                -- e.g. "A-z 2 CR" will accept 2 lines
-                accept_n_lines = '<A-z>',
-                -- Cycle to prev completion item, or manually invoke completion
-                prev = '<A-[>',
-                -- Cycle to next completion item, or manually invoke completion
-                next = '<A-]>',
-                dismiss = '<A-e>',
-            },
-          },
-        })'';
-      };
     };
     lsp = {
       enable = true;
@@ -184,26 +133,6 @@
     #   enable = true;
     #   ui.enable = true;
     # };
-    assistant.codecompanion-nvim = {
-      enable = true;
-      setupOpts = lib.generators.mkLuaInline ''{
-        adapters = {
-          http = {
-            llamacpp = function()
-              return require("codecompanion.adapters").extend("openai_compatible", {
-                env = {
-                  url = "http://127.0.0.1:8080",
-                },
-              })
-            end,
-          },
-        },
-        interactions = {
-          chat = { adapter = "llamacpp", },
-          inline = { adapter = "llamacpp", },
-        }
-      }'';
-    };
 
     # yanky with hydra
     # smart-splits with tmux
