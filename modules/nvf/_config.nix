@@ -101,9 +101,9 @@
       enable = true;
       setupOpts = {
         keymap.fzf."ctrl-q" = "select-all+accept";
-        fzf_opts = {
-          "--exact" = true;
-        };
+        # fzf_opts = {
+        #   "--exact" = true;
+        # };
       };
     };
     visuals.nvim-web-devicons.enable = true;
