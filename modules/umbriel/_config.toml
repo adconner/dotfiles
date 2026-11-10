@@ -67,12 +67,12 @@ default_floating = true
 
 # Focus and movement
 "Mod+H" = "window-focus-left"
-"Mod+J" = "window-focus-down"
-"Mod+K" = "window-focus-up"
+"Mod+J" = "window-focus-or-workspace-down"
+"Mod+K" = "window-focus-or-workspace-up"
 "Mod+L" = "window-focus-right"
 "Mod+Shift+H" = "column-move-left"
-"Mod+Shift+J" = "window-move-down"
-"Mod+Shift+K" = "window-move-up"
+"Mod+Shift+J" = "window-move-or-workspace-down"
+"Mod+Shift+K" = "window-move-or-workspace-up"
 "Mod+Shift+L" = "column-move-right"
 "Alt+Tab" = "window-focus-next"
 "Alt+Shift+Tab" = "window-focus-previous"
