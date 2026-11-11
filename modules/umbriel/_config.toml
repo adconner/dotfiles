@@ -81,10 +81,10 @@ default_floating = true
 "Mod+T" = { action = "window-toggle-floating", repeat = false }
 "Mod+Shift+T" = { action = "window-focus-switch-floating", repeat = false }
 # "Mod+P" = { action = "window-toggle-pinned", repeat = false }
-"Mod+M" ={ action = "window-toggle-maximize-to-edges", repeat = false }
-"Mod+Shift+M" = { action = "window-toggle-fullscreen", repeat = false }
-"Mod+Space" = { action = "workspace-set-layout toggle", repeat = false}
-"Mod+Shift+Space" = { action = "workspace-set-layout scrolling", repeat = false}
+"Mod+Space" ={ action = "window-toggle-maximize-to-edges", repeat = false }
+"Mod+Shift+Space" = { action = "window-toggle-fullscreen", repeat = false }
+"Mod+B" = { action = "workspace-set-layout toggle", repeat = false }
+"Mod+Shift+B" = { action = "workspace-set-layout scrolling", repeat = false }
 "Mod+R" = "window-cycle-primary-extent"
 "Mod+Shift+R" = "window-cycle-primary-extent-back"
 "Mod+minus" = "window-modify-primary-extent -0.1"
