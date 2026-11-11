@@ -105,5 +105,8 @@ enabled = true
 [weather]
 unit = "imperial"
 
+[widget.clock]
+format = "{:%-I:%M %p · %b %-d}"
+
 [widget.spacer_2]
 type = "spacer"
