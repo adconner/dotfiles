@@ -4,7 +4,7 @@ enabled = false
 [bar.main]
 center = [ "active_window" ]
 compositor_blur = false
-end = [ "tray", "network", "bluetooth", "volume", "brightness", "battery", "clock", "session" ]
+end = [ "tray", "network", "volume", "bluetooth", "brightness", "battery", "clock", "session" ]
 margin_ends = 8
 start = [ "weather", "spacer_2", "workspaces" ]
 
